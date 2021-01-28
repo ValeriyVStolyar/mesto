@@ -3,16 +3,10 @@
   height: 19px;
   background: transparent;
   box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
-  background-image: url(../../../images/place-heart.png);
-  background-position: 0 0;
-  background-size: contain;
-  background-repeat: no-repeat;
+  transition: opacity 2s ease-out;
+  color: #000;
 }
 
 .place__heart:hover {
-  background-image: url(../../../images/place-heart-hover.png);
-}
-
-.place__heart:active {
-  background-image: url(../../../images/place-heart-active.png);
+  opacity: .5;
 }

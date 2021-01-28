@@ -1,6 +1,6 @@
 .page {
   min-width: 320px;
-  background: #e5e5e5;
+  background: #000;
   padding: 45px 200px 60px;
   box-sizing: border-box;
   font-family: 'Inter',  'Arial', sans-serif;
@@ -10,7 +10,7 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
-  box-shadow: 0 0 0 10000px #e5e5e5;
+  box-shadow: 0 0 0 10000px #000;
 }
 
 @media screen and (min-width: 1280px) {
