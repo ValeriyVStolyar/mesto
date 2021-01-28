@@ -9,7 +9,7 @@
   font-weight: normal;
   font-style: normal;
   color: #fff;
-  transition: opacity 2c ease-out;
+  transition: opacity 2s ease-out;
 }
 
 .popup__submit:hover {

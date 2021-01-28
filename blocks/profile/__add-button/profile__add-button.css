@@ -7,7 +7,7 @@
   box-sizing: border-box;
   border: 2px solid #fff;
   border-radius: 2px;
-  transition: opacity 2c ease-out;
+  transition: opacity 2s ease-out;
 }
 
 .profile__add-button:hover {
