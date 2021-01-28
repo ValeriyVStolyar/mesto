@@ -1,0 +1,40 @@
+.popup__close {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  position: relative;
+  right: calc(-100% - 40px);
+  top: calc(-34px - 40px);
+  transform: rotate(45deg);
+  border-top: none;
+  border-left: none;
+  border: none;
+}
+
+.popup__close:hover {
+  opacity: .6;
+}
+
+.popup__close::after, .popup__close::before {
+  content: '';
+  display: block;
+  border-bottom: 3px solid #fff;
+  transition: opacity 2c ease-out;
+}
+
+.popup__close::before {
+  transform: translateY(100%);
+}
+
+.popup__close::after {
+  transform: rotate(90deg);
+}
+
+@media screen and (max-width: 767px) {
+  .popup__close {
+    width: 26px;
+    height: 26px;
+    right: calc(-100% - 26px / 2);
+  }
+}
