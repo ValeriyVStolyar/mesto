@@ -1,4 +1,4 @@
-.popup__close {
+.button_type_close {
   width: 40px;
   height: 40px;
   padding: 0;
@@ -12,28 +12,30 @@
   border: none;
 }
 
-.popup__close:hover {
+.button_type_close:hover {
   opacity: .6;
   cursor: pointer;
 }
 
-.popup__close::after, .popup__close::before {
+.button_type_close::after, .button_type_close::before {
   content: '';
   display: block;
   border-bottom: 3px solid #fff;
   transition: opacity 2s ease-out;
 }
 
-.popup__close::before {
+.button_type_close::before {
   transform: translateY(100%);
 }
 
-.popup__close::after {
+.button_type_close::after {
   transform: rotate(90deg);
 }
 
 @media screen and (max-width: 767px) {
-  .popup__close {
+  .button_type_close {
+    left: 97%;
+    top: -60px;
     width: 26px;
     height: 26px;
     right: calc(-100% - 26px / 2);
