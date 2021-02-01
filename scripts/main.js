@@ -18,6 +18,8 @@ function returnMeening() {
 nameInput.value = nameProfile.textContent;
 
 jobInput.value = jobProfile.textContent;
+
+togglePopup();
 }
 
 
@@ -40,7 +42,7 @@ function formSubmitHandler (evt) {
   togglePopup();
 }
 
-openPopup.addEventListener('click', togglePopup);
+
 openPopup.addEventListener('click', returnMeening);
 closePopup.addEventListener('click', togglePopup);
 popupSection.addEventListener('click', closePopupOverlay);

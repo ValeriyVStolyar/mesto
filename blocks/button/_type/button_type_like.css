@@ -3,9 +3,9 @@
   height: 19px;
   padding: 0;
   background: transparent;
-  background-image: url(../../../images/place-heart.png);
+  background-image: url(../../../images/place-heart.svg);
   background-size: auto;
-  background-position: -4px 0;
+  background-position: 0 0;
   background-repeat: no-repeat;
   border: none;
 }
