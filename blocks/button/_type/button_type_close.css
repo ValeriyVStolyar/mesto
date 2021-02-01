@@ -12,16 +12,10 @@
   border: none;
 }
 
-.button_type_close:hover {
-  opacity: .6;
-  cursor: pointer;
-}
-
 .button_type_close::after, .button_type_close::before {
   content: '';
   display: block;
   border-bottom: 3px solid #fff;
-  transition: opacity 2s ease-out;
 }
 
 .button_type_close::before {

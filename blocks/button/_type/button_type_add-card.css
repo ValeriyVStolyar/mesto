@@ -7,12 +7,6 @@
   box-sizing: border-box;
   border: 2px solid #fff;
   border-radius: 2px;
-  transition: opacity 2s ease-out;
-}
-
-.button_type_add-card:hover {
-  opacity: .6;
-  cursor: pointer;
 }
 
 .button_type_add-card::before, .button_type_add-card::after {
