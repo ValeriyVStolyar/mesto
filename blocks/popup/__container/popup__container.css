@@ -12,9 +12,10 @@
   flex-direction: column;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 505px) {
   .popup__container {
     max-width: calc(100% - 19px * 2);
     padding: 25px 22px;
   }
 }
+
