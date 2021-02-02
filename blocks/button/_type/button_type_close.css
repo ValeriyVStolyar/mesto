@@ -3,13 +3,13 @@
   height: 40px;
   padding: 0;
   background: transparent;
-  position: relative;
-  right: calc(-100% - 40px);
-  top: calc(-34px - 40px);
   transform: rotate(45deg);
   border-top: none;
   border-left: none;
   border: none;
+  position: absolute;
+  top: -40px;
+  right: -40px;
 }
 
 .button_type_close::after, .button_type_close::before {
@@ -26,12 +26,18 @@
   transform: rotate(90deg);
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 505px) {
   .button_type_close {
-    left: 97%;
-    top: -60px;
+    top: -48px;
+    right: 5px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .button_type_close {
     width: 26px;
     height: 26px;
-    right: calc(-100% - 26px / 2);
   }
 }
