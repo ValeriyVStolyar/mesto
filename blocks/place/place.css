@@ -6,10 +6,24 @@
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0 0 25px rgba(0, 0, 0, .15);
+  grid-template-rows: 282px min-content;
+}
+/*
+@media screen and (max-width: 1023px) {
+  .place {
+    grid-template-rows: 303px min-content;
+  }
 }
 
+@media screen and (max-width: 767px) {
+  .place {
+    grid-template-rows: 190px min-content;
+  }
+}
+*/
 @media screen and (max-width: 425px) {
   .place {
     padding-bottom: 25px;
+    /*grid-template-rows: 282px min-content;*/
   }
 }

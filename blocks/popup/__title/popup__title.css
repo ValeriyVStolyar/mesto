@@ -10,6 +10,10 @@
   border: none;
 }
 
+.popup__title::first-letter {
+  text-transform: uppercase;
+}
+
 @media screen and (max-width: 425px) {
   .popup__title {
     padding-bottom: 75px;

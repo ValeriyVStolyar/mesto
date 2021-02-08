@@ -1,4 +1,4 @@
-.plases {
+.places {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, minmax(282px, 1fr));
@@ -7,14 +7,14 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .plases {
+  .places {
     grid-template-columns: repeat(2, minmax(303px, 1fr));
     column-gap: 18px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .plases {
+  .places {
     width: calc(100% - 19px * 2);
     padding-right: 19px;
     padding-left: 19px;
@@ -24,7 +24,7 @@
 }
 
 @media screen and (max-width: 425px) {
-  .plases {
+  .places {
     grid-template-columns: minmax(282px, 1fr);
   }
 }
