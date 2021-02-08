@@ -93,20 +93,54 @@ function getItem(item) {
     const newItem = templatePlace.content.cloneNode(true);
     const textPlace = newItem.querySelector('.place__title');
     const placeImage = newItem.querySelector('.place__image');
+    const removePlace = newItem.querySelector('.button_type_remove');
+    const likePlace = newItem.querySelector('.button_type_like');
+
     textPlace.textContent = item.name;
     placeImage.src = item.link;
     placeImage.alt = item.name;
 
+    removePlace.addEventListener('click', handleDelete);
+
+    function likeCard () {
+
+      likePlace.classList.toggle('button_clicked');
+    }
+
+    likePlace.addEventListener('click', likeCard);
+
     return newItem;
 }
+
 render();
+
+function formSubmitHandlerPlaces (evt) {
+  evt.preventDefault();
+
+  listContainer.prepend(getItem({name: placeInput.value, link: linkInput.value}));
+
+  placeInput.value = '';
+  linkInput.value = '';
+
+  togglePopupPlaces();
+}
+
+// function likeCard () {
+//   const likePlace = document.querySelector('.button_type_like');
+//   likePlace.classList.toggle('button_clicked');
+// }
+
+function handleDelete(event) {
+  const targetEl = event.target;
+  const targetItem = targetEl.closest('.place');
+  targetItem.remove();
+}
 
 
 let openPopupPlaces = document.querySelector('.button_type_add-card');
 let popupPlaces = document.querySelector('.popup_place_places');
 let formPlaces = popupPlaces.querySelector('.popup__container');
 let closePopupPlaces = formPlaces.querySelector('.button_type_close');
-//let submitPopupPlaces = formPlaces.querySelector('.button_type_submit');
 let placeInput = formPlaces.querySelector('.popup__input_type_name');
 let linkInput = formPlaces.querySelector('.popup__input_type_job');
 
@@ -122,18 +156,9 @@ function closePopupPlacesOverlay(evt) {
 }
 
 
-function formSubmitHandlerPlaces (evt) {
-  evt.preventDefault();
-
-  listContainer.prepend(getItem({name: placeInput.value, link: linkInput.value}));
-
-  placeInput.value = '';
-  linkInput.value = '';
-
-  togglePopupPlaces();
-}
-
 openPopupPlaces.addEventListener('click', togglePopupPlaces);
 closePopupPlaces.addEventListener('click', togglePopupPlaces);
 popupPlaces.addEventListener('click', closePopupPlacesOverlay);
 formPlaces.addEventListener('submit', formSubmitHandlerPlaces);
+
+
