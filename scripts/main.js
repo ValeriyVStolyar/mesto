@@ -51,38 +51,6 @@ popupProfile.addEventListener('click', closePopupProfileOverlay);
 formProfile.addEventListener('submit', formSubmitHandler);
 
 
-let openPopupPlaces = document.querySelector('.button_type_add-card');
-let popupPlaces = document.querySelector('.popup_place_places');
-let formPlaces = popupPlaces.querySelector('.popup__container');
-let closePopupPlaces = formPlaces.querySelector('.button_type_close');
-let placeInput = formPlaces.querySelector('.popup__input_type_name');
-let linkInput = formPlaces.querySelector('.popup__input_type_job');
-
-
-function togglePopupPlaces() {
-  popupPlaces.classList.toggle('popup_opened');
-}
-
-function closePopupPlacesOverlay(evt) {
-  if (evt.target === evt.currentTarget) {
-    togglePopupPlaces();
-  }
-}
-
-function formSubmitHandlerPlaces (evt) {
-  evt.preventDefault();
-
-
-
-  togglePopupPlaces();
-}
-
-openPopupPlaces.addEventListener('click', togglePopupPlaces);
-closePopupPlaces.addEventListener('click', togglePopupPlaces);
-popupPlaces.addEventListener('click', closePopupPlacesOverlay);
-formPlaces.addEventListener('submit', formSubmitHandlerPlaces);
-
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -113,43 +81,59 @@ const initialCards = [
 const listContainer = document.querySelector('.places');
 const templatePlace = document.querySelector('.template');
 
+
+
 function render() {
   const html = initialCards.map(getItem);
 
   listContainer.append(...html);
 }
 
-
-function getItemHtml(item) {
-  return `<article class="place">
-  <img src="./images/place-karachaevsk.jpg" alt="Карачаевск" class="place__image">
-  <div class="place__list-sights">
-    <h2 class="place__title">${item.name}</h2>
-    <button type="button" aria-label="Лайкнуть" class="button button_type_like"></button>
-  </div>
-</article>`
-}
-
 function getItem(item) {
     const newItem = templatePlace.content.cloneNode(true);
-    const headerEl = newItem.querySelector('.place__title');
+    const textPlace = newItem.querySelector('.place__title');
     const placeImage = newItem.querySelector('.place__image');
-    headerEl.textContent = item.name;
+    textPlace.textContent = item.name;
     placeImage.src = item.link;
     placeImage.alt = item.name;
-
-/*
-    const removeBtn = newItem.querySelector('.button_remove');
-    removeBtn.addEventListener('click', handleDelete);
-
-    const duplicateBtn = newItem.querySelector('.button_duplicate');
-    duplicateBtn.addEventListener('click', handleDuplicate);
-
-    const editBtn = newItem.querySelector('.button_edit');
-    editBtn.addEventListener('click', handleEdit);
-*/
 
     return newItem;
 }
 render();
 
+
+let openPopupPlaces = document.querySelector('.button_type_add-card');
+let popupPlaces = document.querySelector('.popup_place_places');
+let formPlaces = popupPlaces.querySelector('.popup__container');
+let closePopupPlaces = formPlaces.querySelector('.button_type_close');
+//let submitPopupPlaces = formPlaces.querySelector('.button_type_submit');
+let placeInput = formPlaces.querySelector('.popup__input_type_name');
+let linkInput = formPlaces.querySelector('.popup__input_type_job');
+
+
+function togglePopupPlaces() {
+  popupPlaces.classList.toggle('popup_opened');
+}
+
+function closePopupPlacesOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    togglePopupPlaces();
+  }
+}
+
+
+function formSubmitHandlerPlaces (evt) {
+  evt.preventDefault();
+
+  listContainer.prepend(getItem({name: placeInput.value, link: linkInput.value}));
+
+  placeInput.value = '';
+  linkInput.value = '';
+
+  togglePopupPlaces();
+}
+
+openPopupPlaces.addEventListener('click', togglePopupPlaces);
+closePopupPlaces.addEventListener('click', togglePopupPlaces);
+popupPlaces.addEventListener('click', closePopupPlacesOverlay);
+formPlaces.addEventListener('submit', formSubmitHandlerPlaces);
