@@ -156,6 +156,8 @@ function closePopupPlacesOverlay(evt) {
 }
 
 
+
+
 openPopupPlaces.addEventListener('click', togglePopupPlaces);
 closePopupPlaces.addEventListener('click', togglePopupPlaces);
 popupPlaces.addEventListener('click', closePopupPlacesOverlay);
