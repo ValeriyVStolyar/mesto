@@ -1,7 +1,6 @@
 .place {
   padding-bottom: 25px;
   display: grid;
-  grid-template-rows: 1fr min-content;
   gap: 25px;
   border-radius: 10px;
   background-color: #fff;
