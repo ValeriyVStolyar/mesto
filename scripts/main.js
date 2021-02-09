@@ -1,11 +1,11 @@
-let popupProfile = document.querySelector('.popup_place_profile');
-let formProfile = popupProfile.querySelector('.popup__container');
-let closePopupProfile = formProfile.querySelector('.button_type_close');
-let nameInput = formProfile.querySelector('.popup__input_type_name');
-let jobInput = formProfile.querySelector('.popup__input_type_job');
-let openPopupProfile = document.querySelector('.button_type_edit');
-let nameProfile = document.querySelector('.profile__title');
-let jobProfile = document.querySelector('.profile__subtitle');
+const popupProfile = document.querySelector('.popup_place_profile');
+const formProfile = popupProfile.querySelector('.popup__container');
+const closePopupProfile = formProfile.querySelector('.button_type_close');
+const nameInput = formProfile.querySelector('.popup__input_type_name');
+const jobInput = formProfile.querySelector('.popup__input_type_job');
+const openPopupProfile = document.querySelector('.button_type_edit');
+const nameProfile = document.querySelector('.profile__title');
+const jobProfile = document.querySelector('.profile__subtitle');
 
 
 function togglePopup() {
@@ -102,7 +102,7 @@ function getItem(item) {
     placeImage.src = item.link;
     placeImage.alt = item.name;
 
-    removePlace.addEventListener('click', handleDelete);
+    removePlace.addEventListener('click', handleDeconste);
 
     function likeCard () {
 
@@ -120,7 +120,7 @@ function getItem(item) {
 
     placeImage.addEventListener('click', togglePopupPicture);
 
-    return newItem;
+return newItem;
 }
 
 render();
@@ -136,19 +136,19 @@ function formSubmitHandlerPlaces (evt) {
   togglePopupPlaces();
 }
 
-function handleDelete(event) {
+function handleDeconste(event) {
   const targetEl = event.target;
   const targetItem = targetEl.closest('.place');
   targetItem.remove();
 }
 
 
-let openPopupPlaces = document.querySelector('.button_type_add-card');
-let popupPlaces = document.querySelector('.popup_place_places');
-let formPlaces = popupPlaces.querySelector('.popup__container');
-let closePopupPlaces = formPlaces.querySelector('.button_type_close');
-let placeInput = formPlaces.querySelector('.popup__input_type_name');
-let linkInput = formPlaces.querySelector('.popup__input_type_job');
+const openPopupPlaces = document.querySelector('.button_type_add-card');
+const popupPlaces = document.querySelector('.popup_place_places');
+const formPlaces = popupPlaces.querySelector('.popup__container');
+const closePopupPlaces = formPlaces.querySelector('.button_type_close');
+const placeInput = formPlaces.querySelector('.popup__input_type_name');
+const linkInput = formPlaces.querySelector('.popup__input_type_job');
 
 
 function togglePopupPlaces() {
@@ -168,9 +168,9 @@ popupPlaces.addEventListener('click', closePopupPlacesOverlay);
 formPlaces.addEventListener('submit', formSubmitHandlerPlaces);
 
 
-let popupPicture = document.querySelector('.popup_place_picture');
-let formPicture = popupPicture.querySelector('.popup__container');
-let closePopupPicture = formPicture.querySelector('.button_type_close');
+const popupPicture = document.querySelector('.popup_place_picture');
+const formPicture = popupPicture.querySelector('.popup__container');
+const closePopupPicture = formPicture.querySelector('.button_type_close');
 
 
  function togglePopupPicture() {
