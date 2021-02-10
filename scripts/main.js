@@ -6,12 +6,24 @@ const jobInput = formProfile.querySelector('.popup__input_type_job');
 const openPopupProfile = document.querySelector('.button_type_edit');
 const nameProfile = document.querySelector('.profile__title');
 const jobProfile = document.querySelector('.profile__subtitle');
+const listContainer = document.querySelector('.places');
+const templatePlace = document.querySelector('.template');
+const openPopupPlaces = document.querySelector('.button_type_add-card');
+const popupPlaces = document.querySelector('.popup_place_places');
+const formPlaces = popupPlaces.querySelector('.popup__container');
+const closePopupPlaces = formPlaces.querySelector('.button_type_close');
+const placeInput = formPlaces.querySelector('.popup__input_type_place');
+const linkInput = formPlaces.querySelector('.popup__input_type_link');
+const popupPicture = document.querySelector('.popup_place_picture');
+const popupTitle = popupPicture.querySelector('.popup__title');
+const formPicture = popupPicture.querySelector('.popup__container');
+const closePopupPicture = formPicture.querySelector('.button_type_close');
 
 
-function togglePopup() {
-  popupProfile.classList.toggle('popup_opened');
+function togglePopup(popup) {
+
+  popup.classList.toggle('popup_opened');
 }
-
 
 function openProfilePopup() {
 
@@ -19,9 +31,8 @@ function openProfilePopup() {
 
   jobInput.value = jobProfile.textContent;
 
-  togglePopup();
+  togglePopup(popupProfile);
 }
-
 
 // function closePopupProfileOverlay(evt) {
 //   if (evt.target === evt.currentTarget) {
@@ -29,9 +40,6 @@ function openProfilePopup() {
 //   }
 // }
 
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
 function editProfileFormSubmitHandler (evt) {
   evt.preventDefault();
 
@@ -39,22 +47,23 @@ function editProfileFormSubmitHandler (evt) {
 
   jobProfile.textContent = jobInput.value;
 
-  togglePopup();
+  togglePopup(popupProfile);
 }
 
+function openPlacePopup() {
 
-openPopupProfile.addEventListener('click', openProfilePopup);
-closePopupProfile.addEventListener('click', togglePopup);
-//popupProfile.addEventListener('click', closePopupProfileOverlay);
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formProfile.addEventListener('submit', editProfileFormSubmitHandler);
+  placeInput.value = '';
 
+  linkInput.value = '';
 
-const listContainer = document.querySelector('.places');
-const templatePlace = document.querySelector('.template');
+  togglePopup(popupPlaces);
+}
 
-
+// function closePopupPlacesOverlay(evt) {
+//   if (evt.target === evt.currentTarget) {
+//     togglePopupPlaces();
+//   }
+// }
 
 function renderInitialCards() {
   const cards = initialCards.map(getItem);
@@ -68,8 +77,6 @@ function getItem(item) {
     const placeImage = newItem.querySelector('.place__image');
     const removePlace = newItem.querySelector('.button_type_remove');
     const likePlace = newItem.querySelector('.button_type_like');
-    const popupPicture = document.querySelector('.popup_place_picture');
-    const popupImage = document.querySelector('.popup__image');
 
     textPlace.textContent = item.name;
     placeImage.src = item.link;
@@ -79,7 +86,7 @@ function getItem(item) {
 
     likePlace.addEventListener('click', likeCard);
 
-    placeImage.addEventListener('click', togglePopupPicture);
+    placeImage.addEventListener('click', enlargeCard);
 
 return newItem;
 }
@@ -94,7 +101,7 @@ function formSubmitHandlerPlaces (evt) {
   placeInput.value = '';
   linkInput.value = '';
 
-  togglePopupPlaces();
+  togglePopup(popupPlaces);
 }
 
 function deleteCard(event) {
@@ -103,67 +110,34 @@ function deleteCard(event) {
   targetItem.remove();
 }
 
-function likeCard (event) {
+function likeCard(event) {
   const targetEl = event.target;
   const targetItem = targetEl.closest('.button_type_like');
   targetItem.classList.toggle('button_clicked');
 }
 
-function togglePopupPicture(event) {
-  const popupImage = document.querySelector('.popup__image');
+function enlargeCard(event) {
+  const popupImage = popupPicture.querySelector('.popup__image');
   const targetEl = event.target;
   const targetItem = targetEl.closest('.place__image');
+  const targetTitle = targetEl.nextElementSibling;
 
-  popupPicture.classList.toggle('popup_opened');
+  togglePopup(popupPicture);
 
   popupImage.src = targetItem.src;
 
   popupImage.alt = targetItem.alt;
 
-
+  popupTitle.textContent = targetTitle.textContent;
 }
 
 
-
-const openPopupPlaces = document.querySelector('.button_type_add-card');
-const popupPlaces = document.querySelector('.popup_place_places');
-const formPlaces = popupPlaces.querySelector('.popup__container');
-const closePopupPlaces = formPlaces.querySelector('.button_type_close');
-const placeInput = formPlaces.querySelector('.popup__input_type_place');
-const linkInput = formPlaces.querySelector('.popup__input_type_link');
-
-
-function togglePopupPlaces() {
-  popupPlaces.classList.toggle('popup_opened');
-}
-
-function openPlacePopup() {
-
-  placeInput.value = '';
-
-  linkInput.value = '';
-
-  togglePopupPlaces();
-}
-
-// function closePopupPlacesOverlay(evt) {
-//   if (evt.target === evt.currentTarget) {
-//     togglePopupPlaces();
-//   }
-// }
-
-
-openPopupPlaces.addEventListener('click', openPlacePopup);
-closePopupPlaces.addEventListener('click', togglePopupPlaces);
+openPopupProfile.addEventListener('click', () => {openProfilePopup()});
+closePopupProfile.addEventListener('click', () => {togglePopup(popupProfile)});
+//popupProfile.addEventListener('click', closePopupProfileOverlay);
+formProfile.addEventListener('submit', editProfileFormSubmitHandler);
+openPopupPlaces.addEventListener('click', () => {openPlacePopup(popupPlaces)});
+closePopupPlaces.addEventListener('click', () => {togglePopup(popupPlaces)});
 //popupPlaces.addEventListener('click', closePopupPlacesOverlay);
 formPlaces.addEventListener('submit', formSubmitHandlerPlaces);
-
-
-const popupPicture = document.querySelector('.popup_place_picture');
-const formPicture = popupPicture.querySelector('.popup__container');
-const closePopupPicture = formPicture.querySelector('.button_type_close');
-
-
-closePopupPicture.addEventListener('click', togglePopupPicture);
-
-
+closePopupPicture.addEventListener('click', enlargeCard);
