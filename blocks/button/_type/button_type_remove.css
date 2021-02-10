@@ -10,6 +10,7 @@
   background-position: 0 0;
   background-repeat: no-repeat;
   border: none;
+  z-index: 2;
 }
 
 .button_type_remove:hover {
