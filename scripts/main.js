@@ -140,4 +140,4 @@ openPopupPlaces.addEventListener('click', () => {openPlacePopup(popupPlaces)});
 closePopupPlaces.addEventListener('click', () => {togglePopup(popupPlaces)});
 //popupPlaces.addEventListener('click', closePopupPlacesOverlay);
 formPlaces.addEventListener('submit', formSubmitHandlerPlaces);
-closePopupPicture.addEventListener('click', enlargeCard);
+closePopupPicture.addEventListener('click', () => {togglePopup(popupPicture)});
