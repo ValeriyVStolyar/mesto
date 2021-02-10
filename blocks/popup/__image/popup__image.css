@@ -1,6 +1,5 @@
 .popup__image {
   object-position: center;
-  border-radius: 10px 10px 0 0;
   object-fit: cover;
   width: 75vw;
   height: 75vh;

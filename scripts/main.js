@@ -13,26 +13,26 @@ function togglePopup() {
 }
 
 
-function returnMeening() {
+function openProfilePopup() {
 
-nameInput.value = nameProfile.textContent;
+  nameInput.value = nameProfile.textContent;
 
-jobInput.value = jobProfile.textContent;
+  jobInput.value = jobProfile.textContent;
 
-togglePopup();
+  togglePopup();
 }
 
 
-function closePopupProfileOverlay(evt) {
-  if (evt.target === evt.currentTarget) {
-    togglePopup();
-  }
-}
+// function closePopupProfileOverlay(evt) {
+//   if (evt.target === evt.currentTarget) {
+//     togglePopup();
+//   }
+// }
 
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function formSubmitHandler (evt) {
+function editProfileFormSubmitHandler (evt) {
   evt.preventDefault();
 
   nameProfile.textContent = nameInput.value;
@@ -43,50 +43,23 @@ function formSubmitHandler (evt) {
 }
 
 
-openPopupProfile.addEventListener('click', returnMeening);
+openPopupProfile.addEventListener('click', openProfilePopup);
 closePopupProfile.addEventListener('click', togglePopup);
-popupProfile.addEventListener('click', closePopupProfileOverlay);
+//popupProfile.addEventListener('click', closePopupProfileOverlay);
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formProfile.addEventListener('submit', formSubmitHandler);
+formProfile.addEventListener('submit', editProfileFormSubmitHandler);
 
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 const listContainer = document.querySelector('.places');
 const templatePlace = document.querySelector('.template');
 
 
 
-function render() {
-  const html = initialCards.map(getItem);
+function renderInitialCards() {
+  const cards = initialCards.map(getItem);
 
-  listContainer.append(...html);
+  listContainer.append(...cards);
 }
 
 function getItem(item) {
@@ -102,28 +75,16 @@ function getItem(item) {
     placeImage.src = item.link;
     placeImage.alt = item.name;
 
-    removePlace.addEventListener('click', handleDeconste);
-
-    function likeCard () {
-
-      likePlace.classList.toggle('button_clicked');
-    }
+    removePlace.addEventListener('click', deleteCard);
 
     likePlace.addEventListener('click', likeCard);
-
-
-    function togglePopupPicture() {
-      popupPicture.classList.toggle('popup_opened');
-      popupImage.src = placeImage.src;
-      popupImage.alt = placeImage.alt;
-    }
 
     placeImage.addEventListener('click', togglePopupPicture);
 
 return newItem;
 }
 
-render();
+renderInitialCards();
 
 function formSubmitHandlerPlaces (evt) {
   evt.preventDefault();
@@ -136,35 +97,65 @@ function formSubmitHandlerPlaces (evt) {
   togglePopupPlaces();
 }
 
-function handleDeconste(event) {
+function deleteCard(event) {
   const targetEl = event.target;
   const targetItem = targetEl.closest('.place');
   targetItem.remove();
 }
+
+function likeCard (event) {
+  const targetEl = event.target;
+  const targetItem = targetEl.closest('.button_type_like');
+  targetItem.classList.toggle('button_clicked');
+}
+
+function togglePopupPicture(event) {
+  const popupImage = document.querySelector('.popup__image');
+  const targetEl = event.target;
+  const targetItem = targetEl.closest('.place__image');
+
+  popupPicture.classList.toggle('popup_opened');
+
+  popupImage.src = targetItem.src;
+
+  popupImage.alt = targetItem.alt;
+
+
+}
+
 
 
 const openPopupPlaces = document.querySelector('.button_type_add-card');
 const popupPlaces = document.querySelector('.popup_place_places');
 const formPlaces = popupPlaces.querySelector('.popup__container');
 const closePopupPlaces = formPlaces.querySelector('.button_type_close');
-const placeInput = formPlaces.querySelector('.popup__input_type_name');
-const linkInput = formPlaces.querySelector('.popup__input_type_job');
+const placeInput = formPlaces.querySelector('.popup__input_type_place');
+const linkInput = formPlaces.querySelector('.popup__input_type_link');
 
 
 function togglePopupPlaces() {
   popupPlaces.classList.toggle('popup_opened');
 }
 
-function closePopupPlacesOverlay(evt) {
-  if (evt.target === evt.currentTarget) {
-    togglePopupPlaces();
-  }
+function openPlacePopup() {
+
+  placeInput.value = '';
+
+  linkInput.value = '';
+
+  togglePopupPlaces();
 }
 
+// function closePopupPlacesOverlay(evt) {
+//   if (evt.target === evt.currentTarget) {
+//     togglePopupPlaces();
+//   }
+// }
 
-openPopupPlaces.addEventListener('click', togglePopupPlaces);
+
+openPopupPlaces.addEventListener('click', openPlacePopup);
 closePopupPlaces.addEventListener('click', togglePopupPlaces);
-popupPlaces.addEventListener('click', closePopupPlacesOverlay);
+//popupPlaces.addEventListener('click', closePopupPlacesOverlay);
 formPlaces.addEventListener('submit', formSubmitHandlerPlaces);
 
 
@@ -172,10 +163,6 @@ const popupPicture = document.querySelector('.popup_place_picture');
 const formPicture = popupPicture.querySelector('.popup__container');
 const closePopupPicture = formPicture.querySelector('.button_type_close');
 
-
- function togglePopupPicture() {
-   popupPicture.classList.toggle('popup_opened');
- }
 
 closePopupPicture.addEventListener('click', togglePopupPicture);
 
