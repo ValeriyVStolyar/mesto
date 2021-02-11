@@ -2,6 +2,4 @@
   opacity: 1;
   height: auto;
   transition: opacity .9s ease-in-out;
-  transition: visibility 1s linear, opacity 1s linear;
-  visibility: visible;
 }
