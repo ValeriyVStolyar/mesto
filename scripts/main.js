@@ -15,6 +15,7 @@ const closePopupPlaces = formPlaces.querySelector('.button_type_close');
 const placeInput = formPlaces.querySelector('.popup__input_type_place');
 const linkInput = formPlaces.querySelector('.popup__input_type_link');
 const popupPicture = document.querySelector('.popup_place_picture');
+const popupImage = popupPicture.querySelector('.popup__image');
 const popupTitle = popupPicture.querySelector('.popup__title');
 const formPicture = popupPicture.querySelector('.popup__container');
 const closePopupPicture = formPicture.querySelector('.button_type_close');
@@ -86,7 +87,7 @@ function getItem(item) {
 
     likePlace.addEventListener('click', likeCard);
 
-    placeImage.addEventListener('click', enlargeCard);
+    placeImage.addEventListener('click', openImagePopup);
 
 return newItem;
 }
@@ -116,8 +117,7 @@ function likeCard(event) {
   targetItem.classList.toggle('button_clicked');
 }
 
-function enlargeCard(event) {
-  const popupImage = popupPicture.querySelector('.popup__image');
+function openImagePopup(event) {
   const targetEl = event.target;
   const targetItem = targetEl.closest('.place__image');
   const targetTitle = targetEl.nextElementSibling;
