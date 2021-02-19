@@ -41,6 +41,12 @@ function openProfilePopup() {
 //   }
 // }
 
+function closePopupOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    togglePopup;
+  }
+}
+
 function editProfileFormSubmitHandler (evt) {
   evt.preventDefault();
 
@@ -135,9 +141,12 @@ function openImagePopup(event) {
 openPopupProfile.addEventListener('click', () => {openProfilePopup()});
 closePopupProfile.addEventListener('click', () => {togglePopup(popupProfile)});
 //popupProfile.addEventListener('click', closePopupProfileOverlay);
+popupProfile.addEventListener('click', () => {togglePopup(popupProfile)});
 formProfile.addEventListener('submit', editProfileFormSubmitHandler);
 openPopupPlaces.addEventListener('click', () => {openPlacePopup(popupPlaces)});
 closePopupPlaces.addEventListener('click', () => {togglePopup(popupPlaces)});
 //popupPlaces.addEventListener('click', closePopupPlacesOverlay);
+popupPlaces.addEventListener('click', () => {togglePopup(popupPlaces)});
 formPlaces.addEventListener('submit', formSubmitHandlerPlaces);
 closePopupPicture.addEventListener('click', () => {togglePopup(popupPicture)});
+popupPicture.addEventListener('click', () => {togglePopup(popupPicture)});
