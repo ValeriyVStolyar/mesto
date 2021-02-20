@@ -24,6 +24,7 @@ const closePopupPicture = formPicture.querySelector('.button_type_close');
 function togglePopup(popup) {
 
   popup.classList.toggle('popup_opened');
+  console.log(popup);
 }
 
 function openProfilePopup() {
@@ -35,17 +36,23 @@ function openProfilePopup() {
   togglePopup(popupProfile);
 }
 
-// function closePopupProfileOverlay(evt) {
-//   if (evt.target === evt.currentTarget) {
-//     togglePopup();
-//   }
-// }
-
-function closePopupOverlay(evt) {
+function closePopupProfileOverlay(evt) {
   if (evt.target === evt.currentTarget) {
-    togglePopup;
+    togglePopup(popupProfile);
   }
 }
+
+
+function ttt (evt) {
+  console.log(
+    'target', evt.target,
+    'currentTarget', evt.currentTarget
+  )
+}
+popupProfile.addEventListener('click', ttt);
+popupPlaces.addEventListener('click', ttt);
+popupPicture.addEventListener('click', ttt);
+
 
 function editProfileFormSubmitHandler (evt) {
   evt.preventDefault();
@@ -66,11 +73,11 @@ function openPlacePopup() {
   togglePopup(popupPlaces);
 }
 
-// function closePopupPlacesOverlay(evt) {
-//   if (evt.target === evt.currentTarget) {
-//     togglePopupPlaces();
-//   }
-// }
+function closePopupPlacesOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    togglePopup(popupPlaces);
+  }
+}
 
 function renderInitialCards() {
   const cards = initialCards.map(getItem);
@@ -112,21 +119,16 @@ function formSubmitHandlerPlaces (evt) {
 }
 
 function deleteCard(event) {
-  const targetEl = event.target;
-  const targetItem = targetEl.closest('.place');
-  targetItem.remove();
+  event.target.closest('.place').remove();
 }
 
 function likeCard(event) {
-  const targetEl = event.target;
-  const targetItem = targetEl.closest('.button_type_like');
-  targetItem.classList.toggle('button_clicked');
+  event.target.closest('.button_type_like').classList.toggle('button_clicked');
 }
 
 function openImagePopup(event) {
-  const targetEl = event.target;
-  const targetItem = targetEl.closest('.place__image');
-  const targetTitle = targetEl.nextElementSibling;
+  const targetItem = event.target.closest('.place__image');
+  const targetTitle = event.target.nextElementSibling;
 
   togglePopup(popupPicture);
 
@@ -137,16 +139,23 @@ function openImagePopup(event) {
   popupTitle.textContent = targetTitle.textContent;
 }
 
+function closeImagePopupOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    togglePopup(popupPicture);
+  }
+}
+
 
 openPopupProfile.addEventListener('click', () => {openProfilePopup()});
 closePopupProfile.addEventListener('click', () => {togglePopup(popupProfile)});
-//popupProfile.addEventListener('click', closePopupProfileOverlay);
-popupProfile.addEventListener('click', () => {togglePopup(popupProfile)});
+popupProfile.addEventListener('click', closePopupProfileOverlay);
+//popupProfile.addEventListener('click', () => {closePopupProfileOverlay(popupProfile)});
 formProfile.addEventListener('submit', editProfileFormSubmitHandler);
 openPopupPlaces.addEventListener('click', () => {openPlacePopup(popupPlaces)});
 closePopupPlaces.addEventListener('click', () => {togglePopup(popupPlaces)});
-//popupPlaces.addEventListener('click', closePopupPlacesOverlay);
-popupPlaces.addEventListener('click', () => {togglePopup(popupPlaces)});
+popupPlaces.addEventListener('click', closePopupPlacesOverlay);
+//popupPlaces.addEventListener('click', () => {closePopupOverlay(popupPlaces)});
 formPlaces.addEventListener('submit', formSubmitHandlerPlaces);
 closePopupPicture.addEventListener('click', () => {togglePopup(popupPicture)});
-popupPicture.addEventListener('click', () => {togglePopup(popupPicture)});
+//popupPicture.addEventListener('click', () => {closePopupOverlay(popupPicture)});
+popupPicture.addEventListener('click', closeImagePopupOverlay);
