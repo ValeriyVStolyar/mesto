@@ -85,7 +85,7 @@ const toggleButtonState = (inputList, submitButtonSelector) => {
     submitButtonSelector.classList.add('button_disabled');
   } else {
     // иначе сделай кнопку активной
-//    submitButtonSelector.classList.remove('button_disabled');
+    submitButtonSelector.classList.remove('button_disabled');
   };
 };
 
