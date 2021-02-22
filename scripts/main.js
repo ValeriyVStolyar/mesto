@@ -24,7 +24,6 @@ const closePopupPicture = formPicture.querySelector('.button_type_close');
 function togglePopup(popup) {
 
   popup.classList.toggle('popup_opened');
-//  console.log(popup);
 }
 
 function openProfilePopup() {
@@ -42,6 +41,11 @@ function closePopupProfileOverlay(evt) {
   }
 }
 
+function closePopupProfileEscape(evt) {
+  if (evt.key === 'Escape') {
+    popupProfile.classList.remove('popup_opened');
+  }
+}
 
 // function ttt (evt) {
 //   console.log(
@@ -78,6 +82,22 @@ function closePopupPlacesOverlay(evt) {
     togglePopup(popupPlaces);
   }
 }
+
+function closePopupPlacesEscape(evt) {
+  if (evt.key === 'Escape') {
+    popupPlaces.classList.remove('popup_opened');
+  }
+}
+
+// function keyHandler(evt) {
+//   if (evt.key === 'Escape') {
+//     console.log('RRR');
+//     togglePopup(popupPlaces);
+//   }
+// }
+
+// document.addEventListener('keydown', (keyHandler));
+
 
 function renderInitialCards() {
   const cards = initialCards.map(getItem);
@@ -145,17 +165,26 @@ function closeImagePopupOverlay(evt) {
   }
 }
 
+function closeImagePopupEscape(evt) {
+  if (evt.key === 'Escape') {
+    popupPicture.classList.remove('popup_opened');
+  }
+}
+
 
 openPopupProfile.addEventListener('click', () => {openProfilePopup()});
 closePopupProfile.addEventListener('click', () => {togglePopup(popupProfile)});
 popupProfile.addEventListener('click', closePopupProfileOverlay);
-//popupProfile.addEventListener('click', () => {closePopupProfileOverlay(popupProfile)});
+document.addEventListener('keydown', closePopupProfileEscape);
+//document.addEventListener('keydown', () => {closePopupProfileOverlay(popupProfile)});
 formProfile.addEventListener('submit', editProfileFormSubmitHandler);
 openPopupPlaces.addEventListener('click', () => {openPlacePopup(popupPlaces)});
 closePopupPlaces.addEventListener('click', () => {togglePopup(popupPlaces)});
 popupPlaces.addEventListener('click', closePopupPlacesOverlay);
-//popupPlaces.addEventListener('click', () => {closePopupOverlay(popupPlaces)});
+document.addEventListener('keydown', closePopupPlacesEscape);
+//document.addEventListener('keydown', () => {closePopupPlacesOverlay(popupPlaces)});
 formPlaces.addEventListener('submit', formSubmitHandlerPlaces);
 closePopupPicture.addEventListener('click', () => {togglePopup(popupPicture)});
 //popupPicture.addEventListener('click', () => {closePopupOverlay(popupPicture)});
 popupPicture.addEventListener('click', closeImagePopupOverlay);
+document.addEventListener('keydown', closeImagePopupEscape);

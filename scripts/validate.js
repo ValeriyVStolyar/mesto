@@ -72,7 +72,7 @@ const hasInvalidInput = (inputList) => {
     // hasInvalidInput вернёт true
 
     return !inputSelector.validity.valid;
-  })
+  });
 };
 
 // Функция принимает массив полей ввода
@@ -85,10 +85,9 @@ const toggleButtonState = (inputList, submitButtonSelector) => {
     submitButtonSelector.classList.add('button_disabled');
   } else {
     // иначе сделай кнопку активной
-    submitButtonSelector.classList.remove('button_disabled');
+//    submitButtonSelector.classList.remove('button_disabled');
   };
 };
-
 
 const setEventListeners = (formSelector) => {
   // Находим все поля внутри формы,
