@@ -18,3 +18,11 @@
 .popup__input:focus {
   outline: none;
 }
+
+/* .popup__input:invalid {
+  border-bottom-color: #00f;
+}
+
+.popup__input:valid {
+  border-bottom-color: rgba(0, 0, 0, .2);
+} */

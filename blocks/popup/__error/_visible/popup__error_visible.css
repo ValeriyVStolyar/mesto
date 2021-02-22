@@ -1,0 +1,7 @@
+.popup__error_visible {
+  color: #f00;
+  position: relative;
+  top: -26px;
+  left: 0;
+  /* opacity: 1; */
+}

@@ -24,7 +24,7 @@ const closePopupPicture = formPicture.querySelector('.button_type_close');
 function togglePopup(popup) {
 
   popup.classList.toggle('popup_opened');
-  console.log(popup);
+//  console.log(popup);
 }
 
 function openProfilePopup() {
@@ -43,15 +43,15 @@ function closePopupProfileOverlay(evt) {
 }
 
 
-function ttt (evt) {
-  console.log(
-    'target', evt.target,
-    'currentTarget', evt.currentTarget
-  )
-}
-popupProfile.addEventListener('click', ttt);
-popupPlaces.addEventListener('click', ttt);
-popupPicture.addEventListener('click', ttt);
+// function ttt (evt) {
+//   console.log(
+//     'target', evt.target,
+//     'currentTarget', evt.currentTarget
+//   )
+// }
+// popupProfile.addEventListener('click', ttt);
+// popupPlaces.addEventListener('click', ttt);
+// popupPicture.addEventListener('click', ttt);
 
 
 function editProfileFormSubmitHandler (evt) {
