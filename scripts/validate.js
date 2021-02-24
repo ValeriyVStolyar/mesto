@@ -2,7 +2,9 @@
 const showInputError = (formElement, inputElement, errorMessage, validateSetting) => {
   // Находим элемент ошибки внутри самой функции
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  console.log(errorElement.textContent);
   inputElement.classList.add(validateSetting.inputErrorClass);
+  console.log(errorElement.textContent);
   // Показываем сообщение об ошибке
   // Заменим содержимое span с ошибкой на переданный параметр
   errorElement.textContent = errorMessage;
@@ -43,25 +45,34 @@ const hasInvalidInput = (inputList) => {
     // Если поле не валидно, колбэк вернёт true
     // Обход массива прекратится и вся фунцкция
     // hasInvalidInput вернёт true
+console.log(inputElement);
+console.log(!inputElement.validity.valid);
 
     return !inputElement.validity.valid;
   });
 };
 
+// Слушатель события input
+document.addEventListener('input', function (evt) {
+  // Выведем в консоль значение свойства validity.valid поля ввода,
+  // на котором слушаем событие input
+  console.log(evt.target.validity.valid);
+});
+
 // Функция принимает массив полей ввода
 // и элемент кнопки, состояние которой нужно менять
-
 const toggleButtonState = (inputList, buttonElement, validateSetting) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
     buttonElement.setAttribute("disabled", true);
     buttonElement.classList.add(validateSetting.inactiveButtonClass);
+    console.log(buttonElement);
   } else {
     // иначе сделай кнопку активной
-    console.log(buttonElement);
     buttonElement.removeAttribute("disabled");
     buttonElement.classList.remove(validateSetting.inactiveButtonClass);
+    console.log(buttonElement);
   };
 };
 
@@ -73,6 +84,8 @@ const setEventListeners = (formElement, validateSetting) => {
   const buttonElement = formElement.querySelector(validateSetting.submitButtonSelector);
 
   // Вызовем toggleButtonState, чтобы не ждать ввода данных в поля
+  console.log(formElement);
+  console.log(buttonElement);
   toggleButtonState(inputList, buttonElement, validateSetting);
 
   inputList.forEach((inputElement) => {
@@ -81,6 +94,7 @@ const setEventListeners = (formElement, validateSetting) => {
 
       // Вызовем toggleButtonState и передадим ей массив полей и кнопку
       toggleButtonState(inputList, buttonElement, validateSetting);
+      console.log(buttonElement);
     });
   });
 };
