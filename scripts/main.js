@@ -204,7 +204,7 @@ openPopupProfile.addEventListener('click', openProfilePopup);
 //popupProfile.addEventListener('click', closePopupProfileOverlay);
 popupProfile.addEventListener('click', popups);
 //document.addEventListener('keydown', closePopupProfileEscape);
-document.addEventListener('keydown', closeByEscape);
+//document.addEventListener('keydown', closeByEscape);
 //document.addEventListener('keydown', () => {closePopupProfileOverlay(popupProfile)});
 formProfile.addEventListener('submit', editProfileFormSubmitHandler);
 openPopupPlaces.addEventListener('click', () => {openPlacePopup(popupPlaces)});
