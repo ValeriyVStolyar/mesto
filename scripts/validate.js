@@ -48,11 +48,6 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-// Слушатель события input
-document.addEventListener('input', function (evt) {
-  // Выведем в консоль значение свойства validity.valid поля ввода,
-  // на котором слушаем событие input
-});
 
 // Функция принимает массив полей ввода
 // и элемент кнопки, состояние которой нужно менять
