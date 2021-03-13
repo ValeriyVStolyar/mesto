@@ -1,3 +1,4 @@
+(function() {
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement, errorMessage, validateSetting) => {
   // Находим элемент ошибки внутри самой функции
@@ -124,3 +125,4 @@ enableValidation({
 //   console.log(formError, formError.textContent);
 // });
 
+}) ();
