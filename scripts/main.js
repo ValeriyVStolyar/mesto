@@ -284,16 +284,20 @@ const popupProfile = document.querySelector('.popup_place_profile');
 const formProfile = popupProfile.querySelector('.popup__container');
 const nameInput = formProfile.querySelector('.popup__input_type_name');
 const jobInput = formProfile.querySelector('.popup__input_type_job');
+const nameImputError = formProfile.querySelector('.popup__name-error');
+const jobImputError = formProfile.querySelector('.popup__job-error');
 const openPopupProfile = document.querySelector('.button_type_edit');
 const nameProfile = document.querySelector('.profile__title');
 const jobProfile = document.querySelector('.profile__subtitle');
-const listContainer = document.querySelector('.places');
+//const listContainer = document.querySelector('.places');
 //const templatePlace = document.querySelector('.template');
 const openPopupPlaces = document.querySelector('.button_type_add-card');
 const popupPlaces = document.querySelector('.popup_place_places');
 const formPlaces = popupPlaces.querySelector('.popup__container');
 const placeInput = formPlaces.querySelector('.popup__input_type_place');
 const linkInput = formPlaces.querySelector('.popup__input_type_link');
+const placeImputError = formPlaces.querySelector('.popup__place-error');
+const linkImputError = formPlaces.querySelector('.popup__link-error');
 const popupPicture = document.querySelector('.popup_place_picture');
 const popupImage = popupPicture.querySelector('.popup__image');
 const popupTitle = popupPicture.querySelector('.popup__title');
@@ -311,11 +315,20 @@ function togglePopup(popup) {
   }
 }
 
+
 function openProfilePopup() {
 
   nameInput.value = nameProfile.textContent;
 
+  nameImputError.textContent = '';
+
+  nameInput.classList.remove('popup__input_type_error');
+
   jobInput.value = jobProfile.textContent;
+
+  jobImputError.textContent = '';
+
+  jobInput.classList.remove('popup__input_type_error');
 
   togglePopup(popupProfile);
 }
@@ -352,7 +365,16 @@ function openPlacePopup() {
 
   placeInput.value = '';
 
+  placeImputError.textContent = '';
+  console.log(placeImputError)
+
+  placeInput.classList.remove('popup__input_type_error');
+
   linkInput.value = '';
+
+  linkImputError.textContent = '';
+
+  linkInput.classList.remove('popup__input_type_error');
 
   togglePopup(popupPlaces);
 }
