@@ -13,27 +13,13 @@ class FormValidator {
     // constructor(validationSetting) { // теперь конструктор получает объект
   constructor (validationSetting, formElement) {
     this._validationSetting = validationSetting;
-    // this._formSelector = validationSetting.formSelector;
-    // this._inputSelector = validationSetting.inputSelector;
-    // this._submitButtonSelector = validationSetting.submitButtonSelector;
-    // this._inactiveButtonClass = validationSetting.inactiveButtonClass;
-    // this._inputErrorClass = validationSetting.inputErrorClass;
-    // this._errorClass = validationSetting.errorClass;
     this._formElement = formElement; // записали селектор в приватное поле
 	// constructor(cardSelector) { // теперь здесь один параметр — селектор
   //   this._cardSelector = cardSelector;
     this._inputList = Array.from(this._formElement.querySelectorAll(this._validationSetting.inputSelector));
     this._buttonElement = this._formElement.querySelector(this._validationSetting.submitButtonSelector);
-    console.log(formElement);
     console.log(this._formElement);
-    console.log(validationSetting);
     console.log(this._validationSetting);
-    console.log(this._validationSetting.inputSelector);
-    console.log(this._validationSetting.submitButtonSelector);
-    console.log(this._validationSetting.errorClass);
-    console.log(this._validationSetting.inactiveButtonClass);
-    console.log(this._validationSetting.inputErrorClass);
-    console.log(this._validationSetting.formSelector);
     console.log(this._inputList);
     console.log(this._buttonElement);
   }
@@ -41,7 +27,6 @@ class FormValidator {
 // Функция, которая добавляет класс с ошибкой
 _showInputError = (inputElement, errorMessage) => {
   // Находим элемент ошибки внутри самой функции
-  console.log(this._formElement);
   const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
   console.log(errorElement);
   inputElement.classList.add(this._validationSetting.inputErrorClass);
@@ -117,7 +102,7 @@ _setEventListeners = () => {
 
   // Вызовем toggleButtonState, чтобы не ждать ввода данных в поля
   this._toggleButtonState();
-  console.log(this._toggleButtonState);
+  console.log(this._buttonElement);
 
   this._inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', (evt) => {
@@ -155,19 +140,12 @@ enableValidation = () => {
 }
 
 const popupProfile = document.querySelector('.popup_place_profile');
-console.log(popupProfile)
 const formProfile = popupProfile.querySelector('.popup__validate');
-console.log(formProfile)
 const formValidatorProfile = new FormValidator(validationSetting, formProfile);
-console.log(formValidatorProfile)
 formValidatorProfile.enableValidation();
-console.log(formProfile);
 
 const popupPlaces = document.querySelector('.popup_place_places');
-console.log(popupPlaces)
 const formPlaces = popupPlaces.querySelector('.popup__validate');
-console.log(formPlaces)
 const formValidatorPlace = new FormValidator(validationSetting, formPlaces);
-console.log(formValidatorPlace)
 formValidatorPlace.enableValidation();
-console.log(formPlaces);
+
