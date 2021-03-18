@@ -213,22 +213,9 @@ class Card {
     popupImage.src = this._image;
 
     popupImage.alt = this._alt;
-console.log(popupImage.alt)
+
     popupTitle.textContent = this._text;
   }
-
-  // function openImagePopup(event) {
-//   const targetItem = event.target.closest('.place__image');
-//   const targetTitle = event.target.nextElementSibling;
-
-//   togglePopup(popupPicture);
-
-//   popupImage.src = targetItem.src;
-
-//   popupImage.alt = targetItem.alt;
-
-//   popupTitle.textContent = targetTitle.textContent;
-// }
 
 
 // class UserCard extends Card {
@@ -401,7 +388,7 @@ function openPlacePopup() {
 function formSubmitHandlerPlaces (evt) {
   evt.preventDefault();
 
-  listContainer.prepend(getItem({name: placeInput.value, link: linkInput.value}));
+//  listContainer.prepend(getItem({name: placeInput.value, link: linkInput.value}));
 
   placeInput.value = '';
   linkInput.value = '';
