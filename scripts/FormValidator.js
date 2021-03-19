@@ -1,13 +1,6 @@
-  const validationSetting = ({
-    formSelector: '.popup__validate',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.button_type_submit',
-    inactiveButtonClass: 'button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-  });
+// import {validationSetting} from './validationSetting.js';
 
-class FormValidator {
+export default class FormValidator {
   // в конструкторе будут динамические данные,
   // для каждого экземпляра свои
     // constructor(validationSetting) { // теперь конструктор получает объект
@@ -138,14 +131,3 @@ enableValidation = () => {
   //  })
   };
 }
-
-const popupProfile = document.querySelector('.popup_place_profile');
-const formProfile = popupProfile.querySelector('.popup__validate');
-const formValidatorProfile = new FormValidator(validationSetting, formProfile);
-formValidatorProfile.enableValidation();
-
-const popupPlaces = document.querySelector('.popup_place_places');
-const formPlaces = popupPlaces.querySelector('.popup__validate');
-const formValidatorPlace = new FormValidator(validationSetting, formPlaces);
-formValidatorPlace.enableValidation();
-
