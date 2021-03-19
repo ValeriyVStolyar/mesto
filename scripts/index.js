@@ -13,19 +13,19 @@ const formValidatorProfile = new FormValidator(validationSetting, formProfile);
 const openPopupProfile = document.querySelector('.button_type_edit');
 const nameProfile = document.querySelector('.profile__title');
 const jobProfile = document.querySelector('.profile__subtitle');
-const listContainer = document.querySelector('.places');
+//const listContainer = document.querySelector('.places');
 //const templatePlace = document.querySelector('.template');
 const openPopupPlaces = document.querySelector('.button_type_add-card');
 const popupPlaces = document.querySelector('.popup_place_places');
 const formPlaces = popupPlaces.querySelector('.popup__container');
 const placeInput = formPlaces.querySelector('.popup__input_type_place');
 const linkInput = formPlaces.querySelector('.popup__input_type_link');
-const placeImputError = formPlaces.querySelector('.popup__place-error');
-const linkImputError = formPlaces.querySelector('.popup__link-error');
+const placeInputError = formPlaces.querySelector('.popup__place-error');
+const linkInputError = formPlaces.querySelector('.popup__link-error');
 const formValidatorPlace = new FormValidator(validationSetting, formPlaces);
-const popupPicture = document.querySelector('.popup_place_picture');
-const popupImage = popupPicture.querySelector('.popup__image');
-const popupTitle = popupPicture.querySelector('.popup__title');
+//const popupPicture = document.querySelector('.popup_place_picture');
+//const popupImage = popupPicture.querySelector('.popup__image');
+//const popupTitle = popupPicture.querySelector('.popup__title');
 //const formPicture = popupPicture.querySelector('.popup__container');
 const popups = document.querySelectorAll('.popup');
 
@@ -89,13 +89,13 @@ function openPlacePopup() {
 
   placeInput.value = '';
 
-  placeImputError.textContent = '';
+  placeInputError.textContent = '';
 
   placeInput.classList.remove('popup__input_type_error');
 
   linkInput.value = '';
 
-  linkImputError.textContent = '';
+  linkInputError.textContent = '';
 
   linkInput.classList.remove('popup__input_type_error');
 
@@ -133,19 +133,31 @@ function openPlacePopup() {
 function formSubmitHandlerPlaces (evt) {
   evt.preventDefault();
 
-//  listContainer.prepend(getItem({name: placeInput.value, link: linkInput.value}));
-  addCard();
+  addNewCard();
 
   placeInput.value = '';
   linkInput.value = '';
 
   togglePopup(popupPlaces);
-}
+};
 
-function addCard () {
-  listContainer.prepend.card;
-  console.log(card);
-}
+function addNewCard () {
+  const newCard = [{name: placeInput.value, link: linkInput.value}];
+
+  newCard.forEach((item) => {
+    const additionalCard = new Card(item);
+
+    const cardElement = additionalCard.generateCard();
+
+    document.querySelector('.places').prepend(cardElement);
+  });
+};
+
+// console.log(newCard);
+// function addCard () {
+//   listContainer.prepend.card;
+//   console.log(newCard);
+// }
 
 // function deleteCard(event) {
 //   event.target.closest('.place').remove();
@@ -184,7 +196,7 @@ initialCards.forEach((item) => {
 
   // Создаём карточку и возвращаем наружу
   const cardElement = card.generateCard();
-  console.log(cardElement);
+//  console.log(cardElement);
 
   // Добавляем в DOM
   document.querySelector('.places').append(cardElement);
@@ -197,7 +209,6 @@ formValidatorPlace.enableValidation();
 
 
 openPopupProfile.addEventListener('click', openProfilePopup);
-popupProfile.addEventListener('click', popups);
 formProfile.addEventListener('submit', editProfileFormSubmitHandler);
 openPopupPlaces.addEventListener('click', () => {openPlacePopup(popupPlaces)});
 formPlaces.addEventListener('submit', formSubmitHandlerPlaces);

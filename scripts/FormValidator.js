@@ -11,18 +11,15 @@ export default class FormValidator {
   //   this._cardSelector = cardSelector;
     this._inputList = Array.from(this._formElement.querySelectorAll(this._validationSetting.inputSelector));
     this._buttonElement = this._formElement.querySelector(this._validationSetting.submitButtonSelector);
-    console.log(this._formElement);
-    console.log(this._validationSetting);
-    console.log(this._inputList);
-    console.log(this._buttonElement);
   }
 
 // Функция, которая добавляет класс с ошибкой
 _showInputError = (inputElement, errorMessage) => {
   // Находим элемент ошибки внутри самой функции
   const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-  console.log(errorElement);
+
   inputElement.classList.add(this._validationSetting.inputErrorClass);
+
   // Показываем сообщение об ошибке
   // Заменим содержимое span с ошибкой на переданный параметр
   errorElement.textContent = errorMessage;
@@ -33,7 +30,8 @@ _showInputError = (inputElement, errorMessage) => {
 _hideInputError = (inputElement) => {
   // Находим элемент ошибки
   const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-  console.log(errorElement);
+  // console.log(errorElement);
+
   inputElement.classList.remove(this._validationSetting.inputErrorClass);
   // Скрываем сообщение об ошибке
   errorElement.classList.remove(this._validationSetting.errorClass);
@@ -43,7 +41,6 @@ _hideInputError = (inputElement) => {
 
 // Функция isValid теперь принимает formElement и inputElement,
 // а не берёт их из внешней области видимости
-
 _isValid = (inputElement) => {
   if (!inputElement.validity.valid) {
     // showInputError теперь получает параметром форму, в которой
@@ -57,17 +54,14 @@ _isValid = (inputElement) => {
 };
 
 // Функция принимает массив полей
-
 _hasInvalidInput = () => {
 
-  console.log(this._inputList);
   // проходим по этому массиву методом some
   return this._inputList.some((inputElement) => {
-    console.log(inputElement);
+
     // Если поле не валидно, колбэк вернёт true
     // Обход массива прекратится и вся фунцкция
     // hasInvalidInput вернёт true
-
     return !inputElement.validity.valid;
   });
 };
@@ -90,22 +84,22 @@ _toggleButtonState = () => {
 _setEventListeners = () => {
   // Найдём все поля формы и сделаем из них массив
   // const inputList = Array.from(this._formElement.querySelectorAll(this._validationSetting.inputSelector));
+
   // Найдём в текущей форме кнопку отправки
   // const buttonElement = formElement.querySelector(this._validationSetting.submitButtonSelector);
 
   // Вызовем toggleButtonState, чтобы не ждать ввода данных в поля
   this._toggleButtonState();
-  console.log(this._buttonElement);
 
   this._inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', (evt) => {
       this._isValid(inputElement);
-  console.log(evt.target.validity.valid);
-  console.log(evt.target.name);
-  console.log(evt.target.validity);
+  // console.log(evt.target.validity.valid);
+  // console.log(evt.target.name);
+  // console.log(evt.target.validity);
+
       // Вызовем toggleButtonState и передадим ей массив полей и кнопку
   this._toggleButtonState();
-
     });
   });
 };
@@ -115,7 +109,6 @@ enableValidation = () => {
     // сделаем из них массив методом Array.from
 //    const formList = Array.from(document.querySelectorAll(this._validationSetting.formSelector));
 //    console.log(formList);
-
 
 //     // Переберём полученную коллекцию
 //     formList.forEach((formElement) => {
