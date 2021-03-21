@@ -20,7 +20,7 @@ const placeInput = formPlaces.querySelector('.popup__input_type_place');
 const linkInput = formPlaces.querySelector('.popup__input_type_link');
 const formValidatorPlace = new FormValidator(validationSetting, formPlaces);
 const popups = document.querySelectorAll('.popup');
-const templateCards = document.querySelector('.template');
+const templateCards = '.template';
 
 
 export function togglePopup(popup) {
@@ -92,7 +92,7 @@ function formSubmitHandlerPlaces (evt) {
 };
 
 function addNewCard () {
-  const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, templateCards);
+  const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, '.template');
   const cardElement = additionalCard.generateCard();
 
   cardPlace.prepend(cardElement);
