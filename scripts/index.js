@@ -20,15 +20,16 @@ const placeInput = formPlaces.querySelector('.popup__input_type_place');
 const linkInput = formPlaces.querySelector('.popup__input_type_link');
 const formValidatorPlace = new FormValidator(validationSetting, formPlaces);
 const popups = document.querySelectorAll('.popup');
+const templateCards = document.querySelector('.template');
 
 
 export function togglePopup(popup) {
 
   popup.classList.toggle('popup_opened');
-  if (popup.classList.contains('popup_opened')) {  //проверяем, открыт или нет
-    document.addEventListener('keydown', closeByEscape);  //навешиваем, если открыт
+  if (popup.classList.contains('popup_opened')) {
+    document.addEventListener('keydown', closeByEscape);
   } else {
-    document.removeEventListener('keydown', closeByEscape);  //удаляем, если закрыт
+    document.removeEventListener('keydown', closeByEscape);
   }
 }
 
@@ -91,14 +92,14 @@ function formSubmitHandlerPlaces (evt) {
 };
 
 function addNewCard () {
-  const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, '.template');
+  const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, templateCards);
   const cardElement = additionalCard.generateCard();
 
   cardPlace.prepend(cardElement);
 };
 
 initialCards.forEach((item) => {
-  const card = new Card(item, '.template');
+  const card = new Card(item, templateCards);
   const cardElement = card.generateCard();
 
   cardPlace.append(cardElement);
