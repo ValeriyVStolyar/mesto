@@ -92,7 +92,7 @@ function formSubmitHandlerPlaces (evt) {
 };
 
 function addNewCard () {
-  const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, '.template');
+  const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, templateCards);
   const cardElement = additionalCard.generateCard();
 
   cardPlace.prepend(cardElement);
