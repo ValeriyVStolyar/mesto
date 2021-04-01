@@ -1,17 +1,22 @@
-import {togglePopup} from './index.js';
-
-
-const popupPicture = document.querySelector('.popup_place_picture');
-const popupImage = popupPicture.querySelector('.popup__image');
-const popupTitle = popupPicture.querySelector('.popup__title');
+import {handleCardClick} from './index.js';
+//import PopupWithImage from './PopupWithImage.js';
+import {cardPlace, popupProfile, formProfile, nameInput,
+  jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
+  openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
+  formValidatorPlace, popups, templateCards, popupOpen, place, buttonLike,
+  popupPicture, popupImage, popupTitle,
+  popupWithImage
+} from './utils/constants.js';
 
 
 export default class Card {
-    constructor(data, cardSelector) {
+    constructor( data, cardSelector, handleCardClick ) {
         this._text = data.name;
         this._image = data.link;
         this._alt = `Картинка места с названием "${data.name}"`;
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
+        console.log(this._cardSelector); console.log ('в конструкторе');
 };
 
   _getTemplate() {
@@ -20,13 +25,19 @@ export default class Card {
       .content
       .querySelector('.place')
       .cloneNode(true);
-
+//      console.log(cardElement)
       return cardElement;
   };
 
+	// _setEventListeners() {
+  //   this._element.querySelector('.place__image').addEventListener('click', () => {
+  //     popupWithImage.open();
+  //     console.log(this._cardSelector)
+  //   });
+
 	_setEventListeners() {
     this._element.querySelector('.place__image').addEventListener('click', () => {
-      this._openImagePopup();
+      handleCardClick(this._image, this._alt, this._text);
     });
 
     this._element.querySelector('.button_type_remove').addEventListener('click', () => {
@@ -47,16 +58,16 @@ export default class Card {
     this._element = null;
   };
 
-  _openImagePopup() {
+  // _openImagePopup() {
 
-    togglePopup(popupPicture);
+  //   togglePopup(popupPicture);
 
-    popupImage.src = this._image;
+  //   popupImage.src = this._image;
 
-    popupImage.alt = this._alt;
+  //   popupImage.alt = this._alt;
 
-    popupTitle.textContent = this._text;
-  };
+  //   popupTitle.textContent = this._text;
+  // };
 
   generateCard() {
     this._element = this._getTemplate();

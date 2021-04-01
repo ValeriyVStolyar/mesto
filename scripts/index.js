@@ -2,65 +2,59 @@ import {initialCards} from './initial-сards.js';
 import Card from './Card.js';
 import {validationSetting} from './validationSetting.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
+import Popup from './Popup.js';
+//import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
+import {cardPlace, popupProfile, formProfile, nameInput,
+  jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
+  openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
+  formValidatorPlace, popups, templateCards, popupOpen, place, buttonLike,
+  popupPicture, popupImage, popupTitle, popupWithImage
+} from './utils/constants.js';
 
 
-const cardPlace = document.querySelector('.places');
-const popupProfile = document.querySelector('.popup_place_profile');
-const formProfile = popupProfile.querySelector('.popup__container');
-const nameInput = formProfile.querySelector('.popup__input_type_name');
-const jobInput = formProfile.querySelector('.popup__input_type_job');
-const formValidatorProfile = new FormValidator(validationSetting, formProfile);
-const openPopupProfile = document.querySelector('.button_type_edit');
-const nameProfile = document.querySelector('.profile__title');
-const jobProfile = document.querySelector('.profile__subtitle');
-const openPopupPlaces = document.querySelector('.button_type_add-card');
-const popupPlaces = document.querySelector('.popup_place_places');
-const formPlaces = popupPlaces.querySelector('.popup__container');
-const placeInput = formPlaces.querySelector('.popup__input_type_place');
-const linkInput = formPlaces.querySelector('.popup__input_type_link');
-const formValidatorPlace = new FormValidator(validationSetting, formPlaces);
-const popups = document.querySelectorAll('.popup');
-const templateCards = '.template';
+// export function togglePopup(popup) {
+//   console.log(popup)
+//   popup.classList.toggle(popupOpen);
+//   console.log(popup)
+//   if (popup.classList.contains(popupOpen)) {
+//     document.addEventListener('keydown', closeByEscape);
+//   } else {
+//     document.removeEventListener('keydown', closeByEscape);
+//   }
+// }
 
+// function openProfilePopup() {
 
-export function togglePopup(popup) {
+//   nameInput.value = nameProfile.textContent;
 
-  popup.classList.toggle('popup_opened');
-  if (popup.classList.contains('popup_opened')) {
-    document.addEventListener('keydown', closeByEscape);
-  } else {
-    document.removeEventListener('keydown', closeByEscape);
-  }
-}
+//   jobInput.value = jobProfile.textContent;
 
-function openProfilePopup() {
+//   formValidatorProfile.clearInputError();
 
-  nameInput.value = nameProfile.textContent;
+//   togglePopup(popupProfile);
+// }
 
-  jobInput.value = jobProfile.textContent;
+// popups.forEach((popup) => {
+//   popup.addEventListener('click', (evt) => {
+//     if (evt.target.classList.contains(popupOpen)) {
+//       togglePopup(popup);
+//     }
+//     if (evt.target.classList.contains('button_type_close')) {
+//       togglePopup(popup);
+//     };
+//   });
+// });
 
-  formValidatorProfile.clearInputError();
-
-  togglePopup(popupProfile);
-}
-
-popups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-      togglePopup(popup);
-    }
-    if (evt.target.classList.contains('button_type_close')) {
-      togglePopup(popup);
-    };
-  });
-});
-
-function closeByEscape(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    togglePopup(openedPopup);
-  };
-};
+// function closeByEscape(evt) {
+//   console.log(evt)
+//   if (evt.key === 'Escape') {
+//     const openedPopup = document.querySelector('.popup_opened');
+//     togglePopup(openedPopup);
+//   };
+// };
 
 function editProfileFormSubmitHandler (evt) {
   evt.preventDefault();
@@ -91,26 +85,134 @@ function formSubmitHandlerPlaces (evt) {
   formPlaces.reset();
 };
 
-function addNewCard () {
-  const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, templateCards);
-  const cardElement = additionalCard.generateCard();
+// function addNewCard () {
+//   const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, templateCards);
+//   const cardElement = additionalCard.generateCard();
 
-  cardPlace.prepend(cardElement);
-};
+//   cardPlace.prepend(cardElement);
+// };
 
-initialCards.forEach((item) => {
-  const card = new Card(item, templateCards);
-  const cardElement = card.generateCard();
 
-  cardPlace.append(cardElement);
-});
+//const popupWithImage = new PopupWithImage(popupPicture);
+
+export function handleCardClick (link, alt, text) {
+  popupWithImage.open(link, alt, text);
+}
+
+// initialCards.forEach((item) => {
+//   const card = new Card(item, templateCards);
+//   const cardElement = card.generateCard();
+
+//   cardPlace.append(cardElement);
+// });
+
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, templateCards);
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
+//    console.log(cardElement);
+//    console.log(item)
+  }
+},
+place
+);
+//console.log(place)
+cardList.renderItems();
+
 
 formValidatorProfile.enableValidation();
 
 formValidatorPlace.enableValidation();
 
+// const commonPopupProfile = new Popup(popupProfile);
+// const commonPopupPlace = new Popup(popupPlaces);
 
-openPopupProfile.addEventListener('click', openProfilePopup);
-formProfile.addEventListener('submit', editProfileFormSubmitHandler);
-openPopupPlaces.addEventListener('click', () => {openPlacePopup(popupPlaces)});
-formPlaces.addEventListener('submit', formSubmitHandlerPlaces);
+
+openPopupProfile.addEventListener('click', () => {
+  popupWithFormProfile.open();
+})
+openPopupPlaces.addEventListener('click', () => {
+  popupWithFormPlace.open();
+})
+
+
+//popupProfile, () => {handleFormSubmit(userInfo.setUserInfo(nameProfile, jobProfile))}
+
+// commonPopupProfile.setEventListeners();
+// commonPopupPlace.setEventListeners();
+// commonPopupPicture.setEventListeners();
+
+//const popupWithFormProfile = new PopupWithForm(popupProfile, formProfile);
+
+
+const popupWithFormProfile = new PopupWithForm({
+  selectorPopup: popupProfile,
+  handleFormSubmit: (formData) => {
+    const usInf = new UserInfo (nameProfile, jobProfile);
+    popupWithFormProfile.usInf();
+
+    console.log('dfgdfg');
+  },
+  formSubmit: formProfile
+});
+//const popupWithFormPlace = new PopupWithForm(popupPlaces, formPlaces);
+const popupWithFormPlace = new PopupWithForm({
+  selectorPopup: popupPlaces,
+  handleFormSubmit: (formData) => {
+    const usInf = new UserInfo (placeInput, linkInput);
+    popupWithFormPlace.close();
+
+    console.log('dfgdfg');
+  },
+  formSubmit: formPlaces
+});
+//const popupWithFormPicture = new PopupWithForm(popupPlaces, formPlaces);
+popupWithFormProfile.setEventListeners();
+//popupWithFormProfile._handleFormSubmit();
+popupWithFormPlace.setEventListeners();
+
+const userInfo = new UserInfo (nameProfile, jobProfile);
+userInfo.getUserInfo();
+userInfo.setUserInfo();
+// popupWithFormPlace._getInputValues();
+
+
+
+// // создаём экземпляр формы
+// const form = new PopupWithForm({
+//   formSelector: '.template',
+//   // объект, который мы передадим при вызове handleFormSubmit
+//   // окажется на месте параметра formData
+//   handleFormSubmit: (formData) => {
+//     // при создании экземпляра UserCard передаём
+//     // ему объект с данными формы
+//     const card11 = new UserCard(formData, '.template');
+
+//     const cardElement = card.generateCard();
+
+//     cardsList.addItem(cardElement);
+//   }
+// });
+
+// // генерируем разметку формы
+// const formElement = form.generateForm();
+
+// // инициализируем класс, ответственный
+// // за добавление формы на страницу
+// const formRenderer = new Section({
+//     data: []
+// }, '.places');
+
+// // добавляем форму на страницу
+// formRenderer.addItem(formElement);
+
+// const popupWithImage = new PopupWithImage (popupPicture);
+// popupWithImage.open();
+
+
+//openPopupProfile.addEventListener('click', openProfilePopup);
+//formProfile.addEventListener('submit', editProfileFormSubmitHandler);
+//openPopupPlaces.addEventListener('click', () => {openPlacePopup(popupPlaces)});
+//formPlaces.addEventListener('submit', formSubmitHandlerPlaces);
