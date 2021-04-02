@@ -31,12 +31,12 @@ const popupPicture = document.querySelector('.popup_place_picture');
 const popupImage = popupPicture.querySelector('.popup__image');
 const popupTitle = popupPicture.querySelector('.popup__title');
 const popupWithImage = new PopupWithImage(popupPicture);
+const popup = new Popup(popupPicture);
 
 
 export {cardPlace, popupProfile, formProfile, nameInput,
   jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
   openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
   formValidatorPlace, popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle,
-  popupWithImage
+  popupPicture, popupImage, popupTitle, popupWithImage, popup
 }

@@ -52,9 +52,10 @@ export default class Popup {
       console.log(evt.target);
       console.log(this._selectorPopup);
       console.log(evt.currentTarget);
-//      popups.forEach((popup) => {
-//        console.log(popup)
-//        console.log(this._selectorPopup)
+     popups.forEach((popup) => {
+       console.log(popup)
+       console.log(this._selectorPopup)
+     })
     })
 console.log(this._selectorPopup)
     this._selectorPopup.addEventListener('click', (evt) => {

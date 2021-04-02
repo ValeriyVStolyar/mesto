@@ -8,7 +8,9 @@ import {cardPlace, popupProfile, formProfile, nameInput,
 } from './utils/constants.js';
 
 export default class PopupWithForm extends Popup {
-  constructor ({selectorPopup, handleFormSubmit}, formSubmit) {
+  constructor ({selectorPopup, handleFormSubmit}
+ , formSubmit
+    ) {
     super (selectorPopup)
   //  this._inputList = Array.from(this._selectorElement.querySelectorAll(this._validationSetting.inputSelector));
     this._popupElement = selectorPopup;
@@ -39,24 +41,28 @@ export default class PopupWithForm extends Popup {
 
 //должен не только добавлять обработчик клика иконке закрытия,
 //но и добавлять обработчик сабмита формы
-  setEventListeners () {
-    super.setEventListeners();
-  console.log(this._popupElement)
+  // setEventListeners () {
+  //   super.setEventListeners();
+  // console.log(this._popupElement)
+  // console.log(this._element)
 
-    // при сабмите формы
-  this._popupElement.addEventListener('submit', (evt) => {
-    // отменим стандартное поведение
-    evt.preventDefault();
-    console.log(this._handleFormSubmit)
-    // добавим вызов функции __handleFormSubmit
-    // передадим ей объект — результат работы _getInputValues
-  //  this.__handleFormSubmit(this._getInputValues());
-    this._handleFormSubmit(this._getInputValues());
-    console.log(this._handleFormSubmit)
+  //   // при сабмите формы
+  // //this._popupElement.addEventListener('submit', (evt) => {
+  // this._element.addEventListener('submit', (evt) => {
+  //   // отменим стандартное поведение
+  //   evt.preventDefault();
+  //   console.log(this._handleFormSubmit)
+  //   console.log(this._element)
+  //   // добавим вызов функции __handleFormSubmit
+  //   // передадим ей объект — результат работы _getInputValues
+  // //  this.__handleFormSubmit(this._getInputValues());
+  //   this._handleFormSubmit(this._getInputValues());
+  //   console.log(this._handleFormSubmit)
+  //   console.log(this._element)
 
-    this.close();
-  })
-  }
+  //   this.close();
+  // })
+  // }
 //при закрытии попапа форма должна ещё и сбрасываться
   close () {
     super.close();

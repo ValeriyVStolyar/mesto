@@ -11,7 +11,7 @@ import {cardPlace, popupProfile, formProfile, nameInput,
   jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
   openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
   formValidatorPlace, popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle, popupWithImage
+  popupPicture, popupImage, popupTitle, popupWithImage, popup
 } from './utils/constants.js';
 
 
@@ -93,8 +93,6 @@ function formSubmitHandlerPlaces (evt) {
 // };
 
 
-//const popupWithImage = new PopupWithImage(popupPicture);
-
 export function handleCardClick (link, alt, text) {
   popupWithImage.open(link, alt, text);
 }
@@ -126,8 +124,80 @@ formValidatorProfile.enableValidation();
 
 formValidatorPlace.enableValidation();
 
-// const commonPopupProfile = new Popup(popupProfile);
-// const commonPopupPlace = new Popup(popupPlaces);
+popup.setEventListeners();
+
+//popupProfile, () => {handleFormSubmit(userInfo.setUserInfo(nameProfile, jobProfile))}
+
+const popupWithFormProfile = new PopupWithForm({
+  selectorPopup: popupProfile,
+  handleFormSubmit: (formData) => {
+  //  const userInfo = new UserInfo (nameProfile, jobProfile);
+    popupWithFormProfile.setEventListeners();
+
+    console.log('dfgdfg');
+  },
+  formSubmit: formProfile
+});
+
+//const popupWithFormPlace = new PopupWithForm(popupPlaces, formPlaces);
+const popupWithFormPlace = new PopupWithForm({
+  selectorPopup: popupPlaces,
+  handleFormSubmit: (formData) => {
+  // const card = new UserInfo (formData, templateCards);
+  //   const cardElement = card.generateCard();
+  popupWithFormPlace.close();
+  //   cardsList.setItem(cardElement);
+    console.log('dfgdfg');
+  },
+  formSubmit: formPlaces
+});
+
+// const cardList1 = new Section({
+//   items: {
+//     name: 'Иваново',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+//   },
+//   renderer: (item) => {
+//     const card = new Card(item, templateCards);
+//     const cardElement = card.generateCard();
+//     cardList1.addItem(cardElement);
+// //    console.log(cardElement);
+// //    console.log(item)
+//   }
+// },
+// place
+// );
+// console.log(place)
+// cardList1.renderItems();
+
+// // создаём экземпляр формы
+// const form = new PopupWithForm({
+//   formSelector: '.template',
+//   // объект, который мы передадим при вызове handleFormSubmit
+//   // окажется на месте параметра formData
+//   handleFormSubmit: (formData) => {
+//     // при создании экземпляра UserCard передаём
+//     // ему объект с данными формы
+//     const card11 = new UserCard(formData, '.template');
+
+//     const cardElement = card.generateCard();
+
+//     cardsList.addItem(cardElement);
+//   }
+// });
+
+// // генерируем разметку формы
+// const formElement = form.generateForm();
+
+
+
+popupWithFormProfile.setEventListeners();
+
+popupWithFormPlace.setEventListeners();
+
+const userInfo = new UserInfo (nameProfile, jobProfile);
+userInfo.getUserInfo();
+userInfo.setUserInfo();
 
 
 openPopupProfile.addEventListener('click', () => {
@@ -136,48 +206,6 @@ openPopupProfile.addEventListener('click', () => {
 openPopupPlaces.addEventListener('click', () => {
   popupWithFormPlace.open();
 })
-
-
-//popupProfile, () => {handleFormSubmit(userInfo.setUserInfo(nameProfile, jobProfile))}
-
-// commonPopupProfile.setEventListeners();
-// commonPopupPlace.setEventListeners();
-// commonPopupPicture.setEventListeners();
-
-//const popupWithFormProfile = new PopupWithForm(popupProfile, formProfile);
-
-
-const popupWithFormProfile = new PopupWithForm({
-  selectorPopup: popupProfile,
-  handleFormSubmit: (formData) => {
-    const usInf = new UserInfo (nameProfile, jobProfile);
-    popupWithFormProfile.usInf();
-
-    console.log('dfgdfg');
-  },
-  formSubmit: formProfile
-});
-//const popupWithFormPlace = new PopupWithForm(popupPlaces, formPlaces);
-const popupWithFormPlace = new PopupWithForm({
-  selectorPopup: popupPlaces,
-  handleFormSubmit: (formData) => {
-    const usInf = new UserInfo (placeInput, linkInput);
-    popupWithFormPlace.close();
-
-    console.log('dfgdfg');
-  },
-  formSubmit: formPlaces
-});
-//const popupWithFormPicture = new PopupWithForm(popupPlaces, formPlaces);
-popupWithFormProfile.setEventListeners();
-//popupWithFormProfile._handleFormSubmit();
-popupWithFormPlace.setEventListeners();
-
-const userInfo = new UserInfo (nameProfile, jobProfile);
-userInfo.getUserInfo();
-userInfo.setUserInfo();
-// popupWithFormPlace._getInputValues();
-
 
 
 // // создаём экземпляр формы
