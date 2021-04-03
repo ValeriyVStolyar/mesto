@@ -85,12 +85,13 @@ function formSubmitHandlerPlaces (evt) {
   formPlaces.reset();
 };
 
-// function addNewCard () {
-//   const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, templateCards);
-//   const cardElement = additionalCard.generateCard();
+function addNewCard () {
 
-//   cardPlace.prepend(cardElement);
-// };
+  const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, templateCards);
+  const cardElement = additionalCard.generateCard();
+
+  cardPlace.prepend(cardElement);
+};
 
 
 export function handleCardClick (link, alt, text) {
@@ -110,14 +111,47 @@ const cardList = new Section({
     const card = new Card(item, templateCards);
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
-//    console.log(cardElement);
-//    console.log(item)
   }
 },
 place
 );
 //console.log(place)
+
 cardList.renderItems();
+
+
+// const cardList1 = new Section({
+//   items: [{name: placeInput.value, link: linkInput.value},
+//   {
+//     name: 'Иваново',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+//   }],
+//   renderer: (item) => {
+//     const card = new Card(item, templateCards);
+//     const cardElement = card.generateCard();
+//     cardList1.addItem(cardElement);
+//     console.log(cardElement);
+//     console.log(item)
+//   }
+// },
+// place
+// );
+// //buttonLike.addEventListener('click', (cardList1.renderItems()));
+// cardList1.renderItems();
+
+// function addNewCard () {
+//   const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, templateCards);
+//   const cardElement = additionalCard.generateCard();
+//   console.log('добавление карточки')
+
+//   cardPlace.prepend(cardElement);
+// };
+// const popupAddCard = new Card(popupPicture);
+// buttonLike.addEventListener('click', (popupAddCard.generateCard()));
+// popupAddCard.addNewCard();
+
+
+
 
 
 formValidatorProfile.enableValidation();
@@ -128,29 +162,55 @@ popup.setEventListeners();
 
 //popupProfile, () => {handleFormSubmit(userInfo.setUserInfo(nameProfile, jobProfile))}
 
+// const popupWithFormProfile = new PopupWithForm({
+//   selectorPopup: popupProfile,
+//   handleFormSubmit: (formData) => {
+//     console.log(formData)
+//     const userInfo = new UserInfo (formData, formProfile);
+//   //  popupWithFormProfile.setEventListeners();
+// //    setUserInfo();
+//   },
+//   formProfile
+// });
+const userInfo1 = new UserInfo ({userName: nameProfile.textContent, userInfo: jobProfile.textContent});
 const popupWithFormProfile = new PopupWithForm({
   selectorPopup: popupProfile,
   handleFormSubmit: (formData) => {
-  //  const userInfo = new UserInfo (nameProfile, jobProfile);
-    popupWithFormProfile.setEventListeners();
+    console.log(formData)
+    console.log(formData.name)
 
-    console.log('dfgdfg');
-  },
-  formSubmit: formProfile
+//    const userInfo = new UserInfo (formData.name, formData.job);
+console.log(nameProfile)
+    const userInfo = new UserInfo ({userName: formData.name, userInfo: formData.job});
+    // const userInfo = new UserInfo ({userName: nameProfile, userInfo: jobProfile});
+    userInfo.setUserInfo();
+//    userInfo.getUserInfo();
+  //  popupWithFormProfile.setEventListeners();
+//    setUserInfo();
+  }
 });
 
 //const popupWithFormPlace = new PopupWithForm(popupPlaces, formPlaces);
 const popupWithFormPlace = new PopupWithForm({
   selectorPopup: popupPlaces,
   handleFormSubmit: (formData) => {
-  // const card = new UserInfo (formData, templateCards);
-  //   const cardElement = card.generateCard();
-  popupWithFormPlace.close();
-  //   cardsList.setItem(cardElement);
-    console.log('dfgdfg');
+  const additionalCard = new Card({name: formData.place, link: formData.link}, templateCards);
+  const cardElement = additionalCard.generateCard();
+
+  cardPlace.prepend(cardElement);
   },
-  formSubmit: formPlaces
 });
+
+// const form = new SubmitForm({
+//   formSelector: '.form-template',
+//   handleFormSubmit: (item) => {
+//     const card = new UserCard(item, '.card-template_type_user');
+
+//     const cardElement = card.generateCard();
+
+//     cardsList.setItem(cardElement);
+//   }
+// });
 
 // const cardList1 = new Section({
 //   items: {

@@ -1,16 +1,9 @@
-//import { togglePopup } from "./index.js";
-import {cardPlace, popupProfile, formProfile, nameInput,
-  jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
-  openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
-  formValidatorPlace, popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle
-} from './utils/constants.js';
+import {popupOpen} from './utils/constants.js';
 
 //отвечает за открытие и закрытие попапа
 export default class Popup {
   constructor (selectorPopup) {
     this._selectorPopup = selectorPopup;
-    console.log(this._selectorPopup); console.log ('в конструкторе');
   }
 
   _togglePopup = () => {
@@ -47,17 +40,6 @@ export default class Popup {
   }
 //добавляет слушатель клика иконке закрытия попапа
   setEventListeners () {
-    console.log(this._selectorPopup)
-    this._selectorPopup.addEventListener('click', (evt) => {
-      console.log(evt.target);
-      console.log(this._selectorPopup);
-      console.log(evt.currentTarget);
-     popups.forEach((popup) => {
-       console.log(popup)
-       console.log(this._selectorPopup)
-     })
-    })
-console.log(this._selectorPopup)
     this._selectorPopup.addEventListener('click', (evt) => {
       if (evt.target.classList.contains(popupOpen)) {
         console.log('overlay')
@@ -70,15 +52,3 @@ console.log(this._selectorPopup)
   });
   }
 }
-
-// function ttt (evt) {
-//   console.log(
-//     'target', evt.target,
-//     'currentTarget', evt.currentTarget
-//   )
-// }
-
-// popupProfile.addEventListener('click', ttt);
-// popupPlaces.addEventListener('click', ttt);
-// popupPicture.addEventListener('click', ttt);
-

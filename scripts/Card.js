@@ -1,5 +1,4 @@
 import {handleCardClick} from './index.js';
-//import PopupWithImage from './PopupWithImage.js';
 import {cardPlace, popupProfile, formProfile, nameInput,
   jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
   openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
@@ -10,13 +9,16 @@ import {cardPlace, popupProfile, formProfile, nameInput,
 
 
 export default class Card {
-    constructor( data, cardSelector, handleCardClick ) {
-        this._text = data.name;
-        this._image = data.link;
-        this._alt = `Картинка места с названием "${data.name}"`;
+    constructor( {name, link}, cardSelector, handleCardClick ) {
+        this._text = name;
+        this._image = link;
+        this._alt = `Картинка места с названием "${name}"`;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
-        console.log(this._cardSelector); console.log ('в конструкторе');
+        // console.log(data.name)
+        // console.log(data.link)
+        console.log(this._text)
+        // console.log(this._image)
 };
 
   _getTemplate() {
@@ -25,7 +27,6 @@ export default class Card {
       .content
       .querySelector('.place')
       .cloneNode(true);
-//      console.log(cardElement)
       return cardElement;
   };
 

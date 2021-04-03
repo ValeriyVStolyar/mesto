@@ -7,7 +7,6 @@ import {cardPlace, popupProfile, formProfile, nameInput,
   popupPicture, popupImage, popupTitle
 } from './utils/constants.js';
 
-//console.log(place);
 
 //отвечает за отрисовку элементов на странице
 export default class Section {
@@ -18,10 +17,6 @@ export default class Section {
     this._renderer = renderer;
     //селектор контейнера, в который нужно добавлять созданные элементы
     this._container = document.querySelector(containerSelector);
-
-    // console.log(this._items);
-    // console.log(this._renderer);
-     console.log(this._container); console.log ('в конструкторе');
   }
   //принимает DOM-элемент и добавляет его в контейнер
   addItem = (element) => {
@@ -35,47 +30,8 @@ export default class Section {
 //отвечает за отрисовку всех элементов
   renderItems = () => {
     this.clear();
-    // this._items.forEach((item) => {
     this._renderedItems.forEach((item) => {
-      // const card = new Card(item, templateCards);
-      // const cardElement = card.generateCard();
       this._renderer(item);
-
-//      this.addItem(cardElement);
     });
   }
 }
-
-
-// const testSection = new Section({ items: initialCards, renderer: initialCards }, place);
-// const section = new Section({
-//   items: initialCards,
-//   renderer: (item) => {
-//     const card = new Card(item, '.template');
-//     const cardElement = card.generateCard();
-//     section.addItem(cardElement);
-//   }
-// },
-// place
-// );
-// section.renderItems();
-
-
-// openPopupPlaces.addEventListener('click', () => {
-//   testSection.render();
-// });
-
-// const defaultCardList = new Section({
-//   data: items,
-//   renderer: (item) => {
-//     const card = new DefaultCard(item, '.default-card');
-//     const cardElement = card.generateCard();
-//     defaultCardList.setItem(cardElement);
-//   }
-// },
-// cardListSelector
-// );
-
-// defaultCardButton.addEventListener('click', () => {
-//   defaultCardList.renderItems();
-// });

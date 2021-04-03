@@ -1,4 +1,5 @@
 import Popup from './Popup.js';
+//import {addNewCard} from './index.js';
 import UserInfo from './UserInfo.js';
 import {cardPlace, popupProfile, formProfile, nameInput,
   jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
@@ -8,68 +9,70 @@ import {cardPlace, popupProfile, formProfile, nameInput,
 } from './utils/constants.js';
 
 export default class PopupWithForm extends Popup {
-  constructor ({selectorPopup, handleFormSubmit}
- , formSubmit
-    ) {
+  constructor ({selectorPopup, handleFormSubmit}) {
     super (selectorPopup)
   //  this._inputList = Array.from(this._selectorElement.querySelectorAll(this._validationSetting.inputSelector));
     this._popupElement = selectorPopup;
     this._handleFormSubmit = handleFormSubmit;
-//    this._formSubmit = this._popupElement.querySelector('.popup__validate');
-    this._formSubmit = formSubmit;
-//    this._setUserInfo = setUserInfo;
-    console.log(this._popupElement); console.log ('в конструкторе');
-    console.log(this.__handleFormSubmit); console.log ('в конструкторе');
-    console.log(this._formSubmit); console.log ('в конструкторе');
+    this._formSubmit = this._popupElement.querySelector('.popup__validate');
+    console.log(this._popupElement);
+    console.log(this._formSubmit);
   }
 
 //собирает данные всех полей формы
   _getInputValues () {
   //  this._inputList = Array.from(this._selectorElement.querySelectorAll(this._validationSetting.inputSelector));
     this._inputList = Array.from(this._popupElement.querySelectorAll('.popup__input'));
-    console.log(this._inputList)
-    console.log(this._formValues);
+//    console.log(this._inputList)
+//    console.log(this._formValues);
 
     this._formValues = {};
-    console.log(this._formValues)
+//    console.log(this._formValues)
     this._inputList.forEach(input => {this._formValues[input.name] = input.value});
-    console.log()
     console.log(this._formValues)
+//    console.log(this._getInputValues)
     // возвращаем объект значений
     return this._formValues;
   }
 
 //должен не только добавлять обработчик клика иконке закрытия,
 //но и добавлять обработчик сабмита формы
-  // setEventListeners () {
-  //   super.setEventListeners();
-  // console.log(this._popupElement)
-  // console.log(this._element)
+  setEventListeners () {
+    super.setEventListeners();
+  console.log(this._popupElement)
+  console.log(this._element)
 
-  //   // при сабмите формы
-  // //this._popupElement.addEventListener('submit', (evt) => {
-  // this._element.addEventListener('submit', (evt) => {
-  //   // отменим стандартное поведение
-  //   evt.preventDefault();
-  //   console.log(this._handleFormSubmit)
-  //   console.log(this._element)
-  //   // добавим вызов функции __handleFormSubmit
-  //   // передадим ей объект — результат работы _getInputValues
-  // //  this.__handleFormSubmit(this._getInputValues());
-  //   this._handleFormSubmit(this._getInputValues());
-  //   console.log(this._handleFormSubmit)
-  //   console.log(this._element)
-
-  //   this.close();
-  // })
-  // }
+    // при сабмите формы
+  this._popupElement.addEventListener('submit', (evt) => {
+  //this._formSubmit.addEventListener('submit', (evt) => {
+    // отменим стандартное поведение
+    evt.preventDefault();
+//    console.log(this._handleFormSubmit)
+//    console.log(this._element)
+    // добавим вызов функции __handleFormSubmit
+    // передадим ей объект — результат работы _getInputValues
+  //  this.__handleFormSubmit(this._getInputValues());
+    this._handleFormSubmit(this._getInputValues());
+//    this._handleFormSubmit();
+//    this._getInputValues();
+//    console.log(this._handleFormSubmit)
+//    console.log(this._element)
+//formPlaces.reset();
+console.log('beforcloseForm')
+    this.closeForm();
+    console.log('aftercloseForm')
+  })
+  }
 //при закрытии попапа форма должна ещё и сбрасываться
-  close () {
-    super.close();
-    console.log()
-
+  closeForm () {
+    console.log('beforsupercloseForm')
+//    super.close();
+    console.log('aftersuperclose')
+//formPlaces.reset()
     this._togglePopup();
     this._formSubmit.reset();
+    console.log(this._formSubmit)
+//    formPlaces.reset();
   }
 }
 

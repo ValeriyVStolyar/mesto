@@ -4,14 +4,12 @@ import {cardPlace, popupProfile, formProfile, nameInput,
   jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
   openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
   formValidatorPlace, popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle,
-//  popupWithImage
+  popupPicture, popupImage, popupTitle
 } from './utils/constants.js';
 
 export default class PopupWithImage extends Popup {
   constructor (selectorPopup) {
   super (selectorPopup);
-  console.log(this._selectorPopup); console.log ('в конструкторе');
   }
 
   open (link, alt, text) {
@@ -24,11 +22,5 @@ export default class PopupWithImage extends Popup {
     popupImage.alt = alt;
 
     popupTitle.textContent = text;
-
-    // this._selectorPopup.addEventListener('click', (evt) => {
-    //   console.log(evt.target);
-    //   console.log(this._selectorPopup);
-    //   console.log(evt.currentTarget);
-    // })
-    };
+  };
 }
