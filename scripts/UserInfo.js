@@ -11,6 +11,7 @@ export default class UserInfo {
   constructor ({userName, userInfo}) {
     this._userName = userName;
     this._userInfo = userInfo;
+    console.log(this._userName)
   }
 //возвращает объект с данными пользователя
 //пригодится когда данные пользователя нужно будет подставить в форму при открытии
@@ -18,6 +19,7 @@ export default class UserInfo {
     // достаём все элементы полей
     this._userName;
     this._userInfo;
+    console.log(this._userName)
   }
 //принимает новые данные пользователя и добавляет их на страницу
   setUserInfo () {

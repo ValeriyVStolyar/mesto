@@ -56,15 +56,15 @@ import {cardPlace, popupProfile, formProfile, nameInput,
 //   };
 // };
 
-function editProfileFormSubmitHandler (evt) {
-  evt.preventDefault();
+// function editProfileFormSubmitHandler (evt) {
+//   evt.preventDefault();
 
-  nameProfile.textContent = nameInput.value;
+//   nameProfile.textContent = nameInput.value;
 
-  jobProfile.textContent = jobInput.value;
+//   jobProfile.textContent = jobInput.value;
 
-  togglePopup(popupProfile);
-};
+//   togglePopup(popupProfile);
+// };
 
 export function clearErrors() {
   formValidatorProfile.clearInputError();
@@ -76,35 +76,29 @@ export function clearErrors() {
 //  togglePopup(popupPlaces);
 };
 
-function formSubmitHandlerPlaces (evt) {
-  evt.preventDefault();
+// function formSubmitHandlerPlaces (evt) {
+//   evt.preventDefault();
 
-  addNewCard();
+//   addNewCard();
 
-  togglePopup(popupPlaces);
+//   togglePopup(popupPlaces);
 
-  formPlaces.reset();
-};
+//   formPlaces.reset();
+// };
 
-function addNewCard () {
+// function addNewCard () {
 
-  const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, templateCards);
-  const cardElement = additionalCard.generateCard();
+//   const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, templateCards);
+//   const cardElement = additionalCard.generateCard();
 
-  cardPlace.prepend(cardElement);
-};
+//   cardPlace.prepend(cardElement);
+// };
 
 
 export function handleCardClick (link, alt, text) {
   popupWithImage.open(link, alt, text);
 }
 
-// initialCards.forEach((item) => {
-//   const card = new Card(item, templateCards);
-//   const cardElement = card.generateCard();
-
-//   cardPlace.append(cardElement);
-// });
 
 const cardList = new Section({
   items: initialCards,
@@ -116,44 +110,8 @@ const cardList = new Section({
 },
 place
 );
-//console.log(place)
 
 cardList.renderItems();
-
-
-// const cardList1 = new Section({
-//   items: [{name: placeInput.value, link: linkInput.value},
-//   {
-//     name: 'Иваново',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-//   }],
-//   renderer: (item) => {
-//     const card = new Card(item, templateCards);
-//     const cardElement = card.generateCard();
-//     cardList1.addItem(cardElement);
-//     console.log(cardElement);
-//     console.log(item)
-//   }
-// },
-// place
-// );
-// //buttonLike.addEventListener('click', (cardList1.renderItems()));
-// cardList1.renderItems();
-
-// function addNewCard () {
-//   const additionalCard = new Card({name: placeInput.value, link: linkInput.value}, templateCards);
-//   const cardElement = additionalCard.generateCard();
-//   console.log('добавление карточки')
-
-//   cardPlace.prepend(cardElement);
-// };
-// const popupAddCard = new Card(popupPicture);
-// buttonLike.addEventListener('click', (popupAddCard.generateCard()));
-// popupAddCard.addNewCard();
-
-
-
-
 
 formValidatorProfile.enableValidation();
 
@@ -161,36 +119,33 @@ formValidatorPlace.enableValidation();
 
 popup.setEventListeners();
 
-//popupProfile, () => {handleFormSubmit(userInfo.setUserInfo(nameProfile, jobProfile))}
 
-// const popupWithFormProfile = new PopupWithForm({
-//   selectorPopup: popupProfile,
-//   handleFormSubmit: (formData) => {
-//     console.log(formData)
-//     const userInfo = new UserInfo (formData, formProfile);
-//   //  popupWithFormProfile.setEventListeners();
-// //    setUserInfo();
-//   },
-//   formProfile
-// });
-const userInfo1 = new UserInfo ({userName: nameProfile.textContent, userInfo: jobProfile.textContent});
+
+//const userInfo = new UserInfo (nameProfile, jobProfile);
+// userInfo.getUserInfo();
+// userInfo.setUserInfo();
+
+//const userInfo = new UserInfo ({userName: nameProfile.textContent, userInfo: jobProfile.textContent});
+
 const popupWithFormProfile = new PopupWithForm({
   selectorPopup: popupProfile,
   handleFormSubmit: (formData) => {
-    console.log(formData)
     console.log(formData.name)
 
-//    const userInfo = new UserInfo (formData.name, formData.job);
-console.log(nameProfile)
+//    const userInfo = new UserInfo ({userName: nameProfile.textContent, userInfo: jobProfile.textContent});
     const userInfo = new UserInfo ({userName: formData.name, userInfo: formData.job});
+
+    userInfo.setUserInfo ();
+    console.log(formData.name)
     // const userInfo = new UserInfo ({userName: nameProfile, userInfo: jobProfile});
-    userInfo.setUserInfo();
+//    userInfo.setUserInfo();
 //    userInfo.getUserInfo();
   //  popupWithFormProfile.setEventListeners();
 //    setUserInfo();
   }
 });
-
+const userInfo = new UserInfo ({userName: nameProfile.textContent, userInfo: jobProfile.textContent})
+userInfo.getUserInfo()
 //const popupWithFormPlace = new PopupWithForm(popupPlaces, formPlaces);
 const popupWithFormPlace = new PopupWithForm({
   selectorPopup: popupPlaces,
@@ -202,63 +157,10 @@ const popupWithFormPlace = new PopupWithForm({
   },
 });
 
-// const form = new SubmitForm({
-//   formSelector: '.form-template',
-//   handleFormSubmit: (item) => {
-//     const card = new UserCard(item, '.card-template_type_user');
-
-//     const cardElement = card.generateCard();
-
-//     cardsList.setItem(cardElement);
-//   }
-// });
-
-// const cardList1 = new Section({
-//   items: {
-//     name: 'Иваново',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-//   },
-//   renderer: (item) => {
-//     const card = new Card(item, templateCards);
-//     const cardElement = card.generateCard();
-//     cardList1.addItem(cardElement);
-// //    console.log(cardElement);
-// //    console.log(item)
-//   }
-// },
-// place
-// );
-// console.log(place)
-// cardList1.renderItems();
-
-// // создаём экземпляр формы
-// const form = new PopupWithForm({
-//   formSelector: '.template',
-//   // объект, который мы передадим при вызове handleFormSubmit
-//   // окажется на месте параметра formData
-//   handleFormSubmit: (formData) => {
-//     // при создании экземпляра UserCard передаём
-//     // ему объект с данными формы
-//     const card11 = new UserCard(formData, '.template');
-
-//     const cardElement = card.generateCard();
-
-//     cardsList.addItem(cardElement);
-//   }
-// });
-
-// // генерируем разметку формы
-// const formElement = form.generateForm();
-
-
-
 popupWithFormProfile.setEventListeners();
 
 popupWithFormPlace.setEventListeners();
 
-const userInfo = new UserInfo (nameProfile, jobProfile);
-userInfo.getUserInfo();
-userInfo.setUserInfo();
 
 
 openPopupProfile.addEventListener('click', () => {
@@ -268,37 +170,6 @@ openPopupPlaces.addEventListener('click', () => {
   popupWithFormPlace.open();
 })
 
-
-// // создаём экземпляр формы
-// const form = new PopupWithForm({
-//   formSelector: '.template',
-//   // объект, который мы передадим при вызове handleFormSubmit
-//   // окажется на месте параметра formData
-//   handleFormSubmit: (formData) => {
-//     // при создании экземпляра UserCard передаём
-//     // ему объект с данными формы
-//     const card11 = new UserCard(formData, '.template');
-
-//     const cardElement = card.generateCard();
-
-//     cardsList.addItem(cardElement);
-//   }
-// });
-
-// // генерируем разметку формы
-// const formElement = form.generateForm();
-
-// // инициализируем класс, ответственный
-// // за добавление формы на страницу
-// const formRenderer = new Section({
-//     data: []
-// }, '.places');
-
-// // добавляем форму на страницу
-// formRenderer.addItem(formElement);
-
-// const popupWithImage = new PopupWithImage (popupPicture);
-// popupWithImage.open();
 
 
 //openPopupProfile.addEventListener('click', openProfilePopup);

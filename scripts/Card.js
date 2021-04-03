@@ -15,10 +15,6 @@ export default class Card {
         this._alt = `Картинка места с названием "${name}"`;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
-        // console.log(data.name)
-        // console.log(data.link)
-        console.log(this._text)
-        // console.log(this._image)
 };
 
   _getTemplate() {
