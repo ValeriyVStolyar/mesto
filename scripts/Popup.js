@@ -1,4 +1,6 @@
+import { clearErrors } from './index.js';
 import {popupOpen} from './utils/constants.js';
+
 
 //отвечает за открытие и закрытие попапа
 export default class Popup {
@@ -30,6 +32,7 @@ export default class Popup {
   }
 //отвечают за открытие попапа
   open () {
+    clearErrors();
     console.log('open')
     this._togglePopup();
   }

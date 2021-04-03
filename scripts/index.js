@@ -66,13 +66,14 @@ function editProfileFormSubmitHandler (evt) {
   togglePopup(popupProfile);
 };
 
-function openPlacePopup() {
+export function clearErrors() {
+  formValidatorProfile.clearInputError();
 
   formValidatorPlace.toggleButtonState();
 
   formValidatorPlace.clearInputError();
 
-  togglePopup(popupPlaces);
+//  togglePopup(popupPlaces);
 };
 
 function formSubmitHandlerPlaces (evt) {
