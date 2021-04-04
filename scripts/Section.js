@@ -1,11 +1,4 @@
-import {initialCards} from './initial-сards.js';
-import Card from './Card.js';
-import {cardPlace, popupProfile, formProfile, nameInput,
-  jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
-  openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
-  formValidatorPlace, popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle
-} from './utils/constants.js';
+import { } from './utils/constants.js';
 
 
 //отвечает за отрисовку элементов на странице

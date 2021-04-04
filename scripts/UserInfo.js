@@ -1,9 +1,5 @@
-import {cardPlace, popupProfile, formProfile, nameInput,
-  jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
-  openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
-  formValidatorPlace, popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle
-} from './utils/constants.js';
+import {nameProfile, jobProfile} from './utils/constants.js';
+
 
 //отвечает за управление отображением информации о пользователе на странице
 export default class UserInfo {

@@ -1,8 +1,5 @@
-import {initialCards} from '../initial-сards.js';
-import Card from '../Card.js';
 import {validationSetting} from '../validationSetting.js';
 import FormValidator from '../FormValidator.js';
-import Section from '../Section.js';
 import Popup from '../Popup.js';
 import PopupWithImage from '../PopupWithImage.js';
 

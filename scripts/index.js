@@ -1,16 +1,11 @@
 import {initialCards} from './initial-сards.js';
 import Card from './Card.js';
-import {validationSetting} from './validationSetting.js';
-import FormValidator from './FormValidator.js';
 import Section from './Section.js';
-import Popup from './Popup.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
-import {cardPlace, popupProfile, formProfile, nameInput,
-  jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
-  openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
-  formValidatorPlace, popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle, popupWithImage, popup
+import {cardPlace, popupProfile, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
+  openPopupPlaces, popupPlaces,
+  formValidatorPlace, templateCards,place, popupWithImage, popup
 } from './utils/constants.js';
 
 
@@ -49,7 +44,7 @@ const popupWithFormProfile = new PopupWithForm({
 
 const userInfo = new UserInfo ({userName: nameProfile.textContent, userInfo: jobProfile.textContent})
 userInfo.getUserInfo()
-//const popupWithFormPlace = new PopupWithForm(popupPlaces, formPlaces);
+
 const popupWithFormPlace = new PopupWithForm({
   selectorPopup: popupPlaces,
   handleFormSubmit: (formData) => {

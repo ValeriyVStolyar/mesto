@@ -1,11 +1,5 @@
 import Popup from './Popup.js';
-import UserInfo from './UserInfo.js';
-import {cardPlace, popupProfile, formProfile, nameInput,
-  jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
-  openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
-  formValidatorPlace, popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle
-} from './utils/constants.js';
+
 
 export default class PopupWithForm extends Popup {
   constructor ({selectorPopup, handleFormSubmit}) {

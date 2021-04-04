@@ -1,11 +1,4 @@
 import {handleCardClick} from './index.js';
-import {cardPlace, popupProfile, formProfile, nameInput,
-  jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
-  openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
-  formValidatorPlace, popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle,
-  popupWithImage
-} from './utils/constants.js';
 
 
 export default class Card {
