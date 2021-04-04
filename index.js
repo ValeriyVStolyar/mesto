@@ -1,4 +1,4 @@
-import {initialCards} from './scripts/initial-сards.js';
+import {initialCards} from './scripts/utils/initial-сards.js';
 import Card from './scripts/Card.js';
 import Section from './scripts/Section.js';
 import PopupWithForm from './scripts/PopupWithForm.js';

@@ -12,8 +12,9 @@ export default class Section {
     this._container = document.querySelector(containerSelector);
   }
   //принимает DOM-элемент и добавляет его в контейнер
-  addItem = (element) => {
+  addItem (element) {
     this._container.append(element);
+//    return element;
   }
 
   clear() {
@@ -21,7 +22,7 @@ export default class Section {
   }
 
 //отвечает за отрисовку всех элементов
-  renderItems = () => {
+  renderItems () {
     this.clear();
     this._renderedItems.forEach((item) => {
       this._renderer(item);
