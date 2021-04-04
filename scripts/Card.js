@@ -26,12 +26,6 @@ export default class Card {
       return cardElement;
   };
 
-	// _setEventListeners() {
-  //   this._element.querySelector('.place__image').addEventListener('click', () => {
-  //     popupWithImage.open();
-  //     console.log(this._cardSelector)
-  //   });
-
 	_setEventListeners() {
     this._element.querySelector('.place__image').addEventListener('click', () => {
       handleCardClick(this._image, this._alt, this._text);
@@ -54,17 +48,6 @@ export default class Card {
     this._element.remove();
     this._element = null;
   };
-
-  // _openImagePopup() {
-
-  //   togglePopup(popupPicture);
-
-  //   popupImage.src = this._image;
-
-  //   popupImage.alt = this._alt;
-
-  //   popupTitle.textContent = this._text;
-  // };
 
   generateCard() {
     this._element = this._getTemplate();

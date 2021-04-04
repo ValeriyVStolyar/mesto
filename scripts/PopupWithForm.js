@@ -37,7 +37,6 @@ export default class PopupWithForm extends Popup {
 
     this._handleFormSubmit(this._getInputValues());
 
-console.log('beforcloseForm')
     this.closeForm();
   })
   }
