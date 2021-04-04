@@ -1,4 +1,4 @@
-import { clearErrors } from './index.js';
+import { clearErrors } from '../index.js';
 import {popupOpen} from './utils/constants.js';
 
 

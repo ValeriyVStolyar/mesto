@@ -1,12 +1,12 @@
-import {initialCards} from './initial-сards.js';
-import Card from './Card.js';
-import Section from './Section.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+import {initialCards} from './scripts/initial-сards.js';
+import Card from './scripts/Card.js';
+import Section from './scripts/Section.js';
+import PopupWithForm from './scripts/PopupWithForm.js';
+import UserInfo from './scripts/UserInfo.js';
 import {cardPlace, popupProfile, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
   openPopupPlaces, popupPlaces,
   formValidatorPlace, templateCards,place, popupWithImage, popup
-} from './utils/constants.js';
+} from './scripts/utils/constants.js';
 
 
 export function clearErrors() {
