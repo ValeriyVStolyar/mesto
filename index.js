@@ -7,6 +7,8 @@ import {cardPlace, popupProfile, formValidatorProfile, openPopupProfile, namePro
   openPopupPlaces, popupPlaces,
   formValidatorPlace, templateCards,place, popupWithImage, popup
 } from './scripts/utils/constants.js';
+import Popup from './scripts/Popup.js';
+import './pages/index.css';
 
 
 export function clearErrors() {
@@ -19,6 +21,11 @@ export function clearErrors() {
 
 export function handleCardClick (link, alt, text) {
   popupWithImage.open(link, alt, text);
+}
+
+export function setDataProfile(data) {
+  const userInfo = new UserInfo ({userName: nameProfile.textContent, userInfo: jobProfile.textContent})
+  userInfo.getUserInfo();
 }
 
 const cardList = new Section({
@@ -41,9 +48,6 @@ const popupWithFormProfile = new PopupWithForm({
     userInfo.setUserInfo ();
   }
 });
-
-const userInfo = new UserInfo ({userName: nameProfile.textContent, userInfo: jobProfile.textContent})
-userInfo.getUserInfo()
 
 const popupWithFormPlace = new PopupWithForm({
   selectorPopup: popupPlaces,
