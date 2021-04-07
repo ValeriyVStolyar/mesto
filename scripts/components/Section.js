@@ -1,4 +1,4 @@
-import { } from './utils/constants.js';
+import { } from '../utils/constants.js';
 
 
 //отвечает за отрисовку элементов на странице

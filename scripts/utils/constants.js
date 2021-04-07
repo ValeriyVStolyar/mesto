@@ -1,7 +1,7 @@
-import {validationSetting} from '../validationSetting.js';
-import FormValidator from '../FormValidator.js';
-import Popup from '../Popup.js';
-import PopupWithImage from '../PopupWithImage.js';
+import {validationSetting} from './validationSetting.js';
+import FormValidator from '../components/FormValidator.js';
+import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 
 const cardPlace = document.querySelector('.places');
