@@ -23,13 +23,14 @@ export default class Popup {
 //содержит логику закрытия попапа клавишей Esc
   //_handleEscClose = (evt) => {
   _handleEscClose(evt) {
-     (evt.key === 'Escape')
+    if (evt.key === 'Escape') {
       const openedPopup = document.querySelector('.popup_opened');
       console.log('if push ESC')
       console.log(openedPopup)
 //    this._togglePopup();
       this.close(openedPopup);
       console.log('then close poup or going father')
+    }
   }
 
 //отвечают за открытие попапа

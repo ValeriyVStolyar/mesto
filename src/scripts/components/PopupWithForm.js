@@ -31,12 +31,13 @@ export default class PopupWithForm extends Popup {
 
     this._handleFormSubmit(this._getInputValues());
 
-    this.closeForm();
+    this.close();
   })
   }
 //при закрытии попапа форма должна ещё и сбрасываться
-  closeForm () {
-    this._togglePopup();
+  close () {
+    super.close();
+//    this._togglePopup();
     this._formSubmit.reset();
   }
 }
