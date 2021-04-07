@@ -1,5 +1,4 @@
-import { clearErrors, setDataProfile, togglePopupEsc } from '../../index.js';
-import UserInfo from './UserInfo.js';
+import { clearErrors } from '../../index.js';
 import {popupOpen} from '../utils/constants.js';
 
 
@@ -38,8 +37,7 @@ this._togglePopup();
 
 //отвечают за открытие попапа
   open() {
-    setDataProfile();
-//    console.log()
+//    setDataProfile();
     clearErrors();
     console.log('open popup toggle')
     this._togglePopup();

@@ -5,22 +5,10 @@ import PopupWithForm from './scripts/components/PopupWithForm.js';
 import UserInfo from './scripts/components/UserInfo.js';
 import {cardPlace, popupProfile, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
   openPopupPlaces, popupPlaces,
-  formValidatorPlace, templateCards,place, popupWithImage, popup
+  formValidatorPlace, templateCards,place, popupWithImage, popup, jobInput, nameInput
 } from './scripts/utils/constants.js';
-import Popup from './scripts/components/Popup.js';
 import './pages/index.css';
 
-
-// export function   togglePopupEsc(popup) {
-//   popup.classList.toggle(popupOpen);
-//   if (this._selectorPopup.classList.contains(popupOpen)) {
-//     document.addEventListener('keydown', this._handleEscClose);
-//       console.log('навешиваем на ESC')
-//   } else {
-//     document.removeEventListener('keydown', this._handleEscClose);
-//       console.log('удаляем по ESC')
-//   }
-// }
 
 export function clearErrors() {
   formValidatorProfile.clearInputError();
@@ -34,15 +22,11 @@ export function handleCardClick (link, alt, text) {
   popupWithImage.open(link, alt, text);
 }
 
-export function setDataProfile(data) {
-  const userInfo = new UserInfo ({userName: nameProfile.textContent, userInfo: jobProfile.textContent})
-  userInfo.getUserInfo();
-//  console.log(userInfo.getUserInfo().userName);
+function setDataProfile () {
+  const userInfo = new UserInfo ({userName: nameProfile.textContent, userInfo: jobProfile.textContent});
+  nameInput.value = userInfo.getUserInfo().userName;
+  jobInput.value = userInfo.getUserInfo().userInfo;
 }
-const popupProfileInfo = new Popup(popupProfile);
-//popupProfileInfo.getUserInfo(data.nameProfile)
-
-
 
 
 const cardList = new Section({
@@ -76,6 +60,7 @@ const popupWithFormPlace = new PopupWithForm({
   },
 });
 
+
 popupWithFormProfile.setEventListeners();
 
 popupWithFormPlace.setEventListeners();
@@ -90,8 +75,10 @@ popup.setEventListeners();
 
 
 openPopupProfile.addEventListener('click', () => {
+  setDataProfile();
   popupWithFormProfile.open();
 })
+
 openPopupPlaces.addEventListener('click', () => {
   popupWithFormPlace.open();
 })

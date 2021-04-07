@@ -13,21 +13,16 @@ export default class UserInfo {
 //пригодится когда данные пользователя нужно будет подставить в форму при открытии
   getUserInfo () {
     // достаём все элементы полей
-    this._userName = nameProfile.textContent;
-    this._userInfo = jobProfile.textContent;
-    console.log(nameProfile.textContent)
-    console.log(this._userName)
-    console.log(this._userInfo)
-    // return {
-    //   userName: this._userName,
-    //   userInfo: this._userInfo
-    // }
+    // nameProfile.textContent = this._userName;
+    // jobProfile.textContent = this._userInfo;
+    return {
+      userName: this._userName,
+      userInfo: this._userInfo
+    }
   }
 //принимает новые данные пользователя и добавляет их на страницу
   setUserInfo () {
-//    console.log(nameProfile.textContent)
     nameProfile.textContent = this._userName;
     jobProfile.textContent = this._userInfo;
-//    console.log(nameProfile.textContent)
   }
 }
