@@ -18,7 +18,7 @@ export function clearErrors() {
   formValidatorPlace.clearInputError();
 };
 
-export function handleCardClick (link, alt, text) {
+function handleCardClick (link, alt, text) {
   popupWithImage.open(link, alt, text);
 }
 
@@ -32,7 +32,7 @@ function setDataProfile () {
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, templateCards);
+    const card = new Card(item, templateCards, handleCardClick);
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
   }
@@ -53,7 +53,7 @@ const popupWithFormProfile = new PopupWithForm({
 const popupWithFormPlace = new PopupWithForm({
   selectorPopup: popupPlaces,
   handleFormSubmit: (formData) => {
-  const additionalCard = new Card({name: formData.place, link: formData.link}, templateCards);
+  const additionalCard = new Card({name: formData.place, link: formData.link}, templateCards, handleCardClick);
   const cardElement = additionalCard.generateCard();
 
   cardPlace.prepend(cardElement);

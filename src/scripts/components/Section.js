@@ -1,6 +1,3 @@
-import { } from '../utils/constants.js';
-
-
 //отвечает за отрисовку элементов на странице
 export default class Section {
   constructor ({ items, renderer }, containerSelector) {

@@ -1,6 +1,3 @@
-import {handleCardClick} from '../../index.js';
-
-
 export default class Card {
     constructor( {name, link}, cardSelector, handleCardClick ) {
         this._text = name;
@@ -21,7 +18,7 @@ export default class Card {
 
 	_setEventListeners() {
     this._element.querySelector('.place__image').addEventListener('click', () => {
-      handleCardClick(this._image, this._alt, this._text);
+      this._handleCardClick(this._image, this._alt, this._text);
     });
 
     this._element.querySelector('.button_type_remove').addEventListener('click', () => {
