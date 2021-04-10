@@ -1,12 +1,12 @@
-import { initialCards } from './scripts/utils/initial-сards.js';
-import Card from './scripts/components/Card.js';
-import Section from './scripts/components/Section.js';
-import PopupWithForm from './scripts/components/PopupWithForm.js';
+import { initialCards } from '../scripts/utils/initial-сards.js';
+import Card from '../scripts/components/Card.js';
+import Section from '../scripts/components/Section.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import {
   cardPlace, formValidatorProfile, openPopupProfile, userInfo,
   openPopupPlaces, formValidatorPlace, popupWithImage, popup, jobInput, nameInput
-} from './scripts/utils/constants.js';
-import './pages/index.css';
+} from '../scripts/utils/constants.js';
+import './index.css';
 
 
 function handleCardClick(link, alt, text) {
