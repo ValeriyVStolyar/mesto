@@ -1,62 +1,50 @@
-import {initialCards} from './scripts/utils/initial-сards.js';
+import { initialCards } from './scripts/utils/initial-сards.js';
 import Card from './scripts/components/Card.js';
 import Section from './scripts/components/Section.js';
 import PopupWithForm from './scripts/components/PopupWithForm.js';
-import UserInfo from './scripts/components/UserInfo.js';
-import {cardPlace, popupProfile, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
-  openPopupPlaces, popupPlaces,
-  formValidatorPlace, templateCards,place, popupWithImage, popup, jobInput, nameInput
+import {
+  cardPlace, formValidatorProfile, openPopupProfile, userInfo,
+  openPopupPlaces, formValidatorPlace, popupWithImage, popup, jobInput, nameInput
 } from './scripts/utils/constants.js';
 import './pages/index.css';
 
 
-export function clearErrors() {
-  formValidatorProfile.clearInputError();
-
-  formValidatorPlace.toggleButtonState();
-
-  formValidatorPlace.clearInputError();
-};
-
-function handleCardClick (link, alt, text) {
+function handleCardClick(link, alt, text) {
   popupWithImage.open(link, alt, text);
 }
 
-function setDataProfile () {
-  const userInfo = new UserInfo ({userName: nameProfile.textContent, userInfo: jobProfile.textContent});
-  nameInput.value = userInfo.getUserInfo().userName;
-  jobInput.value = userInfo.getUserInfo().userInfo;
+function setDataProfile() {
+  const user = userInfo.getUserInfo();
+  nameInput.value = user.userName;
+  jobInput.value = user.userInfo;
 }
 
 
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, templateCards, handleCardClick);
+    const card = new Card(item, '.template', handleCardClick);
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
   }
 },
-place
+  '.places'
 );
 
 const popupWithFormProfile = new PopupWithForm({
-  selectorPopup: popupProfile,
+  popupSelector: '.popup_place_profile',
   handleFormSubmit: (formData) => {
-
-    const userInfo = new UserInfo ({userName: formData.name, userInfo: formData.job});
-
-    userInfo.setUserInfo ();
+    userInfo.setUserInfo({ userName: formData.name, userInfo: formData.job });
   }
 });
 
 const popupWithFormPlace = new PopupWithForm({
-  selectorPopup: popupPlaces,
+  popupSelector: '.popup_place_places',
   handleFormSubmit: (formData) => {
-  const additionalCard = new Card({name: formData.place, link: formData.link}, templateCards, handleCardClick);
-  const cardElement = additionalCard.generateCard();
+    const additionalCard = new Card({ name: formData.place, link: formData.link }, '.template', handleCardClick);
+    const cardElement = additionalCard.generateCard();
 
-  cardPlace.prepend(cardElement);
+    cardPlace.prepend(cardElement);
   },
 });
 
@@ -76,10 +64,16 @@ popup.setEventListeners();
 
 openPopupProfile.addEventListener('click', () => {
   setDataProfile();
+
+  formValidatorProfile.clearInputError();
+
   popupWithFormProfile.open();
 })
 
 openPopupPlaces.addEventListener('click', () => {
   popupWithFormPlace.open();
-})
 
+  formValidatorPlace.toggleButtonState();
+
+  formValidatorPlace.clearInputError();
+})

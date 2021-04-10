@@ -1,27 +1,23 @@
-import {nameProfile, jobProfile} from '../utils/constants.js';
-
-
 //отвечает за управление отображением информации о пользователе на странице
 export default class UserInfo {
+  //Принимает в конструктор объект с селекторами двух элементов:
   //элемента имени пользователя и элемента информации о себе
-  constructor ({userName, userInfo}) {
-    this._userName = userName;
-    this._userInfo = userInfo;
+  constructor({ userNameSelector, userInfoSelector }) {
+    this._userName = document.querySelector(userNameSelector);
+    this._userInfo = document.querySelector(userInfoSelector);
   }
-//возвращает объект с данными пользователя
-//пригодится когда данные пользователя нужно будет подставить в форму при открытии
-  getUserInfo () {
+  //возвращает объект с данными пользователя
+  //пригодится когда данные пользователя нужно будет подставить в форму при открытии
+  getUserInfo() {
     // достаём все элементы полей
-    // nameProfile.textContent = this._userName;
-    // jobProfile.textContent = this._userInfo;
     return {
-      userName: this._userName,
-      userInfo: this._userInfo
+      userName: this._userName.textContent,
+      userInfo: this._userInfo.textContent,
     }
   }
-//принимает новые данные пользователя и добавляет их на страницу
-  setUserInfo () {
-    nameProfile.textContent = this._userName;
-    jobProfile.textContent = this._userInfo;
+  //принимает новые данные пользователя и добавляет их на страницу
+  setUserInfo(formData) {
+    this._userName.textContent = formData.userName;
+    this._userInfo.textContent = formData.userInfo;
   }
 }

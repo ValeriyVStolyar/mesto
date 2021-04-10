@@ -2,6 +2,7 @@ import {validationSetting} from './validationSetting.js';
 import FormValidator from '../components/FormValidator.js';
 import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
 
 
 const cardPlace = document.querySelector('.places');
@@ -27,13 +28,15 @@ const buttonLike = document.querySelector('.button_type_like');
 const popupPicture = document.querySelector('.popup_place_picture');
 const popupImage = popupPicture.querySelector('.popup__image');
 const popupTitle = popupPicture.querySelector('.popup__title');
-const popupWithImage = new PopupWithImage(popupPicture);
-const popup = new Popup(popupPicture);
+const popupWithImage = new PopupWithImage('.popup_place_picture');
+const popup = new Popup('.popup_place_picture');
+const userInfo = new UserInfo ({userNameSelector: '.profile__title',
+userInfoSelector: '.profile__subtitle'});
 
 
 export {cardPlace, popupProfile, formProfile, nameInput,
   jobInput, formValidatorProfile, openPopupProfile, nameProfile, jobProfile,
   openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
   formValidatorPlace, popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle, popupWithImage, popup
+  popupPicture, popupImage, popupTitle, popupWithImage, popup, userInfo
 }
