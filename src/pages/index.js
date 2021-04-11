@@ -2,12 +2,20 @@ import { initialCards } from '../scripts/utils/initial-сards.js';
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
-import {
-  cardPlace, formValidatorProfile, openPopupProfile, userInfo,
-  openPopupPlaces, formValidatorPlace, popupWithImage, popup, jobInput, nameInput
-} from '../scripts/utils/constants.js';
+import {cardPlace, openPopupProfile, openPopupPlaces, jobInput, nameInput,
+formProfile, formPlaces} from '../scripts/utils/constants.js';
 import './index.css';
+import {validationSetting} from '../scripts/utils/validationSetting.js';
+import FormValidator from '../scripts/components/FormValidator.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import UserInfo from '../scripts/components/UserInfo.js';
 
+
+const formValidatorProfile = new FormValidator(validationSetting, formProfile);
+const formValidatorPlace = new FormValidator(validationSetting, formPlaces);
+const popupWithImage = new PopupWithImage('.popup_place_picture');
+const userInfo = new UserInfo ({userNameSelector: '.profile__title',
+userInfoSelector: '.profile__subtitle'});
 
 function handleCardClick(link, alt, text) {
   popupWithImage.open(link, alt, text);
@@ -59,7 +67,7 @@ formValidatorProfile.enableValidation();
 
 formValidatorPlace.enableValidation();
 
-popup.setEventListeners();
+popupWithImage.setEventListeners();
 
 
 openPopupProfile.addEventListener('click', () => {
