@@ -19,11 +19,12 @@ const buttonLike = document.querySelector('.button_type_like');
 const popupPicture = document.querySelector('.popup_place_picture');
 const popupImage = popupPicture.querySelector('.popup__image');
 const popupTitle = popupPicture.querySelector('.popup__title');
+const popupSubmition = document.querySelector('.popup_place_submition');
 
 
 export {cardPlace, popupProfile, formProfile, nameInput,
   jobInput, openPopupProfile, nameProfile, jobProfile,
   openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
   popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle
+  popupPicture, popupImage, popupTitle, popupSubmition
 }

@@ -30,7 +30,7 @@ export default class PopupWithForm extends Popup {
 
       this._handleFormSubmit(this._getInputValues());
 
-      this.close();
+//      this.close();
     })
   }
   //при закрытии попапа форма должна ещё и сбрасываться

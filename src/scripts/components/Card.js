@@ -1,10 +1,11 @@
 export default class Card {
-  constructor({ name, link }, cardSelector, handleCardClick) {
+  constructor({ name, link }, cardSelector, handleCardClick, handleDeleteClick) {
     this._text = name;
     this._image = link;
     this._alt = `Картинка места с названием "${name}"`;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
   };
 
   _getTemplate() {
@@ -17,21 +18,25 @@ export default class Card {
   };
 
   _setEventListeners() {
-    this._element.querySelector('.place__image').addEventListener('click', () => {
+    this._imageElement.addEventListener('click', () => {
       this._handleCardClick(this._image, this._alt, this._text);
     });
 
-    this._element.querySelector('.button_type_remove').addEventListener('click', () => {
-      this._deleteCard();
+    this._deleteButton.addEventListener('click', () => {
+//      this._deleteCard();
     });
 
-    this._element.querySelector('.button_type_like').addEventListener('click', () => {
+    this._deleteButton.addEventListener('click', () => {
+      this._handleDeleteClick();
+    });
+
+    this._likeButton.addEventListener('click', () => {
       this._handleLikeButtonClick();
     });
   };
 
   _handleLikeButtonClick() {
-    this._element.querySelector('.button_type_like').classList.toggle('button_clicked');
+    this._likeButton.classList.toggle('button_clicked');
   };
 
   _deleteCard() {
@@ -42,11 +47,16 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
 
+    this._deleteButton = this._element.querySelector('.button_type_remove');
+    this._imageElement =this._element.querySelector('.place__image');
+    this._titleElement = this._element.querySelector('.place__title');
+    this._likeButton = this._element.querySelector('.button_type_like');
+
     this._setEventListeners();
 
-    this._element.querySelector('.place__image').src = this._image;
-    this._element.querySelector('.place__image').alt = this._alt;
-    this._element.querySelector('.place__title').textContent = this._text;
+    this._imageElement.src = this._image;
+    this._imageElement.alt = this._alt;
+    this._titleElement.textContent = this._text;
 
     return this._element;
   };
