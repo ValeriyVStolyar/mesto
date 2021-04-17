@@ -1,8 +1,10 @@
 //отвечает за отрисовку элементов на странице
 export default class Section {
-  constructor({ items, renderer }, containerSelector) {
+//  constructor({ items, renderer }, containerSelector) {
+  constructor({ renderItems, renderer }, containerSelector) {
     //массив данных, которые нужно добавить на страницу при инициализации класса
-    this._renderedItems = items;
+//    this._renderedItems = items;
+    this._renderedItems = renderItems;
     //функция, которая отвечает за создание и отрисовку данных на странице
     this._renderer = renderer;
     //селектор контейнера, в который нужно добавлять созданные элементы
@@ -18,12 +20,11 @@ export default class Section {
   }
 
   //отвечает за отрисовку всех элементов
-  renderItems() {
+  renderItems(cards) {
     this.clear();
     this._renderedItems.forEach((item) => {
-  //    console.log(item)
       this._renderer(item);
-      console.log()
+//      console.log(item)
     });
   }
 }

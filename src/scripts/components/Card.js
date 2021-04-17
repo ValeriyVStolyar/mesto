@@ -1,11 +1,14 @@
 export default class Card {
-  constructor({ name, link }, cardSelector, handleCardClick, handleDeleteClick) {
+  constructor({ name, link, id }, cardSelector, handleCardClick, handleDeleteClick) {
     this._text = name;
     this._image = link;
     this._alt = `Картинка места с названием "${name}"`;
+    this._id = id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
+  //  console.log(this._id)
+  //  console.log(this._name)
   };
 
   _getTemplate() {

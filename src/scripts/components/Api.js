@@ -1,0 +1,80 @@
+import userInfo from "./UserInfo.js";
+
+export default class Api {
+  constructor({address, token, groupID}) {
+    this._address = address;
+    this._token = token;
+    this._groupID = groupID;
+  }
+
+  getInfoUser() {
+    return fetch(`${this._address}/v1/${this._groupID}/users/me`, {
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then(response => {
+      if(response.ok) {
+        return response.json();
+      }
+      return Promise.reject(`Ошибка ${response.status}`)
+    })
+    // .then((res) => {
+    //   console.log(res); // если всё хорошо, получили ответ
+    // })
+    // .catch((err) => {
+    //   console.log('Ошибка. Запрос не выполнен');
+    // });
+  }
+
+  getCards() {
+    return fetch(`${this._address}/v1/${this._groupID}/cards`, {
+      headers: {
+        authorization: this._token
+      }
+    }).then(response => {
+      if(response.ok) {
+        return response.json();
+      }
+      return Promise.reject(`Ошибка ${response.status}`)
+    })
+      // .then((cards) => {
+      //   console.log(cards);
+      // });
+  }
+
+  reviewUserInfo(formData) {
+    console.log(formData)
+    return fetch(`${this._address}/v1/${this._groupID}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+      //  name: formData.userName,
+        name: 'DDDD',
+        about: 'HHHHH'
+      })
+    })
+      .then(response => response.ok ? response.json()
+      : Promise.reject(`Ошибка ${response.status}`))
+  }
+
+  addCard(formData) {
+    return fetch(`${this._address}/v1/${this._groupID}/cards`, {
+      method: 'POST',
+      headers: {
+        authorization: this._token,
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        link: formData.link})
+    })
+          .then((cards) => {
+        console.log(cards);
+      })
+      .then(response => response.ok ? response.json() : Promise.reject(`Ошибка ${response.status}`))
+  }
+}
