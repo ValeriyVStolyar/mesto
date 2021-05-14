@@ -52,9 +52,8 @@ export default class Api {
         'Content-type': 'application/json'
       },
       body: JSON.stringify({
-      //  name: formData.userName,
-        name: 'DDDD',
-        about: 'HHHHH'
+        name: formData.name,
+        about: formData.job
       })
     })
       .then(response => response.ok ? response.json()
@@ -70,9 +69,10 @@ export default class Api {
       },
       body: JSON.stringify({
         name: formData.name,
-        link: formData.link})
+        link: formData.link
+      })
     })
-          .then((cards) => {
+        .then((cards) => {
         console.log(cards);
       })
       .then(response => response.ok ? response.json() : Promise.reject(`Ошибка ${response.status}`))

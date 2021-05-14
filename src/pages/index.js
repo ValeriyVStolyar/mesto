@@ -11,14 +11,14 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import Popup from '../scripts/components/Popup.js';
 import Api from '../scripts/components/Api.js';
-import { data } from 'browserslist';
+
 
 
 const formValidatorProfile = new FormValidator(validationSetting, formProfile);
 const formValidatorPlace = new FormValidator(validationSetting, formPlaces);
 const popupWithImage = new PopupWithImage('.popup_place_picture');
 const userInfo = new UserInfo ({userNameSelector: '.profile__title',
-userInfoSelector: '.profile__subtitle'});
+userInfoSelector: '.profile__subtitle', userAvatarSelector: '.profile__image'});
 const popupSubmition = new Popup('.popup_place_submition');
 const api = new Api({address: 'https://mesto.nomoreparties.co',
 token: '8b502132-8be5-4b57-951c-6d6424ff05a4',
@@ -26,26 +26,30 @@ groupID: 'cohort-22'
 })
 
 const avatar = document.querySelector('.profile__image')
+console.log('avatar.id 29')
 console.log(avatar.id)
 
 api.getInfoUser()
   .then(data => {
+    console.log('data 34')
+    console.log(data)
     avatar.id = data._id;
+    console.log('avatar.id 37')
     console.log(avatar.id)
-    userInfo.getUserInfo({userName: data.name, userAbout: data.userAbout });
-    console.log('36')
+//    userInfo.getUserInfo({userName: data.name, userAbout: data.userAbout });
+    console.log('40')
     console.log(data)
     console.log()
   })
   .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен'));
 
-  console.log('avatar.id')
+  console.log('avatar.id 46')
   console.log(avatar.id)
 
 api.getCards()
   .then(cards => {
     console.log(cards);
-    console.log('47');
+    console.log('52');
     const cardsSection = new Section({
         renderItems: cards,
         renderer: (item) => {
@@ -60,15 +64,16 @@ api.getCards()
   })
   .catch(err => console.log('Ошибка при получании карточек'));
 
-api.reviewUserInfo()
-  .then(res => {
-    console.log(res);
-    console.log('65');
-    userInfo.setUserInfo(formData);
-    console.log(formData)
-    console.log('formData')
-  })
-  .catch(err => console.log('Ошибка. Запрос на обновление инфо о пользователе не выполнен'));
+// api.reviewUserInfo()
+//   .then(res => {
+//     console.log(res);
+//     console.log('70');
+//     const [formData] = res;
+//     userInfo.setUserInfo(formData);
+//     console.log(formData)
+//     console.log('formData 74')
+//   })
+//   .catch(err => console.log('Ошибка. Запрос на обновление инфо о пользователе не выполнен'));
 
 
 
@@ -88,10 +93,10 @@ function handleDeleteClick() {
 
 function setDataProfile() {
   const user = userInfo.getUserInfo();
-  console.log('user 89')
+  console.log('user 95')
   console.log(user)
-  nameInput.value = user.userName;
-  jobInput.value = user.userAbout;
+  nameInput.value = user.name;
+  jobInput.value = user.about;
 }
 
 
@@ -108,13 +113,30 @@ function setDataProfile() {
 //   '.places'
 // );
 
-
 const popupWithFormProfile = new PopupWithForm({
   popupSelector: '.popup_place_profile',
   handleFormSubmit: (formData) => {
-    userInfo.setUserInfo({ userName: formData.name, userAbout: formData.job });
+    api.reviewUserInfo(formData)
+      .then(result => {
+        console.log('formData 119')
+        console.log(formData)
+        console.log('result 123')
+        console.log(result)
+        userInfo.setUserInfo({ userName: formData.name, userAbout: formData.job, userAvatar: formData.avatar });
+      })
+      .catch(err => console.log('Ошибка. Запрос на обновление инфо о пользователе не выполнен'));
   }
 });
+
+// const popupWithFormProfile = new PopupWithForm({
+//   popupSelector: '.popup_place_profile',
+//   handleFormSubmit: (formData) => {
+//     console.log('formData 119')
+//     console.log(formData)
+//   //  userInfo.setUserInfo({ userName: formData.name, userAbout: formData.job, userAvatar: formData.avatar });
+//     userInfo.setUserInfo({ userName: formData.name, userAbout: formData.job });
+//   }
+// });
 
 // const popupWithFormPlace = new PopupWithForm({
 //   popupSelector: '.popup_place_places',
@@ -151,6 +173,7 @@ const popupWithFormPlace = new PopupWithForm({
 
 
 popupWithFormProfile.setEventListeners();
+//popupWithFormProfile.close();
 
 popupWithFormPlace.setEventListeners();
 
