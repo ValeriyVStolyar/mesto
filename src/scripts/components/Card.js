@@ -7,8 +7,8 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
-  //  console.log(this._id)
-  //  console.log(this._name)
+//    console.log(this._id)
+//    console.log(this._text)
   };
 
   _getTemplate() {

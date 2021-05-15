@@ -77,7 +77,10 @@
       <img src="<%=require('./images/place-niagara-falls.jpg')%>" alt="Картинка" class="place__image">
       <div class="place__list-sights">
         <h2 class="place__title"></h2>
-        <button type="button" aria-label="Лайкнуть" class="button button_type_like"></button>
+        <div class="place__like-conteiner">
+          <button type="button" aria-label="Лайкнуть" class="button button_type_like"></button>
+          <p class="place__text">0</p>
+      </div>
       </div>
     </article>
   </template>

@@ -163,7 +163,7 @@ const popupWithFormPlace = new PopupWithForm({
         console.log('result 124')
         console.log(formData)
   //      const additionalCard = new Card({ name: formData.place, link: formData.link, _id: formData.id }, '.template', handleCardClick);
-        const additionalCard = new Card({ name: formData.place, link: formData.link }, '.template', handleCardClick);
+        const additionalCard = new Card({ name: formData.place, link: formData.link, id: result._id }, '.template', handleCardClick);
         const cardElement = additionalCard.generateCard();
         cardPlace.prepend(cardElement);
       })
