@@ -61,6 +61,10 @@ export default class Api {
   }
 
   addCard(formData) {
+    console.log('formData 64')
+    console.log(formData)
+    console.log(formData.place)
+    console.log(formData.link)
     return fetch(`${this._address}/v1/${this._groupID}/cards`, {
       method: 'POST',
       headers: {
@@ -68,13 +72,15 @@ export default class Api {
         'Content-type': 'application/json'
       },
       body: JSON.stringify({
-        name: formData.name,
+        name: formData.place,
+      //  place: 'sfsdfs',
         link: formData.link
+      //  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
       })
     })
-        .then((cards) => {
-        console.log(cards);
-      })
+      //   .then((cards) => {
+      //   console.log(cards);
+      // })
       .then(response => response.ok ? response.json() : Promise.reject(`Ошибка ${response.status}`))
   }
 }
