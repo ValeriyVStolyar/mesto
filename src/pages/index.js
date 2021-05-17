@@ -22,29 +22,44 @@ userInfoSelector: '.profile__subtitle', userAvatarSelector: '.profile__image'});
 const popupSubmition = new Popup('.popup_place_submition');
 const api = new Api({address: 'https://mesto.nomoreparties.co',
 token: '8b502132-8be5-4b57-951c-6d6424ff05a4',
+//token: '83427565-56e8-48c1-b66e-268601726ef3',
 groupID: 'cohort-22'
+//groupID: 'cohort-24'
 })
 
-const avatar = document.querySelector('.profile__image')
-console.log('avatar.id 29')
-console.log(avatar.id)
+const avatar = document.querySelector('.profile__image');
+
+// console.log('avatar.id 29')
+// console.log(avatar.id)
+
+export let myId = null;
 
 api.getInfoUser()
   .then(data => {
     console.log('data 34')
     console.log(data)
+    console.log(myId)
     avatar.id = data._id;
     console.log('avatar.id 37')
-    console.log(avatar.id)
+//    console.log(avatar.id)
+    myId = data._id;
 //    userInfo.getUserInfo({userName: data.name, userAbout: data.userAbout });
     console.log('40')
     console.log(data)
-    console.log()
+    console.log(myId)
+//    _showDeleteButton(myId);
   })
   .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен'));
 
+//  card.getMyId(myId);
   console.log('avatar.id 46')
-  console.log(avatar.id)
+//  console.log(avatar.id)
+  console.log(myId)
+
+// openPopupProfile.addEventListener('click', () => {
+//   console.log('myId 60')
+//   console.log(myId)
+// })
 
 api.getCards()
   .then(cards => {
@@ -53,7 +68,10 @@ api.getCards()
     const cardsSection = new Section({
         renderItems: cards,
         renderer: (item) => {
-          const card = new Card(item, '.template', handleCardClick, handleDeleteClick);
+          console.log('item 64')
+          console.log(item)
+          console.log(item.owner._id)
+          const card = new Card({name: item.name, link: item.link, cardId: item._id, ownwerId: item.owner._id}, '.template', handleCardClick, handleDeleteClick);
           const cardElement = card.generateCard();
           cardsSection.addItem(cardElement);
         }
@@ -81,8 +99,11 @@ function handleCardClick(link, alt, text) {
   popupWithImage.open(link, alt, text);
 }
 
-
-
+// function showDeleteButton() {
+//   if(this._ownerId === e17eda3b388940deea4f8663) {
+//     this._del
+//   }
+// }
 
 function handleDeleteClick() {
   popupSubmition.open();
@@ -98,6 +119,8 @@ function setDataProfile() {
   nameInput.value = user.name;
   jobInput.value = user.about;
 }
+
+
 
 
 // const cardsSection = new Section({
@@ -163,7 +186,7 @@ const popupWithFormPlace = new PopupWithForm({
         console.log('result 124')
         console.log(formData)
   //      const additionalCard = new Card({ name: formData.place, link: formData.link, _id: formData.id }, '.template', handleCardClick);
-        const additionalCard = new Card({ name: formData.place, link: formData.link, id: result._id }, '.template', handleCardClick);
+        const additionalCard = new Card({ name: formData.place, link: formData.link, cardId: result._id }, '.template', handleCardClick);
         const cardElement = additionalCard.generateCard();
         cardPlace.prepend(cardElement);
       })
