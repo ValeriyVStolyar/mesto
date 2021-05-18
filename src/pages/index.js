@@ -36,28 +36,29 @@ const avatar = document.querySelector('.profile__image');
 // console.log(avatar.id)
 
 export let myId = null;
+//export let targetClickId = null;
 
 api.getInfoUser()
   .then(data => {
-    console.log('data 34')
-    console.log(data)
-    console.log(myId)
+    // console.log('data 34')
+    // console.log(data)
+    // console.log(myId)
     avatar.id = data._id;
-    console.log('avatar.id 37')
+    // console.log('avatar.id 37')
 //    console.log(avatar.id)
     myId = data._id;
 //    userInfo.getUserInfo({userName: data.name, userAbout: data.userAbout });
-    console.log('40')
-    console.log(data)
-    console.log(myId)
+    // console.log('40')
+    // console.log(data)
+    // console.log(myId)
 //    _showDeleteButton(myId);
   })
   .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен'));
 
 //  card.getMyId(myId);
-  console.log('avatar.id 46')
-//  console.log(avatar.id)
-  console.log(myId)
+//   console.log('avatar.id 46')
+// //  console.log(avatar.id)
+//   console.log(myId)
 
 // openPopupProfile.addEventListener('click', () => {
 //   console.log('myId 60')
@@ -66,15 +67,15 @@ api.getInfoUser()
 
 api.getCards()
   .then(cards => {
-    console.log(cards);
-    console.log('52');
+    // console.log(cards);
+    // console.log('52');
     const cardsSection = new Section({
         renderItems: cards,
         renderer: (item) => {
-          console.log('item 64')
-          console.log(item)
-          console.log(item.owner._id)
-          const card = new Card({name: item.name, link: item.link, cardId: item._id, ownwerId: item.owner._id}, '.template', handleCardClick, handleDeleteClick);
+          // console.log('item 64')
+          // console.log(item)
+          // console.log(item.owner._id)
+          const card = new Card({name: item.name, link: item.link, cardId: item._id, ownwerId: item.owner._id}, '.template', handleCardClick, handleDeleteClick, submitHandleDeleteClick);
           const cardElement = card.generateCard();
           cardsSection.addItem(cardElement);
         }
@@ -114,9 +115,21 @@ function handleDeleteClick() {
 // console.log('open 114')
 // popupSubmit.open();
 
-// function submitHandleDeleteClick(evt) {
+function submitHandleDeleteClick(cardId) {
+  console.log('item 119')
+  console.log(cardId)
+  api.deleteCard(cardId)
+  .then(result => {
+    console.log('result 123')
+    console.log(result)
+    console.log(cardId)
+  //  const deleteCard = new Card();
+  })
+  .catch(err => console.log('Ошибка при удалении карточек'));
 
-// }
+  popupSubmit.close();
+}
+
 // submitDeleteButton._setEventListeners('submit', (evt) => {
 //   popupSubmit.close();
 // })
@@ -124,8 +137,8 @@ function handleDeleteClick() {
 
 function setDataProfile() {
   const user = userInfo.getUserInfo();
-  console.log('user 95')
-  console.log(user)
+  // console.log('user 95')
+  // console.log(user)
   nameInput.value = user.name;
   jobInput.value = user.about;
 }
@@ -151,10 +164,10 @@ const popupWithFormProfile = new PopupWithForm({
   handleFormSubmit: (formData) => {
     api.reviewUserInfo(formData)
       .then(result => {
-        console.log('formData 119')
-        console.log(formData)
-        console.log('result 123')
-        console.log(result)
+        // console.log('formData 119')
+        // console.log(formData)
+        // console.log('result 123')
+        // console.log(result)
         userInfo.setUserInfo({ userName: formData.name, userAbout: formData.job, userAvatar: formData.avatar });
       })
       .catch(err => console.log('Ошибка. Запрос на обновление инфо о пользователе не выполнен'));
@@ -185,33 +198,32 @@ const popupWithFormProfile = new PopupWithForm({
 const popupWithFormPlace = new PopupWithForm({
   popupSelector: '.popup_place_places',
   handleFormSubmit: (formData) => {
-    console.log(formData)
-    console.log(formData.place)
-    console.log(formData.link)
-    console.log('formData 120')
+    // console.log(formData)
+    // console.log(formData.place)
+    // console.log(formData.link)
+    // console.log('formData 120')
     api.addCard(formData)
       .then(result => {
-        console.log(result)
-        console.log('result 124')
-        console.log(formData)
+        // console.log(result)
+        // console.log('result 124')
+        // console.log(formData)
   //      const additionalCard = new Card({ name: formData.place, link: formData.link, _id: formData.id }, '.template', handleCardClick);
-        const additionalCard = new Card({ name: formData.place, link: formData.link, cardId: result._id }, '.template', handleCardClick);
+        const additionalCard = new Card({ name: formData.place, link: formData.link, cardId: result._id }, '.template', handleCardClick, submitHandleDeleteClick);
         const cardElement = additionalCard.generateCard();
         cardPlace.prepend(cardElement);
       })
       .catch(err => console.log('Ошибка при создании карточки'));
-
-
   },
 });
 
-api.deleteCard()
-  .then(result => {
-    console.log('result 201')
-    console.log(result)
-  //  const deleteCard = new Card();
-  })
-  .catch(err => console.log('Ошибка при удалении карточек'));
+// api.deleteCard(cardId)
+//   .then(result => {
+//     console.log('result 201')
+//     console.log(result)
+//     console.log(cardId)
+//   //  const deleteCard = new Card();
+//   })
+//   .catch(err => console.log('Ошибка при удалении карточек'));
 
 
 

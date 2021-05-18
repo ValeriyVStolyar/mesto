@@ -6,9 +6,9 @@ export default class UserInfo {
     this._userName = document.querySelector(userNameSelector);
     this._userInfo = document.querySelector(userInfoSelector);
     this._userAvatar = document.querySelector(userAvatarSelector);
-    console.log(this._userName)
-    console.log(this._userInfo)
-    console.log(this._userAvatar)
+    // console.log(this._userName)
+    // console.log(this._userInfo)
+    // console.log(this._userAvatar)
     // this._name = name;
     // this._about = about;
     // this._avatar = avatar;

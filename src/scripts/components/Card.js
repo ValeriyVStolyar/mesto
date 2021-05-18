@@ -1,11 +1,16 @@
-import {myId} from '../../pages/index.js';
+//import {myId, targetClickId} from '../../pages/index.js';
+import { myId } from '../../pages/index.js';
 console.log(myId)
 
-let targetId = null;
-console.log(targetId)
+let targetClickId = null;
+//let targetId = null;
+console.log(targetClickId)
+
+// targetClickId = null;
+// console.log(targetClickId)
 
 export default class Card {
-  constructor({ name, link, cardId, ownwerId }, cardSelector, handleCardClick, handleDeleteClick) {
+  constructor({ name, link, cardId, ownwerId }, cardSelector, handleCardClick, handleDeleteClick, submitHandleDeleteClick) {
     this._text = name;
     this._image = link;
     this._alt = `Картинка места с названием "${name}"`;
@@ -14,8 +19,9 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
-    console.log(this._id)
-    console.log(this._ownerId)
+    this._submitHandleDeleteClick = submitHandleDeleteClick;
+    // console.log(this._id)
+    // console.log(this._ownerId)
 //    console.log(this._text)
   };
 
@@ -35,30 +41,31 @@ export default class Card {
 
     this._submitionButton.addEventListener('click', (evt) => {
       evt.preventDefault();
-      if(this._ownerId === myId && this._id === targetId) {
+      if(this._ownerId === myId && this._id === targetClickId) {
         console.log('llllllllllll')
       //  this._handleLikeButtonClick.contain(this._id);
       this._deleteCard();
-        console.log('this._id 38')
-        console.log(this._id)
-        console.log(evt.target)
-        console.log(targetId)
+      this._submitHandleDeleteClick(this._id);
+         console.log('this._id 38')
+         console.log(this._id)
+        // console.log(evt.target)
+         console.log(targetClickId)
       }
     //  this._deleteCard();
     //  this._handleLikeButtonClick();
     });
 
     this._deleteButton.addEventListener('click', () => {
-      console.log('this._deleteButton 35')
-      console.log(this._deleteButton)
-      console.log(this._id)
-      targetId = this._id
-      console.log(targetId)
+      // console.log('this._deleteButton 35')
+      // console.log(this._deleteButton)
+       console.log(this._id)
+       targetClickId = this._id
+       console.log(targetClickId)
 
       console.log()
       this._showDeleteButton();
-      console.log('this._deleteButton 40')
-      console.log(this._deleteButton)
+      // console.log('this._deleteButton 40')
+      // console.log(this._deleteButton)
       this._handleDeleteClick();
     });
 
@@ -78,23 +85,23 @@ export default class Card {
 
  _showDeleteButton() {
   // this._deleteButton.remove('button_type_remove');
-  console.log('jjjjj 61')
-  console.log(myId)
-  console.log(this._ownerId)
+  // console.log('jjjjj 61')
+  // console.log(myId)
+  // console.log(this._ownerId)
   // console.log(e17eda3b388940deea4f8663.id)
   // console.log(this._ownerId === e17eda3b388940deea4f8663.id)
 //    if(!(this._ownerId === e17eda3b388940deea4f8663.id)) {
     if(!(this._ownerId === myId)) {
-      console.log('jjjjj')
+      // console.log('jjjjj')
       this._deleteButton.remove('button_type_remove');
-      console.log('this._deleteButton 57')
-      console.log(this._deleteButton)
+      // console.log('this._deleteButton 57')
+      // console.log(this._deleteButton)
     }
   }
 
   _deleteCard() {
-    console.log('this._element 87')
-    console.log(this._element)
+    // console.log('this._element 87')
+    // console.log(this._element)
     this._element.remove();
     this._element = null;
   };
@@ -108,9 +115,9 @@ export default class Card {
     this._likeButton = this._element.querySelector('.button_type_like');
 
     this._submitionButton = document.querySelector('.bbb');
-    console.log(this._deleteButton)
-    console.log(this._ownerId)
-    console.log(this._submitionButton)
+    // console.log(this._deleteButton)
+    // console.log(this._ownerId)
+    // console.log(this._submitionButton)
 
     this._showDeleteButton();
     this._setEventListeners();

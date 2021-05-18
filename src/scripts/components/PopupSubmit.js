@@ -4,7 +4,6 @@ export default class PopupSubmit extends Popup {
   constructor( popupSelector ) {
     super(popupSelector)
     this._popupElement = document.querySelector(popupSelector);
-    console.log(popupSelector)
   }
   setEventListeners() {
     super.setEventListeners();
@@ -17,7 +16,6 @@ export default class PopupSubmit extends Popup {
   }
 
   open() {
-    console.log('open')
     super.open();
 
   }
