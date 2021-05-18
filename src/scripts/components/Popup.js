@@ -3,6 +3,7 @@ export default class Popup {
   constructor(popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
+    console.log(this._popupElement)
   }
 
   //содержит логику закрытия попапа клавишей Esc
@@ -14,6 +15,7 @@ export default class Popup {
 
   //отвечают за открытие попапа
   open() {
+    console.log(this._popupElement)
     this._popupElement.classList.add('popup_opened');
 
     document.addEventListener('keydown', this._handleEscClose);

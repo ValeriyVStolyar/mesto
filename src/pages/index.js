@@ -3,7 +3,7 @@ import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import {cardPlace, openPopupProfile, openPopupPlaces, jobInput, nameInput,
-formProfile, formPlaces} from '../scripts/utils/constants.js';
+formProfile, formPlaces, submitDeleteButton} from '../scripts/utils/constants.js';
 import './index.css';
 import {validationSetting} from '../scripts/utils/validationSetting.js';
 import FormValidator from '../scripts/components/FormValidator.js';
@@ -11,6 +11,7 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import Popup from '../scripts/components/Popup.js';
 import Api from '../scripts/components/Api.js';
+import PopupSubmit from '../scripts/components/PopupSubmit.js';
 
 
 
@@ -19,12 +20,14 @@ const formValidatorPlace = new FormValidator(validationSetting, formPlaces);
 const popupWithImage = new PopupWithImage('.popup_place_picture');
 const userInfo = new UserInfo ({userNameSelector: '.profile__title',
 userInfoSelector: '.profile__subtitle', userAvatarSelector: '.profile__image'});
-const popupSubmition = new Popup('.popup_place_submition');
+//const popupSubmition = new Popup('.popup_place_submition');
+const popupSubmit = new PopupSubmit('.popup_place_submition');
+//const popupSubmition = new PopupWithForm('.popup_place_submition');
 const api = new Api({address: 'https://mesto.nomoreparties.co',
-token: '8b502132-8be5-4b57-951c-6d6424ff05a4',
-//token: '83427565-56e8-48c1-b66e-268601726ef3',
-groupID: 'cohort-22'
-//groupID: 'cohort-24'
+//token: '8b502132-8be5-4b57-951c-6d6424ff05a4',
+token: '83427565-56e8-48c1-b66e-268601726ef3',
+//groupID: 'cohort-22'
+groupID: 'cohort-24'
 })
 
 const avatar = document.querySelector('.profile__image');
@@ -106,10 +109,17 @@ function handleCardClick(link, alt, text) {
 // }
 
 function handleDeleteClick() {
-  popupSubmition.open();
+  popupSubmit.open();
 }
-//popupSubmition.open();
+// console.log('open 114')
+// popupSubmit.open();
 
+// function submitHandleDeleteClick(evt) {
+
+// }
+// submitDeleteButton._setEventListeners('submit', (evt) => {
+//   popupSubmit.close();
+// })
 
 
 function setDataProfile() {
@@ -178,7 +188,6 @@ const popupWithFormPlace = new PopupWithForm({
     console.log(formData)
     console.log(formData.place)
     console.log(formData.link)
-    console.log(formData._id)
     console.log('formData 120')
     api.addCard(formData)
       .then(result => {
@@ -196,6 +205,13 @@ const popupWithFormPlace = new PopupWithForm({
   },
 });
 
+api.deleteCard()
+  .then(result => {
+    console.log('result 201')
+    console.log(result)
+  //  const deleteCard = new Card();
+  })
+  .catch(err => console.log('Ошибка при удалении карточек'));
 
 
 
