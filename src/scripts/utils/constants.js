@@ -16,6 +16,7 @@ const templateCards = '.template';
 const popupOpen = 'popup_opened';
 const place = '.places';
 const buttonLike = document.querySelector('.button_type_like');
+const likeInfo = document.querySelector('.place__text');
 const popupPicture = document.querySelector('.popup_place_picture');
 const popupImage = popupPicture.querySelector('.popup__image');
 const popupTitle = popupPicture.querySelector('.popup__title');
@@ -27,5 +28,5 @@ export {cardPlace, popupProfile, formProfile, nameInput,
   jobInput, openPopupProfile, nameProfile, jobProfile,
   openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
   popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle, submitDeleteButton
+  popupPicture, popupImage, popupTitle, submitDeleteButton, likeInfo
 }

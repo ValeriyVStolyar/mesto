@@ -3,7 +3,7 @@ import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import {cardPlace, openPopupProfile, openPopupPlaces, jobInput, nameInput,
-formProfile, formPlaces, submitDeleteButton} from '../scripts/utils/constants.js';
+formProfile, formPlaces, likeInfo, popupPicture, buttonLike} from '../scripts/utils/constants.js';
 import './index.css';
 import {validationSetting} from '../scripts/utils/validationSetting.js';
 import FormValidator from '../scripts/components/FormValidator.js';
@@ -67,15 +67,17 @@ api.getInfoUser()
 
 api.getCards()
   .then(cards => {
-    // console.log(cards);
-    // console.log('52');
+     console.log(cards);
+     console.log('52');
     const cardsSection = new Section({
         renderItems: cards,
         renderer: (item) => {
-          // console.log('item 64')
-          // console.log(item)
-          // console.log(item.owner._id)
-          const card = new Card({name: item.name, link: item.link, cardId: item._id, ownwerId: item.owner._id}, '.template', handleCardClick, handleDeleteClick, submitHandleDeleteClick);
+          console.log('item 64')
+          console.log(item)
+          console.log(item.owner._id)
+          console.log(item.likes)
+          console.log(item.likes.length)
+          const card = new Card({name: item.name, link: item.link, cardId: item._id, ownwerId: item.owner._id, likes: item.likes}, '.template', handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike);
           const cardElement = card.generateCard();
           cardsSection.addItem(cardElement);
         }
@@ -129,10 +131,81 @@ function submitHandleDeleteClick(cardId) {
 
   popupSubmit.close();
 }
+console.log('likeInfo 134')
+console.log(likeInfo)
+const hhh = document.querySelector('.place__text')
+console.log(hhh)
+console.log(popupPicture)
+console.log(buttonLike)
+
+
+//function countLike(cardId, nnn) {
+function countLike(cardId) {
+  console.log('cardId 137')
+  console.log(cardId)
+//  console.log(nnn)
+  // //  handleLikeButtonClick()
+
+//      api.likeCard(cardId, nnn)
+      api.likeCard(cardId)
+      console.log('aaa 232')
+      console.log(cardId)
+        .then(result => {
+          console.log('result 123')
+          console.log(result)
+          console.log(cardId)
+//          console.log(nnn)
+        })
+        .catch(err => console.log('Ошибка при отправке "like" карточек'));
+
+        api.deleteLikeCard(cardId)
+        console.log('cardId 173')
+        console.log(cardId)
+          .then(result => {
+            console.log('result 177')
+            console.log(result)
+            console.log(cardId)
+  //          console.log(nnn)
+
+          })
+          .catch(err => console.log('Ошибка при отправке "dislike" карточек'));
+  }
+  // countLike();
+
+  // function countLike(cardId) {
+  //   console.log('cardId 166')
+  //   console.log(cardId)
+  // //  console.log(nnn)
+  //   // //  handleLikeButtonClick()
+
+  // //      api.likeCard(cardId, nnn)
+  //       api.deleteLikeCard(cardId)
+  //       console.log('cardId 173')
+  //       console.log(cardId)
+  //         .then(result => {
+  //           console.log('result 177')
+  //           console.log(result)
+  //           console.log(cardId)
+  // //          console.log(nnn)
+
+  //         })
+  //         .catch(err => console.log('Ошибка при отправке "dislike" карточек'));
+  //   }
+
+
+
+
+// const card = new Card();
+// card.numberLikes(likesQuantaty);
+// console.log('likesQuantaty 232')
+// console.log(likesQuantaty)
+
 
 // submitDeleteButton._setEventListeners('submit', (evt) => {
 //   popupSubmit.close();
 // })
+
+
 
 
 function setDataProfile() {
@@ -198,17 +271,17 @@ const popupWithFormProfile = new PopupWithForm({
 const popupWithFormPlace = new PopupWithForm({
   popupSelector: '.popup_place_places',
   handleFormSubmit: (formData) => {
-    // console.log(formData)
+     console.log(formData)
     // console.log(formData.place)
     // console.log(formData.link)
     // console.log('formData 120')
     api.addCard(formData)
       .then(result => {
-        // console.log(result)
-        // console.log('result 124')
-        // console.log(formData)
+         console.log(result)
+         console.log('result 124')
+         console.log(formData)
   //      const additionalCard = new Card({ name: formData.place, link: formData.link, _id: formData.id }, '.template', handleCardClick);
-        const additionalCard = new Card({ name: formData.place, link: formData.link, cardId: result._id }, '.template', handleCardClick, submitHandleDeleteClick);
+        const additionalCard = new Card({ name: formData.place, link: formData.link, cardId: result._id  }, '.template', handleCardClick, submitHandleDeleteClick, countLike);
         const cardElement = additionalCard.generateCard();
         cardPlace.prepend(cardElement);
       })
@@ -224,6 +297,9 @@ const popupWithFormPlace = new PopupWithForm({
 //   //  const deleteCard = new Card();
 //   })
 //   .catch(err => console.log('Ошибка при удалении карточек'));
+
+
+
 
 
 

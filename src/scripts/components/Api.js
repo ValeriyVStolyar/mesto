@@ -61,10 +61,10 @@ export default class Api {
   }
 
   addCard(formData) {
-    console.log('formData 64')
-    console.log(formData)
-    console.log(formData.place)
-    console.log(formData.link)
+    // console.log('formData 64')
+    // console.log(formData)
+    // console.log(formData.place)
+    // console.log(formData.link)
     return fetch(`${this._address}/v1/${this._groupID}/cards`, {
       method: 'POST',
       headers: {
@@ -87,6 +87,40 @@ export default class Api {
   deleteCard(cardId) {
     console.log(cardId)
     return fetch(`${this._address}/v1/${this._groupID}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then(response => {
+      if(response.ok) {
+        return response.json();
+      }
+      return Promise.reject(`Ошибка ${response.status}`)
+    })
+  }
+
+//  likeCard(cardId, nnn) {
+  likeCard(cardId) {
+    console.log(cardId)
+  //  console.log(nnn)
+    return fetch(`${this._address}/v1/${this._groupID}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then(response => {
+      if(response.ok) {
+        return response.json();
+      }
+      return Promise.reject(`Ошибка ${response.status}`)
+    })
+  }
+
+  deleteLikeCard(cardId) {
+    console.log(cardId)
+    return fetch(`${this._address}/v1/${this._groupID}/cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: {
         authorization: this._token
