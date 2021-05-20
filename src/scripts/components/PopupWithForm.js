@@ -23,6 +23,7 @@ export default class PopupWithForm extends Popup {
   //но и добавлять обработчик сабмита формы
   setEventListeners() {
     super.setEventListeners();
+    console.log('presubmit')
 
     this._popupElement.addEventListener('submit', (evt) => {
 

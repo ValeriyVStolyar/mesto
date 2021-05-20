@@ -7,7 +7,8 @@ export default class Api {
     this._groupID = groupID;
   }
 
-  getInfoUser() {
+  getInfoUser(data) {
+    console.log(data)
     return fetch(`${this._address}/v1/${this._groupID}/users/me`, {
       headers: {
         authorization: this._token
@@ -132,5 +133,23 @@ export default class Api {
       }
       return Promise.reject(`Ошибка ${response.status}`)
     })
+  }
+
+  changeAvatar(formData) {
+    console.log(formData)
+    return fetch(`${this._address}/v1/${this._groupID}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        // name: formData.name,
+        // about: formData.job
+        avatar: formData.avatar
+      })
+    })
+      .then(response => response.ok ? response.json()
+      : Promise.reject(`Ошибка ${response.status}`))
   }
 }

@@ -6,6 +6,7 @@ const jobInput = formProfile.querySelector('.popup__input_type_job');
 const openPopupProfile = document.querySelector('.button_type_edit');
 const nameProfile = document.querySelector('.profile__title');
 const jobProfile = document.querySelector('.profile__subtitle');
+const imageProfile = document.querySelector('.profile__image');
 const openPopupPlaces = document.querySelector('.button_type_add-card');
 const popupPlaces = document.querySelector('.popup_place_places');
 const formPlaces = popupPlaces.querySelector('.popup__container');
@@ -22,11 +23,15 @@ const popupImage = popupPicture.querySelector('.popup__image');
 const popupTitle = popupPicture.querySelector('.popup__title');
 const popupSubmition = document.querySelector('.popup_place_submition');
 const submitDeleteButton = popupSubmition.querySelector('.button_type_submit');
+const openPopupAvatar = document.querySelector('.button_type_edit-avatar');
+const popupAvatar = document.querySelector('.popup_place_avatar');
+const formAvatar = popupAvatar.querySelector('.popup__container');
 
 
 export {cardPlace, popupProfile, formProfile, nameInput,
   jobInput, openPopupProfile, nameProfile, jobProfile,
   openPopupPlaces, popupPlaces, formPlaces, placeInput, linkInput,
   popups, templateCards, popupOpen, place, buttonLike,
-  popupPicture, popupImage, popupTitle, submitDeleteButton, likeInfo
+  popupPicture, popupImage, popupTitle, submitDeleteButton, likeInfo,
+  openPopupAvatar, formAvatar, imageProfile
 }

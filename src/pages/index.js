@@ -3,7 +3,8 @@ import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import {cardPlace, openPopupProfile, openPopupPlaces, jobInput, nameInput,
-formProfile, formPlaces, likeInfo, popupPicture, buttonLike} from '../scripts/utils/constants.js';
+formProfile, formPlaces, likeInfo, popupPicture, buttonLike,
+openPopupAvatar, formAvatar, nameProfile, jobProfile, imageProfile} from '../scripts/utils/constants.js';
 import './index.css';
 import {validationSetting} from '../scripts/utils/validationSetting.js';
 import FormValidator from '../scripts/components/FormValidator.js';
@@ -17,6 +18,7 @@ import PopupSubmit from '../scripts/components/PopupSubmit.js';
 
 const formValidatorProfile = new FormValidator(validationSetting, formProfile);
 const formValidatorPlace = new FormValidator(validationSetting, formPlaces);
+const formValidatorAvatar = new FormValidator(validationSetting, formAvatar);
 const popupWithImage = new PopupWithImage('.popup_place_picture');
 const userInfo = new UserInfo ({userNameSelector: '.profile__title',
 userInfoSelector: '.profile__subtitle', userAvatarSelector: '.profile__image'});
@@ -29,6 +31,7 @@ token: '83427565-56e8-48c1-b66e-268601726ef3',
 //groupID: 'cohort-22'
 groupID: 'cohort-24'
 })
+const popupAvatar = new Popup('.popup_place_avatar')
 
 const avatar = document.querySelector('.profile__image');
 
@@ -40,16 +43,26 @@ export let myId = null;
 
 api.getInfoUser()
   .then(data => {
-    // console.log('data 34')
-    // console.log(data)
+    console.log('data 34')
+    console.log(data)
     // console.log(myId)
     avatar.id = data._id;
     // console.log('avatar.id 37')
 //    console.log(avatar.id)
     myId = data._id;
-//    userInfo.getUserInfo({userName: data.name, userAbout: data.userAbout });
+  //  userInfo.getUserInfo({userName: data.name, userAbout: data.userAbout });
+  //  userInfo.getUserInfo({name: data.name, about: data.about });
+  //  userInfo.getUserInfo({name: data.name});
+
+  //  getProfileInfo();
+  nameProfile.textContent = data.name;
+
+  jobProfile.textContent = data.about;
+
+  imageProfile.src = data.avatar;
     // console.log('40')
-    // console.log(data)
+    // console.log(userName)
+    // console.log(userAbout)
     // console.log(myId)
 //    _showDeleteButton(myId);
   })
@@ -216,6 +229,14 @@ function setDataProfile() {
   jobInput.value = user.about;
 }
 
+// function getProfileInfo() {
+//   nameProfile.textContent = data.name;
+
+//   jobProfile.textContent = data.about;
+
+//   imageProfile.src = data.avatar;
+// }
+
 
 
 
@@ -241,7 +262,8 @@ const popupWithFormProfile = new PopupWithForm({
         // console.log(formData)
         // console.log('result 123')
         // console.log(result)
-        userInfo.setUserInfo({ userName: formData.name, userAbout: formData.job, userAvatar: formData.avatar });
+      //  userInfo.setUserInfo({ userName: formData.name, userAbout: formData.job, userAvatar: formData.avatar });
+        userInfo.setUserInfo({ userName: formData.name, userAbout: formData.job });
       })
       .catch(err => console.log('Ошибка. Запрос на обновление инфо о пользователе не выполнен'));
   }
@@ -289,6 +311,29 @@ const popupWithFormPlace = new PopupWithForm({
   },
 });
 
+const popupWithFormAvatar = new PopupWithForm({
+  popupSelector: '.popup_place_avatar',
+  handleFormSubmit: (formData) => {
+     console.log('formData 297')
+     console.log(formData)
+    // console.log(formData.place)
+    // console.log(formData.link)
+    // console.log('formData 120')
+    api.changeAvatar(formData)
+      .then(result => {
+         console.log(result)
+         console.log('result 304')
+         console.log(formData)
+         userInfo.setUserAvatar({ userAvatar: formData.avatar });
+  //      const additionalCard = new Card({ name: formData.place, link: formData.link, _id: formData.id }, '.template', handleCardClick);
+        // const additionalCard = new Card({ name: formData.place, link: formData.link, cardId: result._id  }, '.template', handleCardClick, submitHandleDeleteClick, countLike);
+        // const cardElement = additionalCard.generateCard();
+        // cardPlace.prepend(cardElement);
+      })
+      .catch(err => console.log('Ошибка при отправке аватара'));
+  },
+});
+
 // api.deleteCard(cardId)
 //   .then(result => {
 //     console.log('result 201')
@@ -308,11 +353,15 @@ popupWithFormProfile.setEventListeners();
 
 popupWithFormPlace.setEventListeners();
 
+popupWithFormAvatar.setEventListeners();
+
 //cardsSection.renderItems();
 
 formValidatorProfile.enableValidation();
 
 formValidatorPlace.enableValidation();
+
+
 
 popupWithImage.setEventListeners();
 
@@ -331,4 +380,8 @@ openPopupPlaces.addEventListener('click', () => {
   formValidatorPlace.toggleButtonState();
 
   formValidatorPlace.clearInputError();
+})
+
+openPopupAvatar.addEventListener('click', () => {
+  popupWithFormAvatar.open();
 })
