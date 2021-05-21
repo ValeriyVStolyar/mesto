@@ -7,8 +7,8 @@ export default class Api {
     this._groupID = groupID;
   }
 
-  getInfoUser(data) {
-    console.log(data)
+  getInfoUser() {
+    console.log()
     return fetch(`${this._address}/v1/${this._groupID}/users/me`, {
       headers: {
         authorization: this._token

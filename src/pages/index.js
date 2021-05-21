@@ -361,7 +361,7 @@ formValidatorProfile.enableValidation();
 
 formValidatorPlace.enableValidation();
 
-
+formValidatorAvatar.enableValidation();
 
 popupWithImage.setEventListeners();
 
@@ -384,4 +384,8 @@ openPopupPlaces.addEventListener('click', () => {
 
 openPopupAvatar.addEventListener('click', () => {
   popupWithFormAvatar.open();
+
+  formValidatorAvatar.toggleButtonState();
+
+  formValidatorAvatar.clearInputError();
 })

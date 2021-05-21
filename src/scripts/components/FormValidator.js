@@ -53,6 +53,7 @@ export default class FormValidator {
     this.toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
+      console.log(inputElement)
       inputElement.addEventListener('input', (evt) => {
         this._isValid(inputElement);
 
@@ -63,7 +64,10 @@ export default class FormValidator {
 
   clearInputError() {
     this._inputList.forEach((inputElement) => {
+      console.log(inputElement)
       const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+
+      console.log(errorElement)
 
       inputElement.classList.remove(this._validationSetting.inputErrorClass);
 
