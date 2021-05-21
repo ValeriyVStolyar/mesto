@@ -4,7 +4,8 @@ import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import {cardPlace, openPopupProfile, openPopupPlaces, jobInput, nameInput,
 formProfile, formPlaces, likeInfo, popupPicture, buttonLike,
-openPopupAvatar, formAvatar, nameProfile, jobProfile, imageProfile} from '../scripts/utils/constants.js';
+openPopupAvatar, formAvatar, nameProfile, jobProfile, imageProfile,
+submitButtonPlaces, submitButtonAvatar, submitButtonProfile} from '../scripts/utils/constants.js';
 import './index.css';
 import {validationSetting} from '../scripts/utils/validationSetting.js';
 import FormValidator from '../scripts/components/FormValidator.js';
@@ -161,10 +162,10 @@ function countLike(cardId) {
 
 //      api.likeCard(cardId, nnn)
       api.likeCard(cardId)
-      console.log('aaa 232')
+      console.log('cardId 164')
       console.log(cardId)
         .then(result => {
-          console.log('result 123')
+          console.log('result 167')
           console.log(result)
           console.log(cardId)
 //          console.log(nnn)
@@ -265,6 +266,9 @@ const popupWithFormProfile = new PopupWithForm({
       //  userInfo.setUserInfo({ userName: formData.name, userAbout: formData.job, userAvatar: formData.avatar });
         userInfo.setUserInfo({ userName: formData.name, userAbout: formData.job });
       })
+      .finally(doSmth => {
+        submitButtonProfile.textContent = 'Сохранение...';
+      })
       .catch(err => console.log('Ошибка. Запрос на обновление инфо о пользователе не выполнен'));
   }
 });
@@ -303,9 +307,12 @@ const popupWithFormPlace = new PopupWithForm({
          console.log('result 124')
          console.log(formData)
   //      const additionalCard = new Card({ name: formData.place, link: formData.link, _id: formData.id }, '.template', handleCardClick);
-        const additionalCard = new Card({ name: formData.place, link: formData.link, cardId: result._id  }, '.template', handleCardClick, submitHandleDeleteClick, countLike);
+        const additionalCard = new Card({ name: formData.place, link: formData.link, cardId: result._id, ownwerId: result.owner._id, likes: result.likes  }, '.template', handleCardClick, submitHandleDeleteClick, countLike);
         const cardElement = additionalCard.generateCard();
         cardPlace.prepend(cardElement);
+      })
+      .finally(doSmth => {
+        submitButtonPlaces.textContent = 'Сохранение...';
       })
       .catch(err => console.log('Ошибка при создании карточки'));
   },
@@ -329,6 +336,9 @@ const popupWithFormAvatar = new PopupWithForm({
         // const additionalCard = new Card({ name: formData.place, link: formData.link, cardId: result._id  }, '.template', handleCardClick, submitHandleDeleteClick, countLike);
         // const cardElement = additionalCard.generateCard();
         // cardPlace.prepend(cardElement);
+      })
+      .finally(doSmth => {
+        submitButtonAvatar.textContent = 'Сохранение...';
       })
       .catch(err => console.log('Ошибка при отправке аватара'));
   },

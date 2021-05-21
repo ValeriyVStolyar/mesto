@@ -23,7 +23,7 @@ export default class Card {
     this._handleDeleteClick = handleDeleteClick;
     this._submitHandleDeleteClick = submitHandleDeleteClick;
     this._countLike = countLike;
-    // console.log(this._id)
+    //console.log(this._countLike);
     // console.log(this._ownerId)
     console.log("this._likes 27")
     console.log(this._likes.length)
@@ -83,7 +83,9 @@ export default class Card {
       this.numberLikes();
       this._handleLikeButtonClick();
     //  this._countLike(this._id, this._likes.length);
+      console.log(this._id)
       this._countLike(this._id);
+      console.log(this._id)
     });
   };
 
