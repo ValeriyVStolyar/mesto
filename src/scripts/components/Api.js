@@ -1,5 +1,3 @@
-import userInfo from "./UserInfo.js";
-
 export default class Api {
   constructor({address, token, groupID}) {
     this._address = address;
@@ -8,7 +6,6 @@ export default class Api {
   }
 
   getInfoUser() {
-    console.log()
     return fetch(`${this._address}/v1/${this._groupID}/users/me`, {
       headers: {
         authorization: this._token
@@ -20,12 +17,6 @@ export default class Api {
       }
       return Promise.reject(`Ошибка ${response.status}`)
     })
-    // .then((res) => {
-    //   console.log(res); // если всё хорошо, получили ответ
-    // })
-    // .catch((err) => {
-    //   console.log('Ошибка. Запрос не выполнен');
-    // });
   }
 
   getCards() {
@@ -39,13 +30,9 @@ export default class Api {
       }
       return Promise.reject(`Ошибка ${response.status}`)
     })
-      // .then((cards) => {
-      //   console.log(cards);
-      // });
   }
 
   reviewUserInfo(formData) {
-    console.log(formData)
     return fetch(`${this._address}/v1/${this._groupID}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -62,10 +49,6 @@ export default class Api {
   }
 
   addCard(formData) {
-    // console.log('formData 64')
-    // console.log(formData)
-    // console.log(formData.place)
-    // console.log(formData.link)
     return fetch(`${this._address}/v1/${this._groupID}/cards`, {
       method: 'POST',
       headers: {
@@ -74,14 +57,9 @@ export default class Api {
       },
       body: JSON.stringify({
         name: formData.place,
-      //  place: 'sfsdfs',
         link: formData.link
-      //  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
       })
     })
-      //   .then((cards) => {
-      //   console.log(cards);
-      // })
       .then(response => response.ok ? response.json() : Promise.reject(`Ошибка ${response.status}`))
   }
 
@@ -101,10 +79,7 @@ export default class Api {
     })
   }
 
-//  likeCard(cardId, nnn) {
   likeCard(cardId) {
-    console.log(cardId)
-  //  console.log(nnn)
     return fetch(`${this._address}/v1/${this._groupID}/cards/likes/${cardId}`, {
       method: 'PUT',
       headers: {
@@ -120,7 +95,6 @@ export default class Api {
   }
 
   deleteLikeCard(cardId) {
-    console.log(cardId)
     return fetch(`${this._address}/v1/${this._groupID}/cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: {
@@ -136,7 +110,6 @@ export default class Api {
   }
 
   changeAvatar(formData) {
-    console.log(formData)
     return fetch(`${this._address}/v1/${this._groupID}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
@@ -144,8 +117,6 @@ export default class Api {
         'Content-type': 'application/json'
       },
       body: JSON.stringify({
-        // name: formData.name,
-        // about: formData.job
         avatar: formData.avatar
       })
     })
