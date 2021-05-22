@@ -12,6 +12,7 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
 import PopupSubmit from '../scripts/components/PopupSubmit.js';
+import Popup from '../scripts/components/Popup.js';
 
 
 
@@ -21,7 +22,8 @@ const formValidatorAvatar = new FormValidator(validationSetting, formAvatar);
 const popupWithImage = new PopupWithImage('.popup_place_picture');
 const userInfo = new UserInfo ({userNameSelector: '.profile__title',
 userInfoSelector: '.profile__subtitle', userAvatarSelector: '.profile__image'});
-const popupSubmit = new PopupSubmit('.popup_place_submition');
+//const popupSubmit = new PopupSubmit('.popup_place_submition');
+const popup = new Popup('.popup_place_submition');
 const api = new Api({address: 'https://mesto.nomoreparties.co',
 token: '83427565-56e8-48c1-b66e-268601726ef3',
 groupID: 'cohort-24'
@@ -64,20 +66,22 @@ function handleCardClick(link, alt, text) {
 }
 
 function handleDeleteClick() {
-  popupSubmit.open();
+  popup.open();
 }
 
 function submitHandleDeleteClick(cardId) {
   api.deleteCard(cardId)
   .then(result => {
-    popupSubmit.close();
+    popup.close();
   })
   .catch(err => console.log('Ошибка при удалении карточек'));
 }
 
 function countLike(cardId) {
       api.likeCard(cardId)
+      console.log(cardId)
         .then(result => {
+          console.log(result)
         })
         .catch(err => console.log('Ошибка при отправке "like" карточек'));
 
@@ -151,7 +155,7 @@ popupWithFormPlace.setEventListeners();
 
 popupWithFormAvatar.setEventListeners();
 
-popupSubmit.setEventListeners();
+popup.setEventListeners();
 
 formValidatorProfile.enableValidation();
 

@@ -47,7 +47,8 @@ export default class Card {
     });
 
     this._likeButton.addEventListener('click', () => {
-      this.numberLikes();
+      this._numberLikes();
+      this._countLike(this._id);
     });
   };
 
@@ -62,7 +63,7 @@ export default class Card {
     this._element = null;
   };
 
-  numberLikes() {
+  _numberLikes() {
     if(event.target.classList.contains('button_clicked')) {
       this._likeButton.classList.remove('button_clicked');
       this._likes.length = this._likes.length - 1;
