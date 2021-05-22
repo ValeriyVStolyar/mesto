@@ -2,7 +2,6 @@ import { myId } from '../../pages/index.js';
 
 let targetClickId = null;
 
-
 export default class Card {
   constructor({ name, link, cardId, ownwerId, likes }, cardSelector, handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike) {
     this._text = name;
@@ -16,9 +15,6 @@ export default class Card {
     this._handleDeleteClick = handleDeleteClick;
     this._submitHandleDeleteClick = submitHandleDeleteClick;
     this._countLike = countLike;
-    // console.log(this._likes.filter(function(item) {
-    //   return item === myId;
-    // }))
   };
 
   _getTemplate() {
@@ -37,30 +33,23 @@ export default class Card {
 
     this._submitionButton.addEventListener('click', (evt) => {
       evt.preventDefault();
+
       if(this._ownerId === myId && this._id === targetClickId) {
-      this._deleteCard();
-      this._submitHandleDeleteClick(this._id);
+        this._submitHandleDeleteClick(this._id);
+        this._deleteCard();
       }
     });
 
     this._deleteButton.addEventListener('click', () => {
-       targetClickId = this._id
-
-      this._showDeleteButton();
+      targetClickId = this._id
 
       this._handleDeleteClick();
     });
 
     this._likeButton.addEventListener('click', () => {
       this.numberLikes();
-    //  this._handleLikeButtonClick();
-      this._countLike(this._id);
     });
   };
-
-  // _handleLikeButtonClick() {
-
-  // };
 
  _showDeleteButton() {
     if(!(this._ownerId === myId)) {
@@ -75,7 +64,6 @@ export default class Card {
 
   numberLikes() {
     if(event.target.classList.contains('button_clicked')) {
-  //  if(this._ownerId === myId) {
       this._likeButton.classList.remove('button_clicked');
       this._likes.length = this._likes.length - 1;
     } else {
@@ -95,7 +83,7 @@ export default class Card {
     this._likeButton = this._element.querySelector('.button_type_like');
     this._likeInfo = this._element.querySelector('.place__text');
 
-    this._submitionButton = document.querySelector('.bbb');
+    this._submitionButton = document.querySelector('.button_type_submition');
 
     this._showDeleteButton();
     this._setEventListeners();

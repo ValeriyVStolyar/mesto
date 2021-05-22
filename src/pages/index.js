@@ -1,4 +1,3 @@
-import { initialCards } from '../scripts/utils/initial-сards.js';
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
@@ -71,32 +70,19 @@ function handleDeleteClick() {
 function submitHandleDeleteClick(cardId) {
   api.deleteCard(cardId)
   .then(result => {
+    popupSubmit.close();
   })
   .catch(err => console.log('Ошибка при удалении карточек'));
-
-  popupSubmit.close();
 }
 
 function countLike(cardId) {
-  console.log('cardId 137')
-  console.log(cardId)
       api.likeCard(cardId)
-      console.log('cardId 164')
-      console.log(cardId)
         .then(result => {
-          console.log('result 167')
-          console.log(result)
-          console.log(cardId)
         })
         .catch(err => console.log('Ошибка при отправке "like" карточек'));
 
         api.deleteLikeCard(cardId)
-        console.log('cardId 173')
-        console.log(cardId)
           .then(result => {
-            console.log('result 177')
-            console.log(result)
-            console.log(cardId)
           })
           .catch(err => console.log('Ошибка при отправке "dislike" карточек'));
   }
@@ -117,6 +103,7 @@ const popupWithFormProfile = new PopupWithForm({
     api.reviewUserInfo(formData)
       .then(result => {
         userInfo.setUserInfo({ userName: formData.name, userAbout: formData.job });
+        popupWithFormProfile.close();
       })
       .finally(doSmth => {
         submitButtonProfile.textContent = 'Сохранение...';
@@ -130,9 +117,10 @@ const popupWithFormPlace = new PopupWithForm({
   handleFormSubmit: (formData) => {
     api.addCard(formData)
       .then(result => {
-        const additionalCard = new Card({ name: formData.place, link: formData.link, cardId: result._id, ownwerId: result.owner._id, likes: result.likes  }, '.template', handleCardClick, submitHandleDeleteClick, countLike);
+        const additionalCard = new Card({ name: formData.place, link: formData.link, cardId: result._id, ownwerId: result.owner._id, likes: result.likes  }, '.template', handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike);
         const cardElement = additionalCard.generateCard();
         cardPlace.prepend(cardElement);
+        popupWithFormPlace.close();
       })
       .finally(doSmth => {
         submitButtonPlaces.textContent = 'Сохранение...';
@@ -147,6 +135,7 @@ const popupWithFormAvatar = new PopupWithForm({
     api.changeAvatar(formData)
       .then(result => {
          userInfo.setUserAvatar({ userAvatar: formData.avatar });
+         popupWithFormAvatar.close();
       })
       .finally(doSmth => {
         submitButtonAvatar.textContent = 'Сохранение...';
@@ -161,6 +150,8 @@ popupWithFormProfile.setEventListeners();
 popupWithFormPlace.setEventListeners();
 
 popupWithFormAvatar.setEventListeners();
+
+popupSubmit.setEventListeners();
 
 formValidatorProfile.enableValidation();
 
