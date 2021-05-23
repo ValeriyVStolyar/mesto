@@ -11,7 +11,6 @@ import FormValidator from '../scripts/components/FormValidator.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
-import PopupSubmit from '../scripts/components/PopupSubmit.js';
 import Popup from '../scripts/components/Popup.js';
 
 
@@ -49,7 +48,9 @@ api.getCards()
     const cardsSection = new Section({
         renderItems: cards,
         renderer: (item) => {
-          const card = new Card({name: item.name, link: item.link, cardId: item._id, ownwerId: item.owner._id, likes: item.likes}, '.template', handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike);
+          const card = new Card({name: item.name, link: item.link, cardId: item._id,
+            ownwerId: item.owner._id, likes: item.likes}, '.template',
+            handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike, countDislike);
           const cardElement = card.generateCard();
           cardsSection.addItem(cardElement);
         }
@@ -78,18 +79,18 @@ function submitHandleDeleteClick(cardId) {
 }
 
 function countLike(cardId) {
-      api.likeCard(cardId)
-      console.log(cardId)
-        .then(result => {
-          console.log(result)
-        })
-        .catch(err => console.log('Ошибка при отправке "like" карточек'));
+  api.likeCard(cardId)
+    .then(result => {
+    })
+    .catch(err => console.log('Ошибка при отправке "like" карточек'));
+}
 
-        api.deleteLikeCard(cardId)
-          .then(result => {
-          })
-          .catch(err => console.log('Ошибка при отправке "dislike" карточек'));
-  }
+function countDislike(cardId) {
+  api.deleteLikeCard(cardId)
+    .then(result => {
+    })
+    .catch(err => console.log('Ошибка при отправке "dislike" карточек'));
+}
 
 
 function setDataProfile() {
@@ -121,7 +122,10 @@ const popupWithFormPlace = new PopupWithForm({
   handleFormSubmit: (formData) => {
     api.addCard(formData)
       .then(result => {
-        const additionalCard = new Card({ name: formData.place, link: formData.link, cardId: result._id, ownwerId: result.owner._id, likes: result.likes  }, '.template', handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike);
+        const additionalCard = new Card({ name: formData.place, link: formData.link,
+          cardId: result._id, ownwerId: result.owner._id,
+          likes: result.likes  }, '.template', handleCardClick, handleDeleteClick,
+          submitHandleDeleteClick, countLike, countDislike);
         const cardElement = additionalCard.generateCard();
         cardPlace.prepend(cardElement);
         popupWithFormPlace.close();

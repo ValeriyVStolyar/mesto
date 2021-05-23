@@ -3,7 +3,9 @@ import { myId } from '../../pages/index.js';
 let targetClickId = null;
 
 export default class Card {
-  constructor({ name, link, cardId, ownwerId, likes }, cardSelector, handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike) {
+  constructor({ name, link, cardId, ownwerId, likes },
+    cardSelector, handleCardClick, handleDeleteClick,
+    submitHandleDeleteClick, countLike, countDislike) {
     this._text = name;
     this._image = link;
     this._alt = `Картинка места с названием "${name}"`;
@@ -15,6 +17,7 @@ export default class Card {
     this._handleDeleteClick = handleDeleteClick;
     this._submitHandleDeleteClick = submitHandleDeleteClick;
     this._countLike = countLike;
+    this._countDislike = countDislike;
   };
 
   _getTemplate() {
@@ -48,11 +51,14 @@ export default class Card {
 
     this._likeButton.addEventListener('click', () => {
       this._numberLikes();
-      this._countLike(this._id);
     });
   };
 
- _showDeleteButton() {
+  _countLike() {
+    return this._id;
+  }
+
+  _showDeleteButton() {
     if(!(this._ownerId === myId)) {
       this._deleteButton.remove('button_type_remove');
     }
@@ -63,13 +69,21 @@ export default class Card {
     this._element = null;
   };
 
+  _showCardLiked() {
+    if(this._likes.some((like) => like._id === myId)) {
+      this._likeButton.classList.add('button_clicked');
+    }
+  }
+
   _numberLikes() {
     if(event.target.classList.contains('button_clicked')) {
       this._likeButton.classList.remove('button_clicked');
       this._likes.length = this._likes.length - 1;
+      this._countDislike(this._id);
     } else {
       this._likeButton.classList.add('button_clicked');
       this._likes.length = this._likes.length + 1;
+      this._countLike(this._id);
     }
 
     this._likeInfo.textContent = this._likes.length;
@@ -87,6 +101,7 @@ export default class Card {
     this._submitionButton = document.querySelector('.button_type_submition');
 
     this._showDeleteButton();
+    this._showCardLiked();
     this._setEventListeners();
 
     this._imageElement.src = this._image;
