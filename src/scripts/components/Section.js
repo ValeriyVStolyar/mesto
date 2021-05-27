@@ -13,12 +13,17 @@ export default class Section {
     this._container.append(element);
   }
 
+  setItem(element) {
+    this._container.prepend(element);
+  }
+
   clear() {
     this._container.innerHTML = '';
   }
 
   renderItems(cards) {
     this.clear();
+
     this._renderedItems.forEach((item) => {
       this._renderer(item);
     });

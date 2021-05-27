@@ -28,8 +28,7 @@ token: '83427565-56e8-48c1-b66e-268601726ef3',
 groupID: 'cohort-24'
 })
 
-export let myId = null;
-
+let myId = null;
 
 Promise.all([api.getInfoUser(), api.getCards()])
   .then(([ userData, cards ]) => {
@@ -42,10 +41,7 @@ Promise.all([api.getInfoUser(), api.getCards()])
     const cardsSection = new Section({
       renderItems: cards,
       renderer: (item) => {
-        const card = new Card({name: item.name, link: item.link, cardId: item._id,
-          ownwerId: item.owner._id, likes: item.likes}, '.template',
-          handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike, countDislike);
-        const cardElement = card.generateCard();
+        const cardElement = createCard(item);
         cardsSection.addItem(cardElement);
       }
     },
@@ -54,38 +50,6 @@ Promise.all([api.getInfoUser(), api.getCards()])
     cardsSection.renderItems(cards)
    })
   .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен. Ошибка при получании карточек'));
-
-console.log(myId)
-
-// api.getInfoUser()
-//   .then(data => {
-//   myId = data._id;
-
-//   nameProfile.textContent = data.name;
-
-//   jobProfile.textContent = data.about;
-
-//   imageProfile.src = data.avatar;
-//   })
-//   .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен'));
-
-// api.getCards()
-//   .then(cards => {
-//     const cardsSection = new Section({
-//         renderItems: cards,
-//         renderer: (item) => {
-//           const card = new Card({name: item.name, link: item.link, cardId: item._id,
-//             ownwerId: item.owner._id, likes: item.likes}, '.template',
-//             handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike, countDislike);
-//           const cardElement = card.generateCard();
-//           cardsSection.addItem(cardElement);
-//         }
-//       },
-//         '.places'
-//       );
-//     cardsSection.renderItems(cards)
-//   })
-//   .catch(err => console.log('Ошибка при получании карточек'));
 
 
 function handleCardClick(link, alt, text) {
@@ -126,23 +90,12 @@ function setDataProfile() {
   jobInput.value = user.about;
 }
 
-// function createCard(item) {
-//   const card = new Card(/* ... */);
-//   return card.generateCard();
-// }
-
-// function createCard(formData) {
-//   console.log('item 128')
-//   console.log(formData)
-//   const card = new Card({ name: formData.place, link: formData.link,
-//     cardId: result._id, ownwerId: result.owner._id,
-//     likes: result.likes  }, '.template', handleCardClick, handleDeleteClick,
-//     submitHandleDeleteClick, countLike, countDislike);
-// //  const cardElement = additionalCard.generateCard();
-// console.log(card)
-//   return card.generateCard();
-// //  return cardElement();
-// }
+function createCard(item) {
+  const card = new Card({name: item.name, link: item.link, cardId: item._id,
+    ownwerId: item.owner._id, likes: item.likes, userId: myId}, '.template',
+    handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike, countDislike);
+    return card.generateCard();
+}
 
 const popupWithFormProfile = new PopupWithForm({
   popupSelector: '.popup_place_profile',
@@ -162,21 +115,17 @@ const popupWithFormProfile = new PopupWithForm({
 const popupWithFormPlace = new PopupWithForm({
   popupSelector: '.popup_place_places',
   handleFormSubmit: (formData) => {
-    console.log(formData)
     api.addCard(formData)
       .then(result => {
-    //    createCard(formData)
-        console.log(formData)
-        const additionalCard = new Card({ name: formData.place, link: formData.link,
-          cardId: result._id, ownwerId: result.owner._id,
-          likes: result.likes  }, '.template', handleCardClick, handleDeleteClick,
-          submitHandleDeleteClick, countLike, countDislike);
-      //    console.log(additionalCard)
-          const cardElement = additionalCard.generateCard();
-      // const cardElement = createCard(formData);
-      // console.log(cardElement)
-       cardPlace.prepend(cardElement);
-      //  cardPlace.prepend(formData);
+        const cardElement = createCard(result);
+        const cardsSection = new Section(
+          {
+          renderItems: cardElement,
+          renderer: cardElement
+        },
+        '.places'
+        )
+        cardsSection.setItem(cardElement);
         popupWithFormPlace.close();
       })
       .finally(doSmth => {

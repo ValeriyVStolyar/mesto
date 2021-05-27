@@ -1,9 +1,7 @@
-import { myId } from '../../pages/index.js';
-
 let targetClickId = null;
 
 export default class Card {
-  constructor({ name, link, cardId, ownwerId, likes },
+  constructor({ name, link, cardId, ownwerId, likes, userId },
     cardSelector, handleCardClick, handleDeleteClick,
     submitHandleDeleteClick, countLike, countDislike) {
     this._text = name;
@@ -12,6 +10,7 @@ export default class Card {
     this._id = cardId;
     this._ownerId = ownwerId;
     this._likes = likes;
+    this._userId = userId;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
@@ -37,7 +36,8 @@ export default class Card {
     this._submitionButton.addEventListener('click', (evt) => {
       evt.preventDefault();
 
-      if(this._ownerId === myId && this._id === targetClickId) {
+    //  if(this._ownerId === myId && this._id === targetClickId) {
+      if(this._ownerId === this._userId && this._id === targetClickId) {
         this._submitHandleDeleteClick(this._id);
         this._deleteCard();
       }
@@ -59,7 +59,8 @@ export default class Card {
   }
 
   _showDeleteButton() {
-    if(!(this._ownerId === myId)) {
+  //  if(!(this._ownerId === myId)) {
+    if(!(this._ownerId === this._userId)) {
       this._deleteButton.remove('button_type_remove');
     }
   }
@@ -70,7 +71,8 @@ export default class Card {
   };
 
   _showCardLiked() {
-    if(this._likes.some((like) => like._id === myId)) {
+  //  if(this._likes.some((like) => like._id === myId)) {
+    if(this._likes.some((like) => like._id === this._userId)) {
       this._likeButton.classList.add('button_clicked');
     }
   }
