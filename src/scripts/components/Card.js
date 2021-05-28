@@ -2,8 +2,8 @@ let targetClickId = null;
 
 export default class Card {
   constructor({ name, link, cardId, ownwerId, likes, userId },
-    cardSelector, handleCardClick, handleDeleteClick,
-    submitHandleDeleteClick, countLike, countDislike) {
+    cardSelector, handleCardClick, { handleDeleteClick, handleLikeClick },
+    countLike, countDislike ) {
     this._text = name;
     this._image = link;
     this._alt = `Картинка места с названием "${name}"`;
@@ -14,7 +14,7 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
-    this._submitHandleDeleteClick = submitHandleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
     this._countLike = countLike;
     this._countDislike = countDislike;
   };
@@ -33,18 +33,19 @@ export default class Card {
       this._handleCardClick(this._image, this._alt, this._text);
     });
 
-    this._submitionButton.addEventListener('click', (evt) => {
-      evt.preventDefault();
+    // this._submitionButton.addEventListener('click', (evt) => {
+    //   evt.preventDefault();
 
-    //  if(this._ownerId === myId && this._id === targetClickId) {
-      if(this._ownerId === this._userId && this._id === targetClickId) {
-        this._submitHandleDeleteClick(this._id);
-        this._deleteCard();
-      }
-    });
+    //   if(this._ownerId === this._userId && this._id === targetClickId) {
+    //     this._submitHandleDeleteClick(this._id);
+    //     this._deleteCard();
+    //   //  console.log('this._deleteCard() 42')
+    //   //  console.log(this._deleteCard())
+    //   }
+    // });
 
     this._deleteButton.addEventListener('click', () => {
-      targetClickId = this._id
+      targetClickId = this._id;
 
       this._handleDeleteClick();
     });
@@ -54,24 +55,29 @@ export default class Card {
     });
   };
 
+  // checkDeleteCard() {
+  //   if(this._ownerId === this._userId && this._id === targetClickId) {
+  //     this._submitHandleDeleteClick(this._id);
+  //     this._deleteCard();
+  //     }
+  // }
+
   _countLike() {
     return this._id;
   }
 
   _showDeleteButton() {
-  //  if(!(this._ownerId === myId)) {
     if(!(this._ownerId === this._userId)) {
       this._deleteButton.remove('button_type_remove');
     }
   }
 
-  _deleteCard() {
+  deleteCard() {
     this._element.remove();
     this._element = null;
   };
 
   _showCardLiked() {
-  //  if(this._likes.some((like) => like._id === myId)) {
     if(this._likes.some((like) => like._id === this._userId)) {
       this._likeButton.classList.add('button_clicked');
     }
@@ -100,7 +106,7 @@ export default class Card {
     this._likeButton = this._element.querySelector('.button_type_like');
     this._likeInfo = this._element.querySelector('.place__text');
 
-    this._submitionButton = document.querySelector('.button_type_submition');
+  //  this._submitionButton = document.querySelector('.button_type_submition');
 
     this._showDeleteButton();
     this._showCardLiked();

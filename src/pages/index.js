@@ -2,7 +2,7 @@ import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import {cardPlace, openPopupProfile, openPopupPlaces, jobInput, nameInput,
-formProfile, formPlaces,
+formProfile, formPlaces, submitDeleteButton,
 openPopupAvatar, formAvatar, nameProfile, jobProfile, imageProfile,
 submitButtonPlaces, submitButtonAvatar, submitButtonProfile} from '../scripts/utils/constants.js';
 import './index.css';
@@ -29,6 +29,15 @@ groupID: 'cohort-24'
 })
 
 let myId = null;
+// let item = null;
+let cardForRemove = null;
+let cardForLike = null;
+
+// const card = new Card({name: item.name, link: item.link, cardId: item._id,
+//   ownwerId: item.owner._id, likes: item.likes, userId: myId}, '.template',
+//   handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike, countDislike);
+
+// https://images.unsplash.com/photo-1622131731136-4c511ae0c8eb?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1N3x8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60
 
 Promise.all([api.getInfoUser(), api.getCards()])
   .then(([ userData, cards ]) => {
@@ -41,8 +50,12 @@ Promise.all([api.getInfoUser(), api.getCards()])
     const cardsSection = new Section({
       renderItems: cards,
       renderer: (item) => {
+        console.log('item 45')
+        console.log(item)
         const cardElement = createCard(item);
         cardsSection.addItem(cardElement);
+        console.log('cardElement 47')
+        console.log(cardElement)
       }
     },
       '.places'
@@ -56,19 +69,10 @@ function handleCardClick(link, alt, text) {
   popupWithImage.open(link, alt, text);
 }
 
-function handleDeleteClick() {
-  popup.open();
-}
-
-function submitHandleDeleteClick(cardId) {
-  api.deleteCard(cardId)
-  .then(result => {
-    popup.close();
-  })
-  .catch(err => console.log('Ошибка при удалении карточек'));
-}
-
 function countLike(cardId) {
+  console.log('cardForRemove countLike 72')
+  console.log(cardForLike)
+  console.log(cardId)
   api.likeCard(cardId)
     .then(result => {
     })
@@ -92,8 +96,23 @@ function setDataProfile() {
 
 function createCard(item) {
   const card = new Card({name: item.name, link: item.link, cardId: item._id,
-    ownwerId: item.owner._id, likes: item.likes, userId: myId}, '.template',
-    handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike, countDislike);
+    ownwerId: item.owner._id, likes: item.likes, userId: myId,
+  }, '.template',
+    handleCardClick,
+    { handleDeleteClick: () => {
+      popup.open();
+      cardForRemove = card;
+      console.log('card 104')
+      console.log(card)
+      console.log(cardForRemove)
+      },
+      handleLikeClick: () => {
+        cardForLike = card;
+        console.log('card 110')
+        console.log(card)
+        console.log(cardForLike)
+      }
+    }, countLike, countDislike)
     return card.generateCard();
 }
 
@@ -150,6 +169,15 @@ const popupWithFormAvatar = new PopupWithForm({
   },
 });
 
+submitDeleteButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  api.deleteCard(cardForRemove._id)
+    .then(result => {
+      cardForRemove.deleteCard();
+    })
+    .catch(err => console.log('Ошибка при удалении карточек'));
+  popup.close();
+})
 
 popupWithFormProfile.setEventListeners();
 
