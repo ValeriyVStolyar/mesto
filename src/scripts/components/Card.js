@@ -1,4 +1,7 @@
 let targetClickId = null;
+let evtTarget = null;
+let likeButton = null;
+let likeInfo = null;
 
 export default class Card {
   constructor({ name, link, cardId, ownwerId, likes, userId },
@@ -51,7 +54,14 @@ export default class Card {
     });
 
     this._likeButton.addEventListener('click', () => {
-      this._numberLikes();
+      evtTarget = event.target;
+
+      likeButton = this._likeButton;
+
+      likeInfo = this._likeInfo;
+
+      this._countLike(this._id, evtTarget, likeButton, likeInfo);
+      this._countDislike(this._id, evtTarget, likeButton, likeInfo);
     });
   };
 
@@ -83,19 +93,24 @@ export default class Card {
     }
   }
 
-  _numberLikes() {
-    if(event.target.classList.contains('button_clicked')) {
-      this._likeButton.classList.remove('button_clicked');
-      this._likes.length = this._likes.length - 1;
-      this._countDislike(this._id);
-    } else {
-      this._likeButton.classList.add('button_clicked');
-      this._likes.length = this._likes.length + 1;
-      this._countLike(this._id);
-    }
+//   _numberLikes() {
+//     console.log('hjkhkjhjk')
+//     console.log(event.target)
+// //    if(event.target.classList.contains('button_clicked')) {
+//     if(event.target.classList.contains('button_clicked')) {
+//       console.log(event.target)
+//       this._likeButton.classList.remove('button_clicked');
+//       this._likes.length = this._likes.length - 1;
+//       this._countDislike(this._id);
+//     } else {
+//       console.log(event.target)
+//       this._likeButton.classList.add('button_clicked');
+//       this._likes.length = this._likes.length + 1;
+// //      this._countLike(this._id);
+//     }
 
-    this._likeInfo.textContent = this._likes.length;
-  }
+//     this._likeInfo.textContent = this._likes.length;
+//   }
 
   generateCard() {
     this._element = this._getTemplate();

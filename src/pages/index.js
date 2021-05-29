@@ -1,10 +1,10 @@
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
-import {cardPlace, openPopupProfile, openPopupPlaces, jobInput, nameInput,
+import {openPopupProfile, openPopupPlaces, jobInput, nameInput,
 formProfile, formPlaces, submitDeleteButton,
-openPopupAvatar, formAvatar, nameProfile, jobProfile, imageProfile,
-submitButtonPlaces, submitButtonAvatar, submitButtonProfile} from '../scripts/utils/constants.js';
+openPopupAvatar, formAvatar,
+submitButtonPlaces, submitButtonAvatar, submitButtonProfile } from '../scripts/utils/constants.js';
 import './index.css';
 import {validationSetting} from '../scripts/utils/validationSetting.js';
 import FormValidator from '../scripts/components/FormValidator.js';
@@ -21,7 +21,6 @@ const formValidatorAvatar = new FormValidator(validationSetting, formAvatar);
 const popupWithImage = new PopupWithImage('.popup_place_picture');
 const userInfo = new UserInfo ({userNameSelector: '.profile__title',
 userInfoSelector: '.profile__subtitle', userAvatarSelector: '.profile__image'});
-//const popupSubmit = new PopupSubmit('.popup_place_submition');
 const popup = new Popup('.popup_place_submition');
 const api = new Api({address: 'https://mesto.nomoreparties.co',
 token: '83427565-56e8-48c1-b66e-268601726ef3',
@@ -29,15 +28,8 @@ groupID: 'cohort-24'
 })
 
 let myId = null;
-// let item = null;
 let cardForRemove = null;
 let cardForLike = null;
-
-// const card = new Card({name: item.name, link: item.link, cardId: item._id,
-//   ownwerId: item.owner._id, likes: item.likes, userId: myId}, '.template',
-//   handleCardClick, handleDeleteClick, submitHandleDeleteClick, countLike, countDislike);
-
-// https://images.unsplash.com/photo-1622131731136-4c511ae0c8eb?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1N3x8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60
 
 Promise.all([api.getInfoUser(), api.getCards()])
   .then(([ userData, cards ]) => {
@@ -50,12 +42,8 @@ Promise.all([api.getInfoUser(), api.getCards()])
     const cardsSection = new Section({
       renderItems: cards,
       renderer: (item) => {
-        console.log('item 45')
-        console.log(item)
         const cardElement = createCard(item);
         cardsSection.addItem(cardElement);
-        console.log('cardElement 47')
-        console.log(cardElement)
       }
     },
       '.places'
@@ -69,21 +57,30 @@ function handleCardClick(link, alt, text) {
   popupWithImage.open(link, alt, text);
 }
 
-function countLike(cardId) {
-  console.log('cardForRemove countLike 72')
-  console.log(cardForLike)
-  console.log(cardId)
+function countLike(cardId, evtTarget, likeButton, likeInfo) {
   api.likeCard(cardId)
     .then(result => {
+      if(!(evtTarget.classList.contains('button_clicked'))) {
+        likeButton.classList.add('button_clicked');
+        let stringToNumber = Number(likeInfo.textContent);
+        stringToNumber = stringToNumber + 1;
+        likeInfo.textContent = stringToNumber;
+       }
     })
     .catch(err => console.log('Ошибка при отправке "like" карточек'));
 }
 
-function countDislike(cardId) {
+function countDislike(cardId, evtTarget, likeButton, likeInfo) {
   api.deleteLikeCard(cardId)
     .then(result => {
+      if(evtTarget.classList.contains('button_clicked')) {
+        likeButton.classList.remove('button_clicked');
+        let stringToNumber = Number(likeInfo.textContent);
+        stringToNumber = stringToNumber - 1;
+        likeInfo.textContent = stringToNumber;
+       }
     })
-    .catch(err => console.log('Ошибка при отправке "dislike" карточек'));
+    .catch(err => console.log('Ошибка при удалении "like" карточек'));
 }
 
 function setDataProfile() {
@@ -99,18 +96,13 @@ function createCard(item) {
     ownwerId: item.owner._id, likes: item.likes, userId: myId,
   }, '.template',
     handleCardClick,
-    { handleDeleteClick: () => {
-      popup.open();
-      cardForRemove = card;
-      console.log('card 104')
-      console.log(card)
-      console.log(cardForRemove)
+    {
+      handleDeleteClick: () => {
+        popup.open();
+        cardForRemove = card;
       },
       handleLikeClick: () => {
         cardForLike = card;
-        console.log('card 110')
-        console.log(card)
-        console.log(cardForLike)
       }
     }, countLike, countDislike)
     return card.generateCard();
@@ -178,6 +170,7 @@ submitDeleteButton.addEventListener('click', (evt) => {
     .catch(err => console.log('Ошибка при удалении карточек'));
   popup.close();
 })
+
 
 popupWithFormProfile.setEventListeners();
 

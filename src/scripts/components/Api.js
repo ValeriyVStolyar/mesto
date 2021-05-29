@@ -11,11 +11,16 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(response => {
-      if(response.ok) {
-        return response.json();
+    // .then(response => {
+    //   if(response.ok) {
+    //     return response.json();
+    //   }
+    //   return Promise.reject(`Ошибка ${response.status}`)
+    .then((res) => {
+      if(!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
       }
-      return Promise.reject(`Ошибка ${response.status}`)
+      return res.json();
     })
   }
 
@@ -24,11 +29,17 @@ export default class Api {
       headers: {
         authorization: this._token
       }
-    }).then(response => {
-      if(response.ok) {
-        return response.json();
+    })
+    // .then(response => {
+    //   if(response.ok) {
+    //     return response.json();
+    //   }
+    //   return Promise.reject(`Ошибка ${response.status}`)
+    .then((res) => {
+      if(!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
       }
-      return Promise.reject(`Ошибка ${response.status}`)
+      return res.json();
     })
   }
 
@@ -44,8 +55,14 @@ export default class Api {
         about: formData.job
       })
     })
-      .then(response => response.ok ? response.json()
-      : Promise.reject(`Ошибка ${response.status}`))
+      // .then(response => response.ok ? response.json()
+      // : Promise.reject(`Ошибка ${response.status}`))
+      .then((res) => {
+        if(!res.ok) {
+          return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
+        }
+        return res.json();
+      })
   }
 
   addCard(formData) {
@@ -60,22 +77,32 @@ export default class Api {
         link: formData.link
       })
     })
-      .then(response => response.ok ? response.json() : Promise.reject(`Ошибка ${response.status}`))
+      // .then(response => response.ok ? response.json() : Promise.reject(`Ошибка ${response.status}`))
+      .then((res) => {
+        if(!res.ok) {
+          return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
+        }
+        return res.json();
+      })
   }
 
   deleteCard(cardId) {
-    console.log(cardId)
     return fetch(`${this._address}/v1/${this._groupID}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
         authorization: this._token
       }
     })
-    .then(response => {
-      if(response.ok) {
-        return response.json();
+    // .then(response => {
+    //   if(response.ok) {
+    //     return response.json();
+    //   }
+    //   return Promise.reject(`Ошибка ${response.status}`)
+    .then((res) => {
+      if(!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
       }
-      return Promise.reject(`Ошибка ${response.status}`)
+      return res.json();
     })
   }
 
@@ -86,11 +113,16 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(response => {
-      if(response.ok) {
-        return response.json();
+    // .then(response => {
+    //   if(response.ok) {
+    //     return response.json();
+    //   }
+    //   return Promise.reject(`Ошибка ${response.status}`)
+    .then((res) => {
+      if(!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
       }
-      return Promise.reject(`Ошибка ${response.status}`)
+      return res.json();
     })
   }
 
@@ -101,11 +133,17 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(response => {
-      if(response.ok) {
-        return response.json();
+    // .then(response => {
+    //   if(response.ok) {
+    //     return response.json();
+    //   }
+    //   return Promise.reject(`Ошибка ${response.status}`)
+    // })
+    .then((res) => {
+      if(!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
       }
-      return Promise.reject(`Ошибка ${response.status}`)
+      return res.json();
     })
   }
 
@@ -120,7 +158,13 @@ export default class Api {
         avatar: formData.avatar
       })
     })
-      .then(response => response.ok ? response.json()
-      : Promise.reject(`Ошибка ${response.status}`))
+      // .then(response => response.ok ? response.json()
+      // : Promise.reject(`Ошибка ${response.status}`))
+      .then((res) => {
+        if(!res.ok) {
+          return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
+        }
+        return res.json();
+      })
   }
 }
