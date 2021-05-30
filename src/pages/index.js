@@ -56,31 +56,38 @@ function handleCardClick(link, alt, text) {
   popupWithImage.open(link, alt, text);
 }
 
-function countLike(cardId, evtTarget, likeButton, likeInfo) {
-  api.likeCard(cardId)
-    .then(result => {
-      if(!(evtTarget.classList.contains('button_clicked'))) {
-        likeButton.classList.add('button_clicked');
-        let stringToNumber = Number(likeInfo.textContent);
-        stringToNumber = stringToNumber + 1;
-        likeInfo.textContent = stringToNumber;
-       }
-    })
+// function countLike(cardId, evtTarget, likeButton, likeInfo) {
+//   api.likeCard(cardId)
+//     .then(result => {
+//       if(!(evtTarget.classList.contains('button_clicked'))) {
+//         likeButton.classList.add('button_clicked');
+//         let stringToNumber = Number(likeInfo.textContent);
+//         stringToNumber = stringToNumber + 1;
+//         likeInfo.textContent = stringToNumber;
+//        }
+//     })
+function changeLikeInfo(card, cardId) {
+  console.log(card)
+  console.log(cardId)
+  const promise = card.isLiked() ? api.deleteLikeCard(cardId) : api.likeCard(cardId);
+  promise.then((result) => {
+    card.setLikesInfo(result);
+  })
     .catch(err => console.log('Ошибка при отправке "like" карточек'));
 }
 
-function countDislike(cardId, evtTarget, likeButton, likeInfo) {
-  api.deleteLikeCard(cardId)
-    .then(result => {
-      if(evtTarget.classList.contains('button_clicked')) {
-        likeButton.classList.remove('button_clicked');
-        let stringToNumber = Number(likeInfo.textContent);
-        stringToNumber = stringToNumber - 1;
-        likeInfo.textContent = stringToNumber;
-       }
-    })
-    .catch(err => console.log('Ошибка при удалении "like" карточек'));
-}
+// function countDislike(cardId, evtTarget, likeButton, likeInfo) {
+//   api.deleteLikeCard(cardId)
+//     .then(result => {
+//       if(evtTarget.classList.contains('button_clicked')) {
+//         likeButton.classList.remove('button_clicked');
+//         let stringToNumber = Number(likeInfo.textContent);
+//         stringToNumber = stringToNumber - 1;
+//         likeInfo.textContent = stringToNumber;
+//        }
+//     })
+//     .catch(err => console.log('Ошибка при удалении "like" карточек'));
+// }
 
 function setDataProfile() {
   const user = userInfo.getUserInfo();
@@ -100,10 +107,10 @@ function createCard(item) {
         popup.open();
         cardForRemove = card;
       },
-      handleLikeClick: () => {
-        cardForLike = card;
-      }
-    }, countLike, countDislike)
+      // handleLikeClick: () => {
+      //   cardForLike = card;
+      // }
+    }, changeLikeInfo)
     return card.generateCard();
 }
 
