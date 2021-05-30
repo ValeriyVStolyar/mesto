@@ -26,6 +26,14 @@ const api = new Api({address: 'https://mesto.nomoreparties.co',
 token: '83427565-56e8-48c1-b66e-268601726ef3',
 groupID: 'cohort-24'
 })
+const cardsSection = new Section({
+  renderer: (item) => {
+    const cardElement = createCard(item);
+    cardsSection.addItem(cardElement);
+  }
+},
+  '.places'
+);
 
 let myId = null;
 let cardForRemove = null;
@@ -39,16 +47,7 @@ Promise.all([api.getInfoUser(), api.getCards()])
 
     userInfo.setUserAvatar({ userAvatar: userData.avatar });
 
-    const cardsSection = new Section({
-      renderItems: cards,
-      renderer: (item) => {
-        const cardElement = createCard(item);
-        cardsSection.addItem(cardElement);
-      }
-    },
-      '.places'
-    );
-    cardsSection.renderItems(cards)
+    cardsSection.renderItems(cards);
    })
   .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен. Ошибка при получании карточек'));
 
@@ -129,13 +128,6 @@ const popupWithFormPlace = new PopupWithForm({
     api.addCard(formData)
       .then(result => {
         const cardElement = createCard(result);
-        const cardsSection = new Section(
-          {
-          renderItems: cardElement,
-          renderer: cardElement
-        },
-        '.places'
-        )
         cardsSection.setItem(cardElement);
         popupWithFormPlace.close();
       })
