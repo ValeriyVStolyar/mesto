@@ -11,11 +11,6 @@ export default class Api {
         authorization: this._token
       }
     })
-    // .then(response => {
-    //   if(response.ok) {
-    //     return response.json();
-    //   }
-    //   return Promise.reject(`Ошибка ${response.status}`)
     .then((res) => {
       if(!res.ok) {
         return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
@@ -30,11 +25,6 @@ export default class Api {
         authorization: this._token
       }
     })
-    // .then(response => {
-    //   if(response.ok) {
-    //     return response.json();
-    //   }
-    //   return Promise.reject(`Ошибка ${response.status}`)
     .then((res) => {
       if(!res.ok) {
         return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
@@ -55,8 +45,6 @@ export default class Api {
         about: formData.job
       })
     })
-      // .then(response => response.ok ? response.json()
-      // : Promise.reject(`Ошибка ${response.status}`))
       .then((res) => {
         if(!res.ok) {
           return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
@@ -77,7 +65,6 @@ export default class Api {
         link: formData.link
       })
     })
-      // .then(response => response.ok ? response.json() : Promise.reject(`Ошибка ${response.status}`))
       .then((res) => {
         if(!res.ok) {
           return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
@@ -93,11 +80,6 @@ export default class Api {
         authorization: this._token
       }
     })
-    // .then(response => {
-    //   if(response.ok) {
-    //     return response.json();
-    //   }
-    //   return Promise.reject(`Ошибка ${response.status}`)
     .then((res) => {
       if(!res.ok) {
         return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
@@ -113,11 +95,6 @@ export default class Api {
         authorization: this._token
       }
     })
-    // .then(response => {
-    //   if(response.ok) {
-    //     return response.json();
-    //   }
-    //   return Promise.reject(`Ошибка ${response.status}`)
     .then((res) => {
       if(!res.ok) {
         return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
@@ -133,12 +110,6 @@ export default class Api {
         authorization: this._token
       }
     })
-    // .then(response => {
-    //   if(response.ok) {
-    //     return response.json();
-    //   }
-    //   return Promise.reject(`Ошибка ${response.status}`)
-    // })
     .then((res) => {
       if(!res.ok) {
         return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
@@ -158,8 +129,6 @@ export default class Api {
         avatar: formData.avatar
       })
     })
-      // .then(response => response.ok ? response.json()
-      // : Promise.reject(`Ошибка ${response.status}`))
       .then((res) => {
         if(!res.ok) {
           return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);

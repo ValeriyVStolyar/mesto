@@ -37,7 +37,6 @@ const cardsSection = new Section({
 
 let myId = null;
 let cardForRemove = null;
-let cardForLike = null;
 
 Promise.all([api.getInfoUser(), api.getCards()])
   .then(([ userData, cards ]) => {
@@ -51,43 +50,17 @@ Promise.all([api.getInfoUser(), api.getCards()])
    })
   .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен. Ошибка при получании карточек'));
 
-
 function handleCardClick(link, alt, text) {
   popupWithImage.open(link, alt, text);
 }
 
-// function countLike(cardId, evtTarget, likeButton, likeInfo) {
-//   api.likeCard(cardId)
-//     .then(result => {
-//       if(!(evtTarget.classList.contains('button_clicked'))) {
-//         likeButton.classList.add('button_clicked');
-//         let stringToNumber = Number(likeInfo.textContent);
-//         stringToNumber = stringToNumber + 1;
-//         likeInfo.textContent = stringToNumber;
-//        }
-//     })
 function changeLikeInfo(card, cardId) {
-  console.log(card)
-  console.log(cardId)
   const promise = card.isLiked() ? api.deleteLikeCard(cardId) : api.likeCard(cardId);
   promise.then((result) => {
     card.setLikesInfo(result);
   })
     .catch(err => console.log('Ошибка при отправке "like" карточек'));
 }
-
-// function countDislike(cardId, evtTarget, likeButton, likeInfo) {
-//   api.deleteLikeCard(cardId)
-//     .then(result => {
-//       if(evtTarget.classList.contains('button_clicked')) {
-//         likeButton.classList.remove('button_clicked');
-//         let stringToNumber = Number(likeInfo.textContent);
-//         stringToNumber = stringToNumber - 1;
-//         likeInfo.textContent = stringToNumber;
-//        }
-//     })
-//     .catch(err => console.log('Ошибка при удалении "like" карточек'));
-// }
 
 function setDataProfile() {
   const user = userInfo.getUserInfo();
@@ -107,9 +80,6 @@ function createCard(item) {
         popup.open();
         cardForRemove = card;
       },
-      // handleLikeClick: () => {
-      //   cardForLike = card;
-      // }
     }, changeLikeInfo)
     return card.generateCard();
 }
@@ -118,7 +88,7 @@ const popupWithFormProfile = new PopupWithForm({
   popupSelector: '.popup_place_profile',
   handleFormSubmit: (formData) => {
     api.reviewUserInfo(formData)
-      .then(result => {
+      .then(() => {
         userInfo.setUserInfo({ userName: formData.name, userAbout: formData.job });
         popupWithFormProfile.close();
       })
@@ -149,7 +119,7 @@ const popupWithFormAvatar = new PopupWithForm({
   popupSelector: '.popup_place_avatar',
   handleFormSubmit: (formData) => {
     api.changeAvatar(formData)
-      .then(result => {
+      .then(() => {
          userInfo.setUserAvatar({ userAvatar: formData.avatar });
          popupWithFormAvatar.close();
       })
@@ -163,11 +133,11 @@ const popupWithFormAvatar = new PopupWithForm({
 submitDeleteButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   api.deleteCard(cardForRemove._id)
-    .then(result => {
+    .then(() => {
       cardForRemove.deleteCard();
+      popup.close();
     })
     .catch(err => console.log('Ошибка при удалении карточек'));
-  popup.close();
 })
 
 
